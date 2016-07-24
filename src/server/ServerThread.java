@@ -7,11 +7,11 @@ import mouse.MouseController;
 
 public class ServerThread implements Runnable
 {
-    public ServerThread(Socket skt, MouseController mc_, int d)
+    public ServerThread(Socket skt, MouseController mc_)
     {
         cskt = skt;
         mc = mc_;
-        delay = d;
+        stopFlag = false;
     }
     
     public void receive() throws IOException,InterruptedException
@@ -21,9 +21,15 @@ public class ServerThread implements Runnable
         String s = in.readLine();
         System.out.println(s);
         Scanner sc = new Scanner(s);
-        int x = sc.nextInt();
-        int y = sc.nextInt();
-        mc.move(x, y);
+        int k = sc.nextInt();
+        if(k<0)
+            stopFlag = true;
+        else
+        {
+            int x = sc.nextInt();
+            int y = sc.nextInt();
+            mc.move(x, y);
+        }
 //         mc.wait();
     }
     
@@ -31,10 +37,12 @@ public class ServerThread implements Runnable
     {
         try
         {
-            for(int i=0; i<20; ++i)
+            while(true)
             {
                 receive();
-                System.out.println(i);
+                if(stopFlag)
+                    break;
+//                System.out.println(i);
                 //Thread.sleep(delay);
             }
         }
@@ -47,5 +55,5 @@ public class ServerThread implements Runnable
     private Socket cskt;
     private MouseController mc;
     private BufferedReader in;
-    private int delay;
+    private boolean stopFlag;
 }
