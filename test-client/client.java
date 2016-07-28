@@ -10,6 +10,12 @@ class Client
         skt = new Socket(addr, p);
     }
     
+    public Client(InetAddress addr, int p) throws IOException
+    {
+        port = p;
+        skt = new Socket(addr, p);
+    }
+    
 //     public void listen()
 //     {
 //         Socket cskt = skt.accept();
@@ -46,7 +52,21 @@ class ClientMain
 {
     public static void main(String args[]) throws IOException,InterruptedException
     {
-        Client c = new Client("localhost", 1234);
+        DatagramSocket ds = new DatagramSocket(1235);
+        ds.setBroadcast(true);
+        DatagramPacket p = new DatagramPacket(new byte[32],32);
+        
+        ds.receive(p);
+//        byte[] b = p.getData();
+//        String s = "";
+//        for(int i=0;i<b.length;++i)
+//            s = s + (char)b[i];
+//        System.out.print(s);
+        InetAddress addr = p.getAddress();
+//        System.out.println(InetAddress.getByName(s).isLoopbackAddress());
+        System.out.println(p.getAddress().toString());
+//        System.out.println(InetAddress.getLocalHost().getHostAddress());
+        Client c = new Client(addr, 1234);
         if(!c.getConfirmation())
         {
             System.out.println("Declined by server. Aborting !!!");
