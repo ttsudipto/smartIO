@@ -3,6 +3,7 @@ package server;
 import java.io.IOException;
 import java.net.*;
 import java.util.Enumeration;
+import java.util.List;
 
 public class BroadcastThread implements Runnable {
 
@@ -26,17 +27,20 @@ public class BroadcastThread implements Runnable {
                 Enumeration<NetworkInterface> nis = NetworkInterface.getNetworkInterfaces();
 
                 while (nis.hasMoreElements()) {
-                    Enumeration<InetAddress> ias = nis.nextElement().getInetAddresses();
+                    NetworkInterface ni = nis.nextElement();
+                    if (!ni.isLoopback()) {
+                        List<InterfaceAddress> ias = ni.getInterfaceAddresses();
 
-                    while (ias.hasMoreElements()) {
-                        InetAddress ia = ias.nextElement();
-                        if (!ia.isLoopbackAddress() && ia.getAddress().length == 4) {
-//                    System.out.println(ia + " " + ia.getAddress());
-                            DatagramSocket ds = new DatagramSocket(broadcastPort++, ia);
-                            ds.setBroadcast(true);
-                            DatagramPacket p = new DatagramPacket(new byte[1], 1, InetAddress.getByName("255.255.255.255"), 1235);
-                            ds.send(p);
-                            ds.close();
+                        for(int i=0; i<ias.size(); ++i) {
+                            InetAddress broadcastIA = ias.get(i).getBroadcast();
+                            if(broadcastIA != null) {
+//                                System.out.println(ia + " " + ia.isLinkLocalAddress()+ " " + ia.isAnyLocalAddress()+ " " + ia.isSiteLocalAddress());
+                                DatagramSocket ds = new DatagramSocket();
+                                ds.setBroadcast(true);
+                                DatagramPacket p = new DatagramPacket("".getBytes(), "".getBytes().length, broadcastIA, 1235);
+                                ds.send(p);
+                                ds.close();
+                            }
                         }
                     }
                 }
