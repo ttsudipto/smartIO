@@ -10,17 +10,13 @@ public class BroadcastThread implements Runnable {
     private int broadcastPort;
     private boolean stopFlag;
 
-    public BroadcastThread() {
-        stopFlag = false;
-    }
-
     public void stopBroadcast() {
         stopFlag = true;
     }
 
     @Override
     public void run() {
-
+        stopFlag = false;
         try {
             while(!stopFlag) {
                 broadcastPort = 1236;
