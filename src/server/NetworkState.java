@@ -1,43 +1,33 @@
 package server;
 
-import gui.MainWindow;
-
-import java.awt.*;
-import java.io.IOException;
+import javax.swing.*;
 import java.net.InetAddress;
 import java.util.HashSet;
 
 
-public class NetworkManager {
+public class NetworkState {
 
-    private Server server;
-    private BroadcastThread broadcastThread;
     private static HashSet<InetAddress> addressSet = new HashSet<>();
+    private DefaultListModel<String> listModel;
 
-
-    public void init() throws IOException, AWTException, InterruptedException {
-        server = new Server(1234);
-        broadcastThread = new BroadcastThread();
-        Thread bThread = new Thread(broadcastThread);
-        bThread.start();
-        server.listen();
+    public NetworkState() {
+        listModel = new DefaultListModel<>();
     }
 
-    public String[] getAddresses() {
-        InetAddress[] addressArray = (InetAddress[]) addressSet.toArray();
-        String[] addressStringArray = new String[addressArray.length];
-        for(int i=0; i<addressArray.length; ++i) {
-            addressStringArray[i] =addressArray[i].getHostAddress();
-        }
-        return addressStringArray;
+    public DefaultListModel getListModel() {
+        return listModel;
     }
 
     public void add(InetAddress ia) {
         addressSet.add(ia);
+        if(!listModel.contains(ia.getHostAddress()))
+            listModel.addElement(ia.getHostAddress());
     }
 
     public void remove(InetAddress ia) {
         if(addressSet.contains(ia))
             addressSet.remove(ia);
+        if(listModel.contains(ia.getHostAddress()))
+            listModel.removeElement(ia.getHostAddress());
     }
 }
