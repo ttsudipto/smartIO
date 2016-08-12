@@ -79,8 +79,10 @@ class ClientMain
             while(true)
             {
                 int k = sc.nextInt();
-                if(k<0)
+                if(k<0) {
+                    c.send(-1, 0, 0);
                     break;
+                }
                 else
                 {
                     c.send(k, x, y);
