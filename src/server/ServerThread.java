@@ -7,11 +7,12 @@ import mouse.MouseController;
 
 public class ServerThread implements Runnable
 {
-    public ServerThread(Socket skt, MouseController mc_)
+    public ServerThread(NetworkState state, Socket skt, MouseController mc_)
     {
         cskt = skt;
         mc = mc_;
         stopFlag = false;
+        this.state = state;
     }
     
     public void receive() throws IOException,InterruptedException
@@ -42,18 +43,20 @@ public class ServerThread implements Runnable
                 receive();
                 if(stopFlag)
                     break;
-//                System.out.println(i);
                 //Thread.sleep(delay);
             }
+            state.remove(cskt.getInetAddress());
+            cskt.close();
         }
         catch(Exception e)
         {
             System.out.println("Exception in run()");
         }
     }
-    
+
     private Socket cskt;
     private MouseController mc;
     private BufferedReader in;
     private boolean stopFlag;
+    private NetworkState state;
 }
