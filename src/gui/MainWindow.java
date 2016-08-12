@@ -17,7 +17,6 @@ public class MainWindow extends JFrame implements ActionListener{
     private JPanel radioPanel;
     private JList<String> list;
     private boolean lastSelectedOption;
-    private boolean doIt;
 
     private NetworkManager manager;
     private NetworkThread networkThread;
@@ -28,10 +27,6 @@ public class MainWindow extends JFrame implements ActionListener{
         this.manager = manager;
         this.state = manager.getNetworkState();
         networkThread = new NetworkThread(manager);
-//        this.nThread = new Thread(networkThread);
-//        nThread.start();
-
-        doIt = false;
 
         this.setTitle("SmartIO");
         this.setMinimumSize(new Dimension(640,480));
@@ -64,32 +59,13 @@ public class MainWindow extends JFrame implements ActionListener{
         list = new JList<String>(state.getListModel());
         list.setLayoutOrientation(JList.VERTICAL);
         list.setFixedCellHeight(50);
-//        listModel.addElement("foo");
-//        listModel.addElement("bar");
 
         this.add(disconnectButton, BorderLayout.SOUTH);
         this.add(radioPanel, BorderLayout.NORTH);
         this.add(list, BorderLayout.CENTER);
         this.setVisible(true);
-//        this.display();
     }
 
-    public void display() throws IOException, InterruptedException{
-//        this.setVisible(true);
-
-        while(true) {
-//            System.out.println(doIt + " " +lastSelectedOption);
-            int x=0;
-            if(lastSelectedOption == true && doIt == true) {
-                doIt = false;
-                networkThread.updateParameters(true, lastSelectedOption);
-            }
-            if(lastSelectedOption == false && doIt == true) {
-                doIt = false;
-                networkThread.updateParameters(true, lastSelectedOption);
-            }
-        }
-    }
     public void actionPerformed(ActionEvent e) {
         if(e.getActionCommand().equals("disconnect_clicked")) {
             System.out.println("disconnect clicked");
@@ -97,26 +73,18 @@ public class MainWindow extends JFrame implements ActionListener{
         else if(e.getActionCommand().equals("on") && lastSelectedOption == false) {
             lastSelectedOption = true;
             System.out.println("on clicked");
-//            networkThread = new NetworkThread(manager);
             nThread = new Thread(networkThread);
             System.out.println(nThread.getState().toString());
-//            networkThread.updateParameters(true, lastSelectedOption);
             nThread.start();
             System.out.println(nThread.getState().toString());
-            doIt = true;
         }
         else if(e.getActionCommand().equals("off") && lastSelectedOption == true) {
             lastSelectedOption = false;
             System.out.println("off clicked");
-//            networkThread.updateParameters(true, lastSelectedOption);
             try {
-//                networkThread.interrupt();
-//                networkThread.stop();
                 manager.stopServer();
-//                System.out.println(nThread.getState().toString());
                 nThread = null;
             } catch (Exception e1) {}
-            doIt = true;
         }
     }
 
