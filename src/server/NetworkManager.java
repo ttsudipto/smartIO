@@ -2,6 +2,10 @@ package server;
 
 import java.awt.*;
 import java.io.IOException;
+import java.net.Socket;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 /**
  * Created by Sudipto Bhattacharjee on 11/8/16.
@@ -34,9 +38,22 @@ public class NetworkManager {
         broadcastThread.stopBroadcast();
         bThread = null;
         System.out.println("Broadcast stopped ...");
+
         server.setStopFlag();
         Thread.sleep(server.getTimeout());
         server.close();
+
+        HashMap<Socket, ServerThread> cMap = state.getConnectionMap();
+        Iterator it = cMap.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry<Socket, ServerThread> entry = (Map.Entry<Socket, ServerThread>) it.next();
+            Socket s = entry.getKey();
+            ServerThread st = entry.getValue();
+            st.setStopFlag();
+            Thread.sleep(st.getTimeout());
+            state.remove(s);
+        }
+
         System.out.println("Server stopped ...");
     }
 }

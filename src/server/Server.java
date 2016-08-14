@@ -45,8 +45,9 @@ public class Server
                 if (option == 1) {
                     confirm(cskt, true);
                     System.out.println("Connected to " + cskt.getInetAddress().getHostAddress());
-                    Thread t = new Thread(new ServerThread(state, cskt, mc));
-                    state.add(cskt.getInetAddress());
+                    ServerThread st = new ServerThread(state, cskt, mc);
+                    Thread t = new Thread(st);
+                    state.add(cskt, st);
                     t.start();
                 } else {
                     confirm(cskt, false);
