@@ -9,6 +9,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.net.InetAddress;
+import java.util.List;
 
 public class MainWindow extends JFrame implements ActionListener{
 
@@ -66,25 +68,35 @@ public class MainWindow extends JFrame implements ActionListener{
         this.setVisible(true);
     }
 
-    public void actionPerformed(ActionEvent e) {
-        if(e.getActionCommand().equals("disconnect_clicked")) {
+    public void actionPerformed(ActionEvent event) {
+
+        if(event.getActionCommand().equals("disconnect_clicked")) {
+            List<String> selectedValues = list.getSelectedValuesList();
+            try {
+                for (int i = 0; i < selectedValues.size(); ++i)
+                    manager.disconnect(InetAddress.getByName(selectedValues.get(i)));
+            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();
+            }
             System.out.println("disconnect clicked");
         }
-        else if(e.getActionCommand().equals("on") && lastSelectedOption == false) {
+
+        else if(event.getActionCommand().equals("on") && lastSelectedOption == false) {
             lastSelectedOption = true;
             System.out.println("on clicked");
             nThread = new Thread(networkThread);
-            System.out.println(nThread.getState().toString());
+//            System.out.println(nThread.getState().toString());
             nThread.start();
-            System.out.println(nThread.getState().toString());
+//            System.out.println(nThread.getState().toString());
         }
-        else if(e.getActionCommand().equals("off") && lastSelectedOption == true) {
+
+        else if(event.getActionCommand().equals("off") && lastSelectedOption == true) {
             lastSelectedOption = false;
             System.out.println("off clicked");
             try {
                 manager.stopServer();
                 nThread = null;
-            } catch (Exception e1) {}
+            } catch (Exception e) { e.printStackTrace(); }
         }
     }
 

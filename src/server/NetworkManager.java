@@ -2,6 +2,7 @@ package server;
 
 import java.awt.*;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.Socket;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -47,13 +48,18 @@ public class NetworkManager {
         Iterator it = cMap.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry<Socket, ServerThread> entry = (Map.Entry<Socket, ServerThread>) it.next();
-            Socket s = entry.getKey();
             ServerThread st = entry.getValue();
             st.setStopFlag();
             Thread.sleep(st.getTimeout());
-            state.remove(s);
         }
 
         System.out.println("Server stopped ...");
+    }
+
+    public void disconnect(InetAddress address) throws IOException, InterruptedException {
+        ServerThread st = state.getServerThread(address);
+        st.setStopFlag();
+        Thread.sleep(st.getTimeout());
+        System.out.println(address.getHostAddress() + " disconnected");
     }
 }
