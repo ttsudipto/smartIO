@@ -26,6 +26,8 @@ public class ServerThread implements Runnable
     {
         try {
             in = new BufferedReader(new InputStreamReader(cskt.getInputStream()));
+            if(!in.ready())
+                return;
 //            while (!in.ready()) ;
             String s = in.readLine();
             System.out.println(s);
