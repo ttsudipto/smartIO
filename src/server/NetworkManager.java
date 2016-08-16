@@ -1,6 +1,6 @@
 package server;
 
-import java.awt.*;
+import java.awt.AWTException;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
@@ -9,42 +9,41 @@ import java.util.Iterator;
 import java.util.Map;
 
 /**
- * Created by Sudipto Bhattacharjee on 11/8/16.
+ * @author Sudipto Bhattacharjee
  */
 public class NetworkManager {
-    private Server server;
-    private BroadcastThread broadcastThread;
-    private Thread bThread;
-    private NetworkState state;
+
+    private Server mServer;
+    private BroadcastThread mBroadcastThread;
+    private Thread mThread;
+    private NetworkState mState;
 
     public NetworkManager() {
-        state = new NetworkState();
-        broadcastThread = new BroadcastThread();
+        mState = new NetworkState();
+        mBroadcastThread = new BroadcastThread();
     }
 
-    public NetworkState getNetworkState() {
-        return state;
-    }
+    public NetworkState getNetworkState() { return mState; }
 
     public void startServer() throws IOException, InterruptedException, AWTException {
-        server = new Server(state, 1234);
-        bThread = new Thread(broadcastThread);
-        bThread.start();
+        mServer = new Server(mState, 1234);
+        mThread = new Thread(mBroadcastThread);
+        mThread.start();
         System.out.println("Broadcast started ...");
         System.out.println("Server started ...");
-        server.listen();
+        mServer.listen();
     }
 
     public void stopServer() throws IOException, InterruptedException {
-        broadcastThread.stopBroadcast();
-        bThread = null;
+        mBroadcastThread.stopBroadcast();
+        mThread = null;
         System.out.println("Broadcast stopped ...");
 
-        server.setStopFlag();
-        Thread.sleep(server.getTimeout());
-        server.close();
+        mServer.setStopFlag();
+        Thread.sleep(mServer.getTimeout());
+        mServer.close();
 
-        HashMap<Socket, ServerThread> cMap = state.getConnectionMap();
+        HashMap<Socket, ServerThread> cMap = mState.getConnectionMap();
         Iterator it = cMap.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry<Socket, ServerThread> entry = (Map.Entry<Socket, ServerThread>) it.next();
@@ -57,7 +56,7 @@ public class NetworkManager {
     }
 
     public void disconnect(InetAddress address) throws IOException, InterruptedException {
-        ServerThread st = state.getServerThread(address);
+        ServerThread st = mState.getServerThread(address);
         st.setStopFlag();
         Thread.sleep(st.getTimeout());
         System.out.println(address.getHostAddress() + " disconnected");

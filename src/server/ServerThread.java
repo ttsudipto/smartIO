@@ -1,72 +1,68 @@
 package server;
 
-import java.net.*;
-import java.io.*;
+import java.net.Socket;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
 import java.util.Scanner;
+
 import mouse.MouseController;
 
-public class ServerThread implements Runnable
-{
-    private Socket cskt;
-    private MouseController mc;
-    private BufferedReader in;
-    private boolean stopFlag;
-    private NetworkState state;
+public class ServerThread implements Runnable {
 
-    public ServerThread(NetworkState state, Socket skt, MouseController mc_) throws IOException
-    {
-        cskt = skt;
-        mc = mc_;
-        stopFlag = false;
-        this.state = state;
-        cskt.setSoTimeout(100);
+    private Socket mClientSocket;
+    private MouseController mMouseController;
+    private BufferedReader mIn;
+    private boolean mStopFlag;
+    private NetworkState mState;
+
+    public ServerThread(NetworkState state, Socket skt, MouseController mc) throws IOException {
+        mClientSocket = skt;
+        mMouseController = mc;
+        mStopFlag = false;
+        this.mState = state;
+        mClientSocket.setSoTimeout(100);
     }
     
-    public void receive() throws InterruptedException
-    {
+    public void receive() throws InterruptedException {
         try {
-            in = new BufferedReader(new InputStreamReader(cskt.getInputStream()));
-            if(!in.ready())
-                return;
-//            while (!in.ready()) ;
-            String s = in.readLine();
+            mIn = new BufferedReader(new InputStreamReader(mClientSocket.getInputStream()));
+            if(!mIn.ready())    return;
+            //while (!in.ready()) ;
+            String s = mIn.readLine();
             System.out.println(s);
             Scanner sc = new Scanner(s);
             int k = sc.nextInt();
-            if (k < 0)
-                stopFlag = true;
-            else {
+            if (k < 0) {
+                mStopFlag = true;
+            } else {
                 int x = sc.nextInt();
                 int y = sc.nextInt();
-                mc.move(x, y);
+                mMouseController.move(x, y);
             }
         } catch (IOException e) {
-            return;
+            e.printStackTrace();
         }
-//         mc.wait();
+        //mc.wait();
     }
 
-    public void setStopFlag() { stopFlag = true; }
+    public void setStopFlag() { mStopFlag = true; }
 
-    public int getTimeout() throws IOException { return cskt.getSoTimeout(); }
+    public int getTimeout() throws IOException { return mClientSocket.getSoTimeout(); }
     
-    public void run()
-    {
-        try
-        {
-            while(true)
-            {
+    @Override
+    public void run() {
+        try {
+            while(true) {
                 receive();
-                if(stopFlag)
-                    break;
+                if(mStopFlag)   break;
                 //Thread.sleep(delay);
             }
-            state.remove(cskt);
-            cskt.close();
+            mState.remove(mClientSocket);
+            mClientSocket.close();
         }
-        catch(Exception e)
-        {
-            System.out.println("Exception in run()");
+        catch(Exception e) {
+            e.printStackTrace();
         }
     }
 }

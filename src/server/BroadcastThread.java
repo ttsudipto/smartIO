@@ -1,25 +1,29 @@
 package server;
 
 import java.io.IOException;
-import java.net.*;
+import java.net.NetworkInterface;
+import java.net.InterfaceAddress;
+import java.net.InetAddress;
+import java.net.DatagramSocket;
+import java.net.DatagramPacket;
 import java.util.Enumeration;
 import java.util.List;
 
 public class BroadcastThread implements Runnable {
 
-    private int broadcastPort;
-    private boolean stopFlag;
+    private int mBroadcastPort;
+    private boolean mStopFlag;
 
     public void stopBroadcast() {
-        stopFlag = true;
+        mStopFlag = true;
     }
 
     @Override
     public void run() {
-        stopFlag = false;
+        mStopFlag = false;
         try {
-            while(!stopFlag) {
-                broadcastPort = 1236;
+            while(!mStopFlag) {
+                mBroadcastPort = 1236;
                 Enumeration<NetworkInterface> nis = NetworkInterface.getNetworkInterfaces();
 
                 while (nis.hasMoreElements()) {
@@ -30,12 +34,14 @@ public class BroadcastThread implements Runnable {
                         for(int i=0; i<ias.size(); ++i) {
                             InetAddress broadcastIA = ias.get(i).getBroadcast();
                             if(broadcastIA != null) {
-//                                System.out.println(ia + " " + ia.isLinkLocalAddress()+ " " + ia.isAnyLocalAddress()+ " " + ia.isSiteLocalAddress());
-                                DatagramSocket ds = new DatagramSocket();
-                                ds.setBroadcast(true);
-                                DatagramPacket p = new DatagramPacket("".getBytes(), "".getBytes().length, broadcastIA, 1235);
-                                ds.send(p);
-                                ds.close();
+//                                System.out.println(ia + " " + ia.isLinkLocalAddress()+ " "
+// + ia.isAnyLocalAddress()+ " " + ia.isSiteLocalAddress());
+                                DatagramSocket datagramSocket = new DatagramSocket();
+                                datagramSocket.setBroadcast(true);
+                                DatagramPacket datagramPacket = new DatagramPacket("".getBytes(), "".getBytes().length,
+                                        broadcastIA, 1235);
+                                datagramSocket.send(datagramPacket);
+                                datagramSocket.close();
                             }
                         }
                     }

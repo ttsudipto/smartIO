@@ -1,34 +1,44 @@
 package gui;
 
-import server.NetworkManager;
-import server.NetworkState;
-import server.NetworkThread;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.BorderLayout;
+import java.awt. Insets;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.util.List;
 
-public class MainWindow extends JFrame implements ActionListener{
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JFrame;
+import javax.swing.JRadioButton;
+import javax.swing.JList;
+import javax.swing.ButtonGroup;
 
-    private JButton disconnectButton;
-    private JRadioButton onButton, offButton;
-    private JPanel radioPanel;
-    private JList<String> list;
-    private boolean lastSelectedOption;
+import server.NetworkManager;
+import server.NetworkState;
+import server.NetworkThread;
 
-    private NetworkManager manager;
-    private NetworkThread networkThread;
-    private Thread nThread;
-    private NetworkState state;
 
-    public MainWindow(NetworkManager manager) throws IOException, InterruptedException {
-        this.manager = manager;
-        this.state = manager.getNetworkState();
-        networkThread = new NetworkThread(manager);
+public class MainWindow extends JFrame implements ActionListener {
+
+    private JButton mDisconnectButton;
+    private JRadioButton mOnButton, mOffButton;
+    private JPanel mRadioPanel;
+    private JList<String> mList;
+    private boolean mLastSelectedOption;
+
+    private NetworkManager mManager;
+    private NetworkThread mNetworkThread;
+    private Thread mThread;
+    private NetworkState mState;
+
+    public MainWindow(NetworkManager manager) {
+        this.mManager = manager;
+        this.mState = manager.getNetworkState();
+        mNetworkThread = new NetworkThread(manager);
 
         this.setTitle("SmartIO");
         this.setMinimumSize(new Dimension(640,480));
@@ -36,66 +46,66 @@ public class MainWindow extends JFrame implements ActionListener{
 
         this.setLayout(new BorderLayout());
 
-        disconnectButton = new JButton("Disconnect");
-        disconnectButton.setMargin(new Insets(5,5,5,5));
-        disconnectButton.setActionCommand("disconnect_clicked");
-        disconnectButton.addActionListener(this);
+        mDisconnectButton = new JButton("Disconnect");
+        mDisconnectButton.setMargin(new Insets(5,5,5,5));
+        mDisconnectButton.setActionCommand("disconnect_clicked");
+        mDisconnectButton.addActionListener(this);
 
-        onButton = new JRadioButton();
-        onButton.setText("Server On");
-        onButton.setActionCommand("on");
-        offButton = new JRadioButton();
-        offButton.setActionCommand("off");
-        offButton.setText("Server Off");
-        offButton.setSelected(true);
-        lastSelectedOption = false;
+        mOnButton = new JRadioButton();
+        mOnButton.setText("Server On");
+        mOnButton.setActionCommand("on");
+        mOffButton = new JRadioButton();
+        mOffButton.setActionCommand("off");
+        mOffButton.setText("Server Off");
+        mOffButton.setSelected(true);
+        mLastSelectedOption = false;
         ButtonGroup bg = new ButtonGroup();
-        bg.add(offButton);
-        bg.add(onButton);
-        onButton.addActionListener(this);
-        offButton.addActionListener(this);
-        radioPanel = new JPanel(new GridLayout(1, 0));
-        radioPanel.add(offButton);
-        radioPanel.add(onButton);
+        bg.add(mOffButton);
+        bg.add(mOnButton);
+        mOnButton.addActionListener(this);
+        mOffButton.addActionListener(this);
+        mRadioPanel = new JPanel(new GridLayout(1, 0));
+        mRadioPanel.add(mOnButton);
+        mRadioPanel.add(mOffButton);
 
-        list = new JList<String>(state.getListModel());
-        list.setLayoutOrientation(JList.VERTICAL);
-        list.setFixedCellHeight(50);
+        mList = new JList<>(mState.getListModel());
+        mList.setLayoutOrientation(JList.VERTICAL);
+        mList.setFixedCellHeight(50);
 
-        this.add(disconnectButton, BorderLayout.SOUTH);
-        this.add(radioPanel, BorderLayout.NORTH);
-        this.add(list, BorderLayout.CENTER);
+        this.add(mDisconnectButton, BorderLayout.SOUTH);
+        this.add(mRadioPanel, BorderLayout.NORTH);
+        this.add(mList, BorderLayout.CENTER);
         this.setVisible(true);
     }
 
     public void actionPerformed(ActionEvent event) {
 
         if(event.getActionCommand().equals("disconnect_clicked")) {
-            List<String> selectedValues = list.getSelectedValuesList();
+            List<String> selectedValues = mList.getSelectedValuesList();
             try {
                 for (int i = 0; i < selectedValues.size(); ++i)
-                    manager.disconnect(InetAddress.getByName(selectedValues.get(i)));
+                    mManager.disconnect(InetAddress.getByName(selectedValues.get(i)));
             } catch (IOException | InterruptedException e) {
                 e.printStackTrace();
             }
             System.out.println("disconnect clicked");
         }
 
-        else if(event.getActionCommand().equals("on") && lastSelectedOption == false) {
-            lastSelectedOption = true;
+        else if(event.getActionCommand().equals("on") && !mLastSelectedOption) {
+            mLastSelectedOption = true;
             System.out.println("on clicked");
-            nThread = new Thread(networkThread);
+            mThread = new Thread(mNetworkThread);
 //            System.out.println(nThread.getState().toString());
-            nThread.start();
+            mThread.start();
 //            System.out.println(nThread.getState().toString());
         }
 
-        else if(event.getActionCommand().equals("off") && lastSelectedOption == true) {
-            lastSelectedOption = false;
+        else if(event.getActionCommand().equals("off") && mLastSelectedOption) {
+            mLastSelectedOption = false;
             System.out.println("off clicked");
             try {
-                manager.stopServer();
-                nThread = null;
+                mManager.stopServer();
+                mThread = null;
             } catch (Exception e) { e.printStackTrace(); }
         }
     }

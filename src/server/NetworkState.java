@@ -1,41 +1,36 @@
 package server;
 
-import javax.swing.*;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.util.HashMap;
 
+import javax.swing.DefaultListModel;
+
 public class NetworkState {
 
-    private static HashMap<Socket, ServerThread> connectionMap = new HashMap<>();
-    private static HashMap<InetAddress, Socket> addressMap = new HashMap<>();
-    private DefaultListModel<String> listModel;
+    private static HashMap<Socket, ServerThread> sConnectionMap = new HashMap<>();
+    private static HashMap<InetAddress, Socket> sAddressMap = new HashMap<>();
+    private DefaultListModel<String> mListModel;
 
-    public NetworkState() {
-        listModel = new DefaultListModel<>();
-    }
+    public NetworkState() { mListModel = new DefaultListModel<>(); }
 
-    public DefaultListModel getListModel() {
-        return listModel;
-    }
+    public DefaultListModel getListModel() { return mListModel; }
 
-    public HashMap<Socket, ServerThread> getConnectionMap() { return connectionMap; }
+    public HashMap<Socket, ServerThread> getConnectionMap() { return sConnectionMap; }
 
-    public ServerThread getServerThread(InetAddress ia) { return connectionMap.get(addressMap.get(ia)); }
+    public ServerThread getServerThread(InetAddress ia) { return sConnectionMap.get(sAddressMap.get(ia)); }
 
     public void add(Socket skt, ServerThread serverThread) {
-        connectionMap.put(skt, serverThread);
-        addressMap.put(skt.getInetAddress(), skt);
-        if(!listModel.contains(skt.getInetAddress().getHostAddress()))
-            listModel.addElement(skt.getInetAddress().getHostAddress());
+        sConnectionMap.put(skt, serverThread);
+        sAddressMap.put(skt.getInetAddress(), skt);
+        if(!mListModel.contains(skt.getInetAddress().getHostAddress()))
+            mListModel.addElement(skt.getInetAddress().getHostAddress());
     }
 
     public void remove(Socket skt) {
-        if(connectionMap.containsKey(skt))
-            connectionMap.remove(skt);
-        if(addressMap.containsKey(skt.getInetAddress()))
-            connectionMap.remove(skt.getInetAddress());
-        if(listModel.contains(skt.getInetAddress().getHostAddress()))
-            listModel.removeElement(skt.getInetAddress().getHostAddress());
+        if(sConnectionMap.containsKey(skt)) sConnectionMap.remove(skt);
+        if(sAddressMap.containsKey(skt.getInetAddress()))   sConnectionMap.remove(skt.getInetAddress());
+        if(mListModel.contains(skt.getInetAddress().getHostAddress()))  mListModel.removeElement(skt.
+                getInetAddress().getHostAddress());
     }
 }
