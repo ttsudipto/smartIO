@@ -9,21 +9,25 @@ import java.net.DatagramPacket;
 import java.util.Enumeration;
 import java.util.List;
 
-public class BroadcastThread implements Runnable {
+import static server.NetworkManager.sPublicKey;
 
-    private int mBroadcastPort;
+/**
+ * @author Sudipto Bhattacharjee
+ * @author Sayantan Majumdar
+ */
+
+class BroadcastThread implements Runnable {
+
     private boolean mStopFlag;
+    private static final int BROADCAST_PORT = 1235;
 
-    public void stopBroadcast() {
-        mStopFlag = true;
-    }
+    void stopBroadcast() { mStopFlag = true; }
 
     @Override
     public void run() {
         mStopFlag = false;
         try {
             while(!mStopFlag) {
-                mBroadcastPort = 1236;
                 Enumeration<NetworkInterface> nis = NetworkInterface.getNetworkInterfaces();
 
                 while (nis.hasMoreElements()) {
@@ -31,15 +35,13 @@ public class BroadcastThread implements Runnable {
                     if (!ni.isLoopback()) {
                         List<InterfaceAddress> ias = ni.getInterfaceAddresses();
 
-                        for(int i=0; i<ias.size(); ++i) {
-                            InetAddress broadcastIA = ias.get(i).getBroadcast();
+                        for(InterfaceAddress addr: ias) {
+                            InetAddress broadcastIA = addr.getBroadcast();
                             if(broadcastIA != null) {
-//                                System.out.println(ia + " " + ia.isLinkLocalAddress()+ " "
-// + ia.isAnyLocalAddress()+ " " + ia.isSiteLocalAddress());
                                 DatagramSocket datagramSocket = new DatagramSocket();
                                 datagramSocket.setBroadcast(true);
-                                DatagramPacket datagramPacket = new DatagramPacket("".getBytes(), "".getBytes().length,
-                                        broadcastIA, 1235);
+                                DatagramPacket datagramPacket = new DatagramPacket(sPublicKey, sPublicKey.length,
+                                        broadcastIA, BROADCAST_PORT);
                                 datagramSocket.send(datagramPacket);
                                 datagramSocket.close();
                             }

@@ -3,6 +3,10 @@ package mouse;
 import java.awt.Robot;
 import java.awt.AWTException;
 
+/**
+ * @author Sudipto Bhattacharjee
+ */
+
 public class MouseController {
 
     private Robot mRobot;

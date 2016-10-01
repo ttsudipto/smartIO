@@ -8,15 +8,18 @@ import java.util.Scanner;
 
 import mouse.MouseController;
 
-public class ServerThread implements Runnable {
+/**
+ * @author Sudipto Bhattacharjee
+ */
+
+class ServerThread implements Runnable {
 
     private Socket mClientSocket;
     private MouseController mMouseController;
-    private BufferedReader mIn;
     private boolean mStopFlag;
     private NetworkState mState;
 
-    public ServerThread(NetworkState state, Socket skt, MouseController mc) throws IOException {
+    ServerThread(NetworkState state, Socket skt, MouseController mc) throws IOException {
         mClientSocket = skt;
         mMouseController = mc;
         mStopFlag = false;
@@ -24,12 +27,12 @@ public class ServerThread implements Runnable {
         mClientSocket.setSoTimeout(100);
     }
     
-    public void receive() throws InterruptedException {
+    private void receive() throws InterruptedException {
         try {
-            mIn = new BufferedReader(new InputStreamReader(mClientSocket.getInputStream()));
-            if(!mIn.ready())    return;
+            BufferedReader in = new BufferedReader(new InputStreamReader(mClientSocket.getInputStream()));
+            if(!in.ready())    return;
             //while (!in.ready()) ;
-            String s = mIn.readLine();
+            String s = in.readLine();
             System.out.println(s);
             Scanner sc = new Scanner(s);
             int k = sc.nextInt();
@@ -46,9 +49,9 @@ public class ServerThread implements Runnable {
         //mc.wait();
     }
 
-    public void setStopFlag() { mStopFlag = true; }
+    void setStopFlag() { mStopFlag = true; }
 
-    public int getTimeout() throws IOException { return mClientSocket.getSoTimeout(); }
+    int getTimeout() throws IOException { return mClientSocket.getSoTimeout(); }
     
     @Override
     public void run() {

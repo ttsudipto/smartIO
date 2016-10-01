@@ -21,6 +21,9 @@ import server.NetworkManager;
 import server.NetworkState;
 import server.NetworkThread;
 
+/**
+ * @author Sudipto Bhattacharjee
+ */
 
 public class MainWindow extends JFrame implements ActionListener {
 
@@ -83,8 +86,9 @@ public class MainWindow extends JFrame implements ActionListener {
         if(event.getActionCommand().equals("disconnect_clicked")) {
             List<String> selectedValues = mList.getSelectedValuesList();
             try {
-                for (int i = 0; i < selectedValues.size(); ++i)
-                    mManager.disconnect(InetAddress.getByName(selectedValues.get(i)));
+                for (String values: selectedValues) {
+                    mManager.disconnect(InetAddress.getByName(values));
+                }
             } catch (IOException | InterruptedException e) {
                 e.printStackTrace();
             }

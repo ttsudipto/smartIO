@@ -12,22 +12,22 @@ public class NetworkState {
     private static HashMap<InetAddress, Socket> sAddressMap = new HashMap<>();
     private DefaultListModel<String> mListModel;
 
-    public NetworkState() { mListModel = new DefaultListModel<>(); }
+    NetworkState() { mListModel = new DefaultListModel<>(); }
 
     public DefaultListModel getListModel() { return mListModel; }
 
-    public HashMap<Socket, ServerThread> getConnectionMap() { return sConnectionMap; }
+    HashMap<Socket, ServerThread> getConnectionMap() { return sConnectionMap; }
 
-    public ServerThread getServerThread(InetAddress ia) { return sConnectionMap.get(sAddressMap.get(ia)); }
+    ServerThread getServerThread(InetAddress ia) { return sConnectionMap.get(sAddressMap.get(ia)); }
 
-    public void add(Socket skt, ServerThread serverThread) {
+    void add(Socket skt, ServerThread serverThread) {
         sConnectionMap.put(skt, serverThread);
         sAddressMap.put(skt.getInetAddress(), skt);
         if(!mListModel.contains(skt.getInetAddress().getHostAddress()))
             mListModel.addElement(skt.getInetAddress().getHostAddress());
     }
 
-    public void remove(Socket skt) {
+    void remove(Socket skt) {
         if(sConnectionMap.containsKey(skt)) sConnectionMap.remove(skt);
         if(sAddressMap.containsKey(skt.getInetAddress()))   sConnectionMap.remove(skt.getInetAddress());
         if(mListModel.contains(skt.getInetAddress().getHostAddress()))  mListModel.removeElement(skt.

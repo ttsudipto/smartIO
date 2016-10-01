@@ -4,6 +4,10 @@ import java.awt.AWTException;
 import server.NetworkManager;
 import gui.MainWindow;
 
+/**
+ * @author Sudipto Bhattacharjee
+ */
+
 class Main {
     public static void main(String args[]) throws IOException,AWTException,InterruptedException {
         NetworkManager manager = new NetworkManager();

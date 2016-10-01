@@ -1,5 +1,7 @@
 package server;
 
+import security.EKEProvider;
+
 import java.awt.AWTException;
 import java.io.IOException;
 import java.net.InetAddress;
@@ -18,15 +20,21 @@ public class NetworkManager {
     private Thread mThread;
     private NetworkState mState;
 
+    public static final int TCP_PORT = 1234;
+
+    public static byte[] sPublicKey;
+
     public NetworkManager() {
         mState = new NetworkState();
+        sPublicKey = new EKEProvider().getBase64EncodedPubKey();
         mBroadcastThread = new BroadcastThread();
+        System.out.println("Server public key: " + new String(sPublicKey));
     }
 
     public NetworkState getNetworkState() { return mState; }
 
-    public void startServer() throws IOException, InterruptedException, AWTException {
-        mServer = new Server(mState, 1234);
+    void startServer() throws IOException, InterruptedException, AWTException {
+        mServer = new Server(mState, TCP_PORT);
         mThread = new Thread(mBroadcastThread);
         mThread.start();
         System.out.println("Broadcast started ...");
