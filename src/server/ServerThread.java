@@ -26,46 +26,40 @@ class ServerThread implements Runnable {
         this.mState = state;
         mClientSocket.setSoTimeout(100);
     }
-    
-    private void receive() throws InterruptedException {
-        try {
-            BufferedReader in = new BufferedReader(new InputStreamReader(mClientSocket.getInputStream()));
-            if(!in.ready())    return;
-            //while (!in.ready()) ;
-            String s = in.readLine();
-            System.out.println(s);
-            Scanner sc = new Scanner(s);
-            int k = sc.nextInt();
-            if (k < 0) {
-                mStopFlag = true;
-            } else {
-                int x = sc.nextInt();
-                int y = sc.nextInt();
-                mMouseController.move(x, y);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        //mc.wait();
-    }
 
-    void setStopFlag() { mStopFlag = true; }
-
-    int getTimeout() throws IOException { return mClientSocket.getSoTimeout(); }
-    
     @Override
     public void run() {
         try {
-            while(true) {
+            while(!mStopFlag) {
                 receive();
-                if(mStopFlag)   break;
-                //Thread.sleep(delay);
             }
             mState.remove(mClientSocket);
+            System.out.println(mClientSocket.getInetAddress() + " is now disconnected!");
             mClientSocket.close();
         }
         catch(Exception e) {
             e.printStackTrace();
         }
     }
+    
+    private void receive() throws InterruptedException {
+        try {
+            BufferedReader in = new BufferedReader(new InputStreamReader(mClientSocket.getInputStream()));
+            if(!in.ready()) return;
+            String s = in.readLine();
+            System.out.println(s);
+            Scanner sc = new Scanner(s);
+            int k = sc.nextInt();
+            if (k == 10) setStopFlag();
+            int x = sc.nextInt();
+            int y = sc.nextInt();
+            mMouseController.move(x, y);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    void setStopFlag() { mStopFlag = true; }
+
+    int getTimeout() throws IOException { return mClientSocket.getSoTimeout(); }
 }

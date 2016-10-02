@@ -44,27 +44,27 @@ import java.util.Date;
 
 public class EKEProvider {
 
-	private String pairing_key;
-	private KeyPair keyPair;
-	private SecretKey access_key;
-	private byte[] init_vector;
+	private String mPairingKey;
+	private KeyPair mKeyPair;
+	private SecretKey mAccessKey;
+	private byte[] mIV;
 
 	public EKEProvider() {
         Security.insertProviderAt(new BouncyCastleProvider(), 1);
 		SecureRandom random = new SecureRandom();
-		StringBuffer sbuf = new StringBuffer(new BigInteger(30, random).toString(32));
-		for(int i=0;i<sbuf.length();i++) {
-			char ch = sbuf.charAt(i);
+		StringBuilder stringBuilder = new StringBuilder(new BigInteger(30, random).toString(32));
+		for(int i=0;i<stringBuilder.length();i++) {
+			char ch = stringBuilder.charAt(i);
 			if(Character.isLetter(ch) && Character.isLowerCase(ch) && random.nextFloat()<0.5) {
-				sbuf.setCharAt(i, Character.toUpperCase(ch));
+				stringBuilder.setCharAt(i, Character.toUpperCase(ch));
 			}
 		}
-		this.pairing_key = sbuf.toString();
+		this.mPairingKey = stringBuilder.toString();
 
-		MessageDigest msg_digest;
+		MessageDigest msgDigest;
 		try {
-			msg_digest = MessageDigest.getInstance("SHA-256", "BC");
-			this.init_vector = msg_digest.digest(pairing_key.getBytes());
+			msgDigest = MessageDigest.getInstance("SHA-256", "BC");
+			this.mIV = msgDigest.digest(mPairingKey.getBytes());
 		}
 		catch (NoSuchAlgorithmException | NoSuchProviderException nsae) {
 			nsae.printStackTrace();
@@ -72,12 +72,14 @@ public class EKEProvider {
 
 	}
 
+	public String getPairingKey() { return mPairingKey; }
+
 	public EKEProvider(String k) {
-		this.pairing_key = k;
-		MessageDigest msg_digest;
+		this.mPairingKey = k;
+		MessageDigest msgDigest;
 		try {
-			msg_digest = MessageDigest.getInstance("SHA-256", "BC");
-			this.init_vector = msg_digest.digest(pairing_key.getBytes());
+			msgDigest = MessageDigest.getInstance("SHA-256", "BC");
+			this.mIV = msgDigest.digest(mPairingKey.getBytes());
 		}
 		catch (NoSuchAlgorithmException | NoSuchProviderException nsae) {
 			nsae.printStackTrace();
@@ -85,11 +87,11 @@ public class EKEProvider {
 	}
 
 	public void generateMasterKeys() {
-		this.keyPair = generateECKeys();
+		this.mKeyPair = generateECKeys();
 	}
 
 	public void generateAccessKey(PublicKey XPubKey) {
-		this.access_key = generateSharedSecret(keyPair.getPrivate(), XPubKey);
+		this.mAccessKey = generateSharedSecret(mKeyPair.getPrivate(), XPubKey);
 	}
 
     public byte[] getBase64EncodedPubKey() {
@@ -146,7 +148,7 @@ public class EKEProvider {
 
 	private String encryptString(SecretKey key, String plainText) {
 		try {
-			IvParameterSpec ivSpec = new IvParameterSpec(init_vector);
+			IvParameterSpec ivSpec = new IvParameterSpec(mIV);
 			Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding", "BC");
 			byte[] plainTextBytes = plainText.getBytes("UTF-8");
 			byte[] cipherText;
@@ -169,7 +171,7 @@ public class EKEProvider {
 	private String decryptString(SecretKey key, String cipherText) {
 		try {
 			Key decryptionKey = new SecretKeySpec(key.getEncoded(), key.getAlgorithm());
-			IvParameterSpec ivSpec = new IvParameterSpec(init_vector);
+			IvParameterSpec ivSpec = new IvParameterSpec(mIV);
 			Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding", "BC");
 			byte[] cipherTextBytes = Base64.decodeBase64(cipherText);
 			byte[] plainText;
