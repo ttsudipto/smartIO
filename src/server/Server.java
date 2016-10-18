@@ -12,7 +12,6 @@ import java.awt.AWTException;
 
 import mouse.MouseController;
 import net.ClientInfo;
-import security.EKEProvider;
 
 /**
  * @author Sudipto Bhattacharjee
@@ -37,10 +36,9 @@ class Server {
     
     private boolean isValidClient(Socket socket) throws IOException {
         BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        if(!in.ready()) return false;
         String pairingKey = in.readLine();
         System.out.println("Received pairing key: " + pairingKey);
-        return pairingKey != null && mPairingKey.equals(pairingKey);
+        return mPairingKey.equals(pairingKey);
     }
 
     void setStopFlag() { mStopFlag = true; }
@@ -48,21 +46,17 @@ class Server {
     int getTimeout() throws IOException { return mServerSocket.getSoTimeout(); }
 
     void listen() throws IOException,InterruptedException {
-        boolean keyGenerated = false;
         while(!mStopFlag) {
             try {
-                if(!keyGenerated) {
-                    mPairingKey = new EKEProvider().getPairingKey();
-                    System.out.println("Type the following pairing key to connect your phone: " + mPairingKey);
-                    keyGenerated = true;
-                }
                 Socket clientSocket = mServerSocket.accept();
-
                 System.out.println(clientSocket.getInetAddress().getHostAddress() +
                         " wants to connect.");
-                String clientPubKey = new String(new ClientInfo().getBase64EncodedPubKey());
 
-                if(isValidClient(clientSocket)) {
+                String[] items = new ClientInfo().getPKIV();
+                String clientPubKey = items[0];
+                mPairingKey = items[1];
+                System.out.println("Type the following pairing key to connect your phone: " + mPairingKey);
+                if (isValidClient(clientSocket)) {
                     new PrintWriter(clientSocket.getOutputStream(), true).println(1);
                     System.out.println("Connected to " + clientSocket.getInetAddress().getHostAddress());
                     System.out.println("Client public key: " + clientPubKey);
@@ -73,8 +67,8 @@ class Server {
                 } else {
                     System.out.println("Incorrect Pairing Key!");
                     new PrintWriter(clientSocket.getOutputStream(), true).println(0);
+                    clientSocket.close();
                 }
-                keyGenerated = false;
             } catch (SocketTimeoutException | SocketException e) {}
         }
     }
