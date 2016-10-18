@@ -8,7 +8,6 @@ import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.io.PrintWriter;
 import java.io.IOException;
-import java.util.Scanner;
 import java.awt.AWTException;
 
 import mouse.MouseController;
@@ -58,13 +57,13 @@ class Server {
                     keyGenerated = true;
                 }
                 Socket clientSocket = mServerSocket.accept();
-                PrintWriter printWriter = new PrintWriter(clientSocket.getOutputStream(), true);
+
                 System.out.println(clientSocket.getInetAddress().getHostAddress() +
                         " wants to connect.");
                 String clientPubKey = new String(new ClientInfo().getBase64EncodedPubKey());
 
                 if(isValidClient(clientSocket)) {
-                    printWriter.println(1);
+                    new PrintWriter(clientSocket.getOutputStream(), true).println(1);
                     System.out.println("Connected to " + clientSocket.getInetAddress().getHostAddress());
                     System.out.println("Client public key: " + clientPubKey);
                     ServerThread st = new ServerThread(mState, clientSocket, mMouseController);
@@ -73,8 +72,7 @@ class Server {
                     t.start();
                 } else {
                     System.out.println("Incorrect Pairing Key!");
-                    printWriter.println(0);
-                    clientSocket.close();
+                    new PrintWriter(clientSocket.getOutputStream(), true).println(0);
                 }
                 keyGenerated = false;
             } catch (SocketTimeoutException | SocketException e) {}

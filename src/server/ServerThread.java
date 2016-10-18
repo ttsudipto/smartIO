@@ -1,5 +1,6 @@
 package server;
 
+import java.io.PrintWriter;
 import java.net.Socket;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -10,6 +11,7 @@ import mouse.MouseController;
 
 /**
  * @author Sudipto Bhattacharjee
+ * @author Sayantan Majumdar
  */
 
 class ServerThread implements Runnable {
@@ -31,10 +33,12 @@ class ServerThread implements Runnable {
     public void run() {
         try {
             while(!mStopFlag) {
-                receive();
+                receiveMouseData();
             }
             mState.remove(mClientSocket);
             System.out.println(mClientSocket.getInetAddress() + " is now disconnected!");
+            PrintWriter printWriter = new PrintWriter(mClientSocket.getOutputStream(), true);
+            printWriter.println(-1);
             mClientSocket.close();
         }
         catch(Exception e) {
@@ -42,15 +46,14 @@ class ServerThread implements Runnable {
         }
     }
     
-    private void receive() throws InterruptedException {
+    private void receiveMouseData() throws InterruptedException {
         try {
             BufferedReader in = new BufferedReader(new InputStreamReader(mClientSocket.getInputStream()));
             if(!in.ready()) return;
             String s = in.readLine();
             System.out.println(s);
             Scanner sc = new Scanner(s);
-            int k = sc.nextInt();
-            if (k == 10) setStopFlag();
+            if (sc.nextInt() == -1) setStopFlag();
             int x = sc.nextInt();
             int y = sc.nextInt();
             mMouseController.move(x, y);
