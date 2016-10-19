@@ -7,7 +7,8 @@ import java.io.InputStreamReader;
 import java.io.IOException;
 import java.util.Scanner;
 
-import mouse.MouseController;
+import device.KeyboardController;
+import device.MouseController;
 
 /**
  * @author Sudipto Bhattacharjee
@@ -18,12 +19,14 @@ class ServerThread implements Runnable {
 
     private Socket mClientSocket;
     private MouseController mMouseController;
+    private KeyboardController mKeyboardController;
     private boolean mStopFlag;
     private NetworkState mState;
 
-    ServerThread(NetworkState state, Socket skt, MouseController mc) throws IOException {
+    ServerThread(NetworkState state, Socket skt, MouseController mc, KeyboardController kc) throws IOException {
         mClientSocket = skt;
         mMouseController = mc;
+        mKeyboardController = kc;
         mStopFlag = false;
         this.mState = state;
         mClientSocket.setSoTimeout(100);
@@ -33,7 +36,7 @@ class ServerThread implements Runnable {
     public void run() {
         try {
             while(!mStopFlag) {
-                receiveMouseData();
+                receiveData();
             }
             mState.remove(mClientSocket);
             System.out.println(mClientSocket.getInetAddress() + " is now disconnected!");
@@ -46,17 +49,26 @@ class ServerThread implements Runnable {
         }
     }
     
-    private void receiveMouseData() throws InterruptedException {
+    private void receiveData() throws InterruptedException {
         try {
             BufferedReader in = new BufferedReader(new InputStreamReader(mClientSocket.getInputStream()));
             if(!in.ready()) return;
             String s = in.readLine();
             System.out.println(s);
             Scanner sc = new Scanner(s);
-            if (sc.nextInt() == -1) setStopFlag();
-            int x = sc.nextInt();
-            int y = sc.nextInt();
-            mMouseController.move(x, y);
+            String flag = sc.next();
+            switch (flag) {
+                case "Stop":
+                    setStopFlag();
+                    break;
+
+                case "Mouse":
+                    mMouseController.move(sc.nextInt(), sc.nextInt());
+                    break;
+
+                case "Keyboard": mKeyboardController.doKeyOperation(sc.next());
+                sc.close();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

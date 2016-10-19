@@ -1,4 +1,4 @@
-package mouse;
+package device;
 
 import java.awt.Robot;
 import java.awt.AWTException;

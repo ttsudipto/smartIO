@@ -10,7 +10,8 @@ import java.io.PrintWriter;
 import java.io.IOException;
 import java.awt.AWTException;
 
-import mouse.MouseController;
+import device.KeyboardController;
+import device.MouseController;
 import net.ClientInfo;
 
 /**
@@ -23,12 +24,14 @@ class Server {
     private boolean mStopFlag;
     private ServerSocket mServerSocket;
     private MouseController mMouseController;
+    private KeyboardController mKeyboardController;
     private NetworkState mState;
     private String mPairingKey;
 
     Server(NetworkState state) throws IOException, AWTException {
         this.mState = state;
         mMouseController = new MouseController();
+        mKeyboardController = new KeyboardController();
         mServerSocket = new ServerSocket(NetworkManager.TCP_PORT);
         mServerSocket.setSoTimeout(200);
         mStopFlag = false;
@@ -60,7 +63,7 @@ class Server {
                     new PrintWriter(clientSocket.getOutputStream(), true).println(1);
                     System.out.println("Connected to " + clientSocket.getInetAddress().getHostAddress());
                     System.out.println("Client public key: " + clientPubKey);
-                    ServerThread st = new ServerThread(mState, clientSocket, mMouseController);
+                    ServerThread st = new ServerThread(mState, clientSocket, mMouseController, mKeyboardController);
                     Thread t = new Thread(st);
                     mState.add(clientSocket, st);
                     t.start();
