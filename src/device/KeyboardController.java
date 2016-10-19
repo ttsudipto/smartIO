@@ -9,16 +9,15 @@ import java.awt.event.KeyEvent;
  */
 public class KeyboardController {
     private Robot mRobot;
-    //private static int sSpecialKeyCode;
-    //private static boolean sSpecialKeyPressed;
-
+    private static int sSpecialKeyCode;
+    private static boolean sSpecialKeyPressed;
     public KeyboardController() throws AWTException {
         mRobot = new Robot();
     }
 
     public void doKeyOperation(String key) {
 
-        /*if(key.length() > 1) {
+        if(key.length() > 1) {
             switch (key) {
                 case "backspace":
                     mRobot.keyPress(KeyEvent.VK_BACK_SPACE);
@@ -54,12 +53,15 @@ public class KeyboardController {
                     mRobot.keyRelease(KeyEvent.VK_SPACE);
             }
         }
-        else {*/
+        else {
+            System.out.println(key);
             int keyCode = KeyEvent.getExtendedKeyCodeForChar(key.charAt(0));
             mRobot.keyPress(KeyEvent.KEY_TYPED);
-            mRobot.keyPress(keyCode);
-            mRobot.keyRelease(keyCode);
-            //if(sSpecialKeyPressed) mRobot.keyRelease(sSpecialKeyCode);
-        //}
+            try {
+                mRobot.keyPress(keyCode);
+                mRobot.keyRelease(keyCode);
+            } catch (IllegalArgumentException e) {}
+            if(sSpecialKeyPressed) mRobot.keyRelease(sSpecialKeyCode);
+        }
     }
 }

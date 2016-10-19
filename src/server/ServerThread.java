@@ -56,8 +56,7 @@ class ServerThread implements Runnable {
             String s = in.readLine();
             System.out.println(s);
             Scanner sc = new Scanner(s);
-            String flag = sc.next();
-            switch (flag) {
+            switch (sc.next()) {
                 case "Stop":
                     setStopFlag();
                     break;
