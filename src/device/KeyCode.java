@@ -65,10 +65,6 @@ class KeyCode {
         sShiftKeyMap.put('}', KeyEvent.VK_CLOSE_BRACKET);
     }
 
-    static boolean isNotShift(char c) {
-        return sKeyMap.containsKey(c);
-    }
-
     static boolean isShiftKey(char c) {
         return sShiftKeyMap.containsKey(c);
     }

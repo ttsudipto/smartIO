@@ -15,19 +15,26 @@ public class KeyboardController {
     }
 
     public void doKeyOperation(String s) {
-        if(s.equals("backspace")) {
+
+        if (s.equals("backspace")) {
             mRobot.keyPress(KeyEvent.VK_BACK_SPACE);
             mRobot.keyRelease(KeyEvent.VK_BACK_SPACE);
             return;
-        } else if(s.equals("enter")) {
+        }
+        if (s.equals("enter")) {
             mRobot.keyPress(KeyEvent.VK_ENTER);
             mRobot.keyRelease(KeyEvent.VK_ENTER);
             return;
         }
-        char key;
-        try {
-            key = s.charAt(0);
-        } catch (Exception e) { key = '\n'; }
+        int keyLength = s.length();
+        if(keyLength == 0) {
+            performAction('\n');
+            return;
+        }
+        for (int index = 0; index < keyLength; ++index) performAction(s.charAt(index));
+    }
+    private void performAction(char key) {
+
         if(KeyCode.isShiftKey(key)) {
             int keyCode = KeyCode.getShiftCode(key);
             if(keyCode == -1)   System.out.println("Invalid char! " + key);
@@ -44,13 +51,10 @@ public class KeyboardController {
             }
         }
     }
-
     private void doShift(int keyCode) {
         mRobot.keyPress(KeyEvent.VK_SHIFT);
         mRobot.keyPress(keyCode);
         mRobot.keyRelease(keyCode);
         mRobot.keyRelease(KeyEvent.VK_SHIFT);
     }
-
-
 }

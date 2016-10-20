@@ -67,7 +67,6 @@ class ServerThread implements Runnable {
                 case "Key":
                     //length of "Key" = 3 and next char is space. Hence beginIndex = 4
                     mKeyboardController.doKeyOperation(s.substring(4));
-                sc.close();
             }
         } catch (IOException e) {
             e.printStackTrace();
