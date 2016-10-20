@@ -54,7 +54,6 @@ class ServerThread implements Runnable {
             BufferedReader in = new BufferedReader(new InputStreamReader(mClientSocket.getInputStream()));
             if(!in.ready()) return;
             String s = in.readLine();
-            System.out.println(s);
             Scanner sc = new Scanner(s);
             switch (sc.next()) {
                 case "Stop":
@@ -65,7 +64,9 @@ class ServerThread implements Runnable {
                     mMouseController.move(sc.nextInt(), sc.nextInt());
                     break;
 
-                case "Keyboard": mKeyboardController.doKeyOperation(sc.next());
+                case "Key":
+                    //length of "Key" = 3 and next char is space. Hence beginIndex = 4
+                    mKeyboardController.doKeyOperation(s.substring(4));
                 sc.close();
             }
         } catch (IOException e) {
