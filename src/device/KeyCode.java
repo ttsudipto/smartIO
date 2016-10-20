@@ -26,21 +26,21 @@ class KeyCode {
         }
 
         // special char
-        sShiftKeyMap.put('`', KeyEvent.VK_BACK_QUOTE);
-        sShiftKeyMap.put('-', KeyEvent.VK_MINUS);
-        sShiftKeyMap.put('=', KeyEvent.VK_EQUALS);
-        sShiftKeyMap.put('_', KeyEvent.VK_UNDERSCORE);
-        sShiftKeyMap.put('+', KeyEvent.VK_PLUS);
-        sShiftKeyMap.put('[', KeyEvent.VK_OPEN_BRACKET);
-        sShiftKeyMap.put(']', KeyEvent.VK_OPEN_BRACKET);
-        sShiftKeyMap.put('\\', KeyEvent.VK_BACK_SLASH);
-        sShiftKeyMap.put(';', KeyEvent.VK_SEMICOLON);
-        sShiftKeyMap.put('\'', KeyEvent.VK_QUOTE);
-        sShiftKeyMap.put(',', KeyEvent.VK_COMMA);
-        sShiftKeyMap.put('.', KeyEvent.VK_PERIOD);
-        sShiftKeyMap.put('/', KeyEvent.VK_SLASH);
-        sShiftKeyMap.put(' ', KeyEvent.VK_SPACE);
-        sShiftKeyMap.put('\n', KeyEvent.VK_ENTER);
+        sKeyMap.put('`', KeyEvent.VK_BACK_QUOTE);
+        sKeyMap.put('-', KeyEvent.VK_MINUS);
+        sKeyMap.put('=', KeyEvent.VK_EQUALS);
+        sKeyMap.put('_', KeyEvent.VK_UNDERSCORE);
+        sKeyMap.put('+', KeyEvent.VK_PLUS);
+        sKeyMap.put('[', KeyEvent.VK_OPEN_BRACKET);
+        sKeyMap.put(']', KeyEvent.VK_OPEN_BRACKET);
+        sKeyMap.put('\\', KeyEvent.VK_BACK_SLASH);
+        sKeyMap.put(';', KeyEvent.VK_SEMICOLON);
+        sKeyMap.put('\'', KeyEvent.VK_QUOTE);
+        sKeyMap.put(',', KeyEvent.VK_COMMA);
+        sKeyMap.put('.', KeyEvent.VK_PERIOD);
+        sKeyMap.put('/', KeyEvent.VK_SLASH);
+        sKeyMap.put(' ', KeyEvent.VK_SPACE);
+        sKeyMap.put('\n', KeyEvent.VK_ENTER);
 
 
         // set of character which need to be typed with shift key
@@ -61,6 +61,8 @@ class KeyCode {
         sShiftKeyMap.put('?', KeyEvent.VK_SLASH);
         sShiftKeyMap.put('_', KeyEvent.VK_MINUS);
         sShiftKeyMap.put('+', KeyEvent.VK_EQUALS);
+        sShiftKeyMap.put('{', KeyEvent.VK_OPEN_BRACKET);
+        sShiftKeyMap.put('}', KeyEvent.VK_CLOSE_BRACKET);
     }
 
     static boolean isNotShift(char c) {
