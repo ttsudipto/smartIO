@@ -28,6 +28,7 @@ class Server {
     private KeyboardController mKeyboardController;
     private NetworkState mState;
     private String mPairingKey;
+    private EKEProvider mEKEProvider;
 
     Server(NetworkState state) throws IOException, AWTException {
         this.mState = state;
@@ -40,9 +41,9 @@ class Server {
     
     private boolean isValidClient(Socket socket) throws IOException {
         BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        String pairingKey = in.readLine();
+        String pairingKey = mEKEProvider.decryptString(in.readLine());
         System.out.println("Received pairing key: " + pairingKey);
-        return mPairingKey.equals(pairingKey);
+        return pairingKey != null && mPairingKey.equals(pairingKey);
     }
 
     void setStopFlag() { mStopFlag = true; }
@@ -58,10 +59,11 @@ class Server {
 
                 byte[] clientPublicKey = new ClientInfo().getClientPublicKey();
                 mPairingKey = EKEProvider.getPairingKey();
+                mEKEProvider = new EKEProvider(mPairingKey, clientPublicKey);
                 System.out.println("Type the following pairing key to connect your phone: " + mPairingKey);
 
                 if (isValidClient(clientSocket)) {
-                    new PrintWriter(clientSocket.getOutputStream(), true).println(1);
+                    new PrintWriter(clientSocket.getOutputStream(), true).println(mEKEProvider.encryptString("1"));
                     System.out.println("Connected to " + clientSocket.getInetAddress().getHostAddress());
                     System.out.println("Client public key: " + new String(clientPublicKey));
                     ServerThread st = new ServerThread(mState, clientSocket, mMouseController,
@@ -71,7 +73,8 @@ class Server {
                     t.start();
                 } else {
                     System.out.println("Incorrect Pairing Key!");
-                    new PrintWriter(clientSocket.getOutputStream(), true).println(0);
+                    new PrintWriter(clientSocket.getOutputStream(), true)
+                            .println(mEKEProvider.encryptString("0"));
                     clientSocket.close();
                 }
             } catch (SocketTimeoutException | SocketException e) {}
