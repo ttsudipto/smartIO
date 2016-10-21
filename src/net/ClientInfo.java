@@ -1,7 +1,5 @@
 package net;
 
-import security.EKEProvider;
-
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -15,14 +13,14 @@ public class ClientInfo {
 
     public static final int UDP_PORT = 1236;
 
-    public String[] getPKIV() {
+    public byte[] getClientPublicKey() {
         try {
             DatagramSocket datagramSocket = new DatagramSocket(UDP_PORT);
             datagramSocket.setBroadcast(true);
             DatagramPacket datagramPacket = new DatagramPacket(new byte[sPublicKey.length], sPublicKey.length);
             datagramSocket.receive(datagramPacket);
             datagramSocket.close();
-            return new String[]{new String(datagramPacket.getData()), new EKEProvider().getPairingKey()};
+            return datagramPacket.getData();
         } catch (IOException e) {
             e.printStackTrace();
             return null;

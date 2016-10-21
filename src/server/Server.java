@@ -13,6 +13,7 @@ import java.awt.AWTException;
 import device.KeyboardController;
 import device.MouseController;
 import net.ClientInfo;
+import security.EKEProvider;
 
 /**
  * @author Sudipto Bhattacharjee
@@ -55,15 +56,16 @@ class Server {
                 System.out.println(clientSocket.getInetAddress().getHostAddress() +
                         " wants to connect.");
 
-                String[] items = new ClientInfo().getPKIV();
-                String clientPubKey = items[0];
-                mPairingKey = items[1];
+                byte[] clientPublicKey = new ClientInfo().getClientPublicKey();
+                mPairingKey = EKEProvider.getPairingKey();
                 System.out.println("Type the following pairing key to connect your phone: " + mPairingKey);
+
                 if (isValidClient(clientSocket)) {
                     new PrintWriter(clientSocket.getOutputStream(), true).println(1);
                     System.out.println("Connected to " + clientSocket.getInetAddress().getHostAddress());
-                    System.out.println("Client public key: " + clientPubKey);
-                    ServerThread st = new ServerThread(mState, clientSocket, mMouseController, mKeyboardController);
+                    System.out.println("Client public key: " + new String(clientPublicKey));
+                    ServerThread st = new ServerThread(mState, clientSocket, mMouseController,
+                            mKeyboardController, clientPublicKey, mPairingKey);
                     Thread t = new Thread(st);
                     mState.add(clientSocket, st);
                     t.start();

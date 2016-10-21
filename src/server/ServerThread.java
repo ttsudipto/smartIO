@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 import device.KeyboardController;
 import device.MouseController;
+import security.EKEProvider;
 
 /**
  * @author Sudipto Bhattacharjee
@@ -22,14 +23,18 @@ class ServerThread implements Runnable {
     private KeyboardController mKeyboardController;
     private boolean mStopFlag;
     private NetworkState mState;
+    private EKEProvider mEKEProvider;
 
-    ServerThread(NetworkState state, Socket skt, MouseController mc, KeyboardController kc) throws IOException {
+    ServerThread(NetworkState state, Socket skt, MouseController mc, KeyboardController kc,
+                 byte[] clientPublicKey, String pairingKey)
+            throws IOException {
         mClientSocket = skt;
         mMouseController = mc;
         mKeyboardController = kc;
         mStopFlag = false;
         this.mState = state;
         mClientSocket.setSoTimeout(100);
+        mEKEProvider = new EKEProvider(pairingKey, clientPublicKey);
     }
 
     @Override
@@ -41,7 +46,9 @@ class ServerThread implements Runnable {
             mState.remove(mClientSocket);
             System.out.println(mClientSocket.getInetAddress() + " is now disconnected!");
             PrintWriter printWriter = new PrintWriter(mClientSocket.getOutputStream(), true);
-            printWriter.println(-1);
+            if(mEKEProvider != null) {
+                printWriter.println(mEKEProvider.encryptString("1"));
+            }
             mClientSocket.close();
         }
         catch(Exception e) {
@@ -53,7 +60,7 @@ class ServerThread implements Runnable {
         try {
             BufferedReader in = new BufferedReader(new InputStreamReader(mClientSocket.getInputStream()));
             if(!in.ready()) return;
-            String s = in.readLine();
+            String s = mEKEProvider.decryptString(in.readLine());
             Scanner sc = new Scanner(s);
             switch (sc.next()) {
                 case "Stop":

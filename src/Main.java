@@ -13,8 +13,8 @@ import gui.MainWindow;
 class Main {
 
     public static void main(String args[]) throws IOException,AWTException,InterruptedException {
-        EKEProvider ekeProvider = new EKEProvider();
-        byte[] publicKey = ekeProvider.getBase64EncodedPubKey();
+
+        byte[] publicKey = new EKEProvider().getBase64EncodedPubKey();
 
         NetworkManager manager = new NetworkManager(publicKey);
         new MainWindow(manager);
