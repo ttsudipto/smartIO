@@ -12,7 +12,6 @@ import java.awt.AWTException;
 
 import device.KeyboardController;
 import device.MouseController;
-import net.ClientInfo;
 import security.EKEProvider;
 
 /**
@@ -24,6 +23,7 @@ class Server {
 
     private boolean mStopFlag;
     private ServerSocket mServerSocket;
+    private Socket mClientSocket;
     private MouseController mMouseController;
     private KeyboardController mKeyboardController;
     private NetworkState mState;
@@ -46,36 +46,40 @@ class Server {
         return pairingKey != null && mPairingKey.equals(pairingKey);
     }
 
-    void setStopFlag() { mStopFlag = true; }
+    void setStopFlag() {
+        mStopFlag = true;
+    }
 
     int getTimeout() throws IOException { return mServerSocket.getSoTimeout(); }
 
     void listen() throws IOException,InterruptedException {
         while(!mStopFlag) {
             try {
-                Socket clientSocket = mServerSocket.accept();
-                System.out.println(clientSocket.getInetAddress().getHostAddress() +
+                mClientSocket = mServerSocket.accept();
+                BufferedReader in = new BufferedReader(new InputStreamReader(mClientSocket.getInputStream()));
+                byte[] clientPublicKey = in.readLine().getBytes();
+                System.out.println(mClientSocket.getInetAddress().getHostAddress() +
                         " wants to connect.");
 
-                byte[] clientPublicKey = new ClientInfo().getClientPublicKey();
+
                 mPairingKey = EKEProvider.getPairingKey();
                 mEKEProvider = new EKEProvider(mPairingKey, clientPublicKey);
                 System.out.println("Type the following pairing key to connect your phone: " + mPairingKey);
+                PrintWriter out = new PrintWriter(mClientSocket.getOutputStream(), true);
 
-                if (isValidClient(clientSocket)) {
-                    new PrintWriter(clientSocket.getOutputStream(), true).println(mEKEProvider.encryptString("1"));
-                    System.out.println("Connected to " + clientSocket.getInetAddress().getHostAddress());
+                if (isValidClient(mClientSocket)) {
+                    out.println(mEKEProvider.encryptString("1"));
+                    System.out.println("Connected to " + mClientSocket.getInetAddress().getHostAddress());
                     System.out.println("Client public key: " + new String(clientPublicKey));
-                    ServerThread st = new ServerThread(mState, clientSocket, mMouseController,
+                    ServerThread st = new ServerThread(mState, mClientSocket, mMouseController,
                             mKeyboardController, clientPublicKey, mPairingKey);
                     Thread t = new Thread(st);
-                    mState.add(clientSocket, st);
+                    mState.add(mClientSocket, st);
                     t.start();
                 } else {
                     System.out.println("Incorrect Pairing Key!");
-                    new PrintWriter(clientSocket.getOutputStream(), true)
-                            .println(mEKEProvider.encryptString("0"));
-                    clientSocket.close();
+                    out.println(mEKEProvider.encryptString("0"));
+                    mClientSocket.close();
                 }
             } catch (SocketTimeoutException | SocketException e) {}
         }

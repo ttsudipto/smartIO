@@ -44,12 +44,6 @@ class ServerThread implements Runnable {
                 receiveData();
             }
             mState.remove(mClientSocket);
-            System.out.println(mClientSocket.getInetAddress() + " is now disconnected!");
-            PrintWriter printWriter = new PrintWriter(mClientSocket.getOutputStream(), true);
-            if(mEKEProvider != null) {
-                printWriter.println(mEKEProvider.encryptString("1"));
-            }
-            mClientSocket.close();
         }
         catch(Exception e) {
             e.printStackTrace();
@@ -58,6 +52,7 @@ class ServerThread implements Runnable {
     
     private void receiveData() throws InterruptedException {
         try {
+            if(mClientSocket.isClosed()) return;
             BufferedReader in = new BufferedReader(new InputStreamReader(mClientSocket.getInputStream()));
             if(!in.ready()) return;
             String s = mEKEProvider.decryptString(in.readLine());
@@ -80,7 +75,22 @@ class ServerThread implements Runnable {
         }
     }
 
-    void setStopFlag() { mStopFlag = true; }
+    void setStopFlag() {
+        mStopFlag = true;
+        try {
+            System.out.println(mClientSocket.getInetAddress() + " is now disconnected!");
+            if(!mClientSocket.isClosed()) {
+                PrintWriter printWriter = new PrintWriter(mClientSocket.getOutputStream(), true);
+                if (mEKEProvider != null) {
+                    printWriter.println(mEKEProvider.encryptString("Stop"));
+                }
+                mClientSocket.close();
+            }
+        } catch (IOException e) {}
+    }
 
-    int getTimeout() throws IOException { return mClientSocket.getSoTimeout(); }
+    int getTimeout() throws IOException {
+        if(!mClientSocket.isClosed())   return mClientSocket.getSoTimeout();
+        return 0;
+    }
 }
