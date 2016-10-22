@@ -6,6 +6,8 @@ import java.awt. Insets;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.util.List;
@@ -25,7 +27,7 @@ import server.NetworkThread;
  * @author Sudipto Bhattacharjee
  */
 
-public class MainWindow extends JFrame implements ActionListener {
+public class MainWindow extends JFrame implements ActionListener, WindowListener {
 
     private JButton mDisconnectButton;
     private JRadioButton mOnButton, mOffButton;
@@ -46,6 +48,7 @@ public class MainWindow extends JFrame implements ActionListener {
         this.setTitle("SmartIO");
         this.setMinimumSize(new Dimension(640,480));
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.addWindowListener(this);
 
         this.setLayout(new BorderLayout());
 
@@ -113,6 +116,34 @@ public class MainWindow extends JFrame implements ActionListener {
             } catch (Exception e) { e.printStackTrace(); }
         }
     }
+
+    @Override
+    public void windowOpened(WindowEvent windowEvent) {}
+
+    @Override
+    public void windowClosing(WindowEvent windowEvent) {
+        try {
+            mManager.stopServer();
+            mThread = null;
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void windowClosed(WindowEvent windowEvent) {}
+
+    @Override
+    public void windowIconified(WindowEvent windowEvent) {}
+
+    @Override
+    public void windowDeiconified(WindowEvent windowEvent) {}
+
+    @Override
+    public void windowActivated(WindowEvent windowEvent) {}
+
+    @Override
+    public void windowDeactivated(WindowEvent windowEvent) {}
 
 //    public void updateList(String[] data) {
 //        listModel.removeAllElements();
