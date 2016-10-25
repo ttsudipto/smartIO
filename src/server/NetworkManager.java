@@ -17,9 +17,8 @@ public class NetworkManager {
     private BroadcastThread mBroadcastThread;
     private Thread mThread;
     private NetworkState mState;
-    static final int TCP_PORT = 1234;
 
-    public static byte[] sPublicKey;
+    static byte[] sPublicKey;
 
     public NetworkManager(byte[] publicKey) {
         mState = new NetworkState();
@@ -31,8 +30,8 @@ public class NetworkManager {
     public NetworkState getNetworkState() { return mState; }
 
     void startServer() throws IOException, InterruptedException, AWTException {
-        mServer = new Server(mState);
         mThread = new Thread(mBroadcastThread);
+        mServer = new Server(mState, mBroadcastThread);
         mThread.start();
         System.out.println("Broadcast started ...");
         System.out.println("Server started ...");
@@ -44,20 +43,22 @@ public class NetworkManager {
         mThread = null;
         System.out.println("Broadcast stopped ...");
 
-        mServer.setStopFlag();
-        Thread.sleep(mServer.getTimeout());
-        mServer.close();
+        if(mServer != null) {
+            mServer.setStopFlag();
+            Thread.sleep(mServer.getTimeout());
+            mServer.close();
 
-        HashMap<Socket, ServerThread> cMap = mState.getConnectionMap();
-        Iterator it = cMap.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry<Socket, ServerThread> entry = (Map.Entry<Socket, ServerThread>) it.next();
-            ServerThread st = entry.getValue();
-            st.setStopFlag();
-            Thread.sleep(st.getTimeout());
+            HashMap<Socket, ServerThread> cMap = mState.getConnectionMap();
+            Iterator it = cMap.entrySet().iterator();
+            while (it.hasNext()) {
+                Map.Entry<Socket, ServerThread> entry = (Map.Entry<Socket, ServerThread>) it.next();
+                ServerThread st = entry.getValue();
+                st.setStopFlag();
+                Thread.sleep(st.getTimeout());
+            }
+
+            System.out.println("Server stopped ...");
         }
-
-        System.out.println("Server stopped ...");
     }
 
     public void disconnect(InetAddress address) throws IOException, InterruptedException {

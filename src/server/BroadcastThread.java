@@ -22,36 +22,43 @@ class BroadcastThread implements Runnable {
     private static final int BROADCAST_PORT = 1235;
 
     void stopBroadcast() { mStopFlag = true; }
+    boolean getBroadcastFlag() { return mStopFlag; }
 
     @Override
     public void run() {
         mStopFlag = false;
         try {
             while(!mStopFlag) {
-                Enumeration<NetworkInterface> nis = NetworkInterface.getNetworkInterfaces();
-
-                while (nis.hasMoreElements()) {
-                    NetworkInterface ni = nis.nextElement();
-                    if (!ni.isLoopback()) {
-                        List<InterfaceAddress> ias = ni.getInterfaceAddresses();
-
-                        for(InterfaceAddress addr: ias) {
-                            InetAddress broadcastIA = addr.getBroadcast();
-                            if(broadcastIA != null) {
-                                DatagramSocket datagramSocket = new DatagramSocket();
-                                datagramSocket.setBroadcast(true);
-                                DatagramPacket datagramPacket = new DatagramPacket(sPublicKey, sPublicKey.length,
-                                        broadcastIA, BROADCAST_PORT);
-                                datagramSocket.send(datagramPacket);
-                                datagramSocket.close();
-                            }
-                        }
-                    }
-                }
+                broadcastData(sPublicKey);
                 Thread.sleep(1000);
             }
+            broadcastData("Stop".getBytes());
         } catch(InterruptedException | IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void broadcastData(byte[] data) throws IOException {
+        Enumeration<NetworkInterface> nis = NetworkInterface.getNetworkInterfaces();
+
+        while (nis.hasMoreElements()) {
+            NetworkInterface ni = nis.nextElement();
+            if (!ni.isLoopback()) {
+                List<InterfaceAddress> ias = ni.getInterfaceAddresses();
+
+                for(InterfaceAddress addr: ias) {
+                    InetAddress broadcastIA = addr.getBroadcast();
+                    if(broadcastIA != null) {
+                        DatagramSocket datagramSocket = new DatagramSocket();
+                        datagramSocket.setBroadcast(true);
+                        DatagramPacket datagramPacket = new DatagramPacket(data, data.length,
+                                broadcastIA, BROADCAST_PORT);
+                        if(new String(data).equals("Stop")) System.out.println("Stop broadcasted");
+                        datagramSocket.send(datagramPacket);
+                        datagramSocket.close();
+                    }
+                }
+            }
         }
     }
 }

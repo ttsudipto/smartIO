@@ -174,7 +174,6 @@ public class EKEProvider {
                 | InvalidAlgorithmParameterException
                 | IllegalBlockSizeException | BadPaddingException
                 | UnsupportedEncodingException | NullPointerException e) {
-            e.printStackTrace();
             return null;
         }
     }
