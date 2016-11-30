@@ -63,6 +63,8 @@ class KeyCode {
         sShiftKeyMap.put('+', KeyEvent.VK_EQUALS);
         sShiftKeyMap.put('{', KeyEvent.VK_OPEN_BRACKET);
         sShiftKeyMap.put('}', KeyEvent.VK_CLOSE_BRACKET);
+        sShiftKeyMap.put('|', KeyEvent.VK_BACK_SLASH);
+        sShiftKeyMap.put('~', KeyEvent.VK_BACK_QUOTE);
     }
 
     static boolean isShiftKey(char c) {
