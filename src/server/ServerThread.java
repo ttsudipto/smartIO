@@ -70,8 +70,12 @@ class ServerThread implements Runnable {
                     setStopFlag();
                     break;
 
-                case "Mouse":
+                case "Mouse_Move":
                     mMouseController.move(sc.nextInt(), sc.nextInt());
+                    break;
+
+                case "Mouse_Other":
+                    mMouseController.doOperation(sc.next());
                     break;
 
                 case "Key":
