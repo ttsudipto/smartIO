@@ -5,8 +5,8 @@ import java.net.Socket;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
-import java.util.Scanner;
 
+import com.google.gson.Gson;
 import device.KeyboardController;
 import device.MouseController;
 import security.EKEProvider;
@@ -63,24 +63,26 @@ class ServerThread implements Runnable {
             if(mClientSocket.isClosed()) return;
             BufferedReader in = new BufferedReader(new InputStreamReader(mClientSocket.getInputStream()));
             if(!in.ready()) return;
-            String s = mEKEProvider.decryptString(in.readLine());
-            Scanner sc = new Scanner(s);
-            switch (sc.next()) {
-                case "Stop":
-                    setStopFlag();
-                    break;
+            String readData = mEKEProvider.decryptString(in.readLine());
+            DataWrapper dataWrapper = new Gson().fromJson(readData, DataWrapper.class);
+            if(dataWrapper != null) {
+                switch (dataWrapper.getOperationType()) {
+                    case "Stop":
+                        setStopFlag();
+                        break;
 
-                case "Mouse_Move":
-                    mMouseController.move(sc.nextInt(), sc.nextInt());
-                    break;
+                    case "Mouse_Move":
+                        mMouseController.move(dataWrapper.getQuaternionObject());
+                        break;
 
-                case "Mouse_Other":
-                    mMouseController.doOperation(sc.next());
-                    break;
+                    case "Mouse_Button":
+                        mMouseController.doOperation(dataWrapper.getData());
+                        break;
 
-                case "Key":
-                    //length of "Key" = 3 and next char is space. Hence beginIndex = 4
-                    mKeyboardController.doKeyOperation(s.substring(4));
+                    case "Key":
+                        //length of "Key" = 3 and next char is space. Hence beginIndex = 4
+                        mKeyboardController.doKeyOperation(dataWrapper.getData());
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
