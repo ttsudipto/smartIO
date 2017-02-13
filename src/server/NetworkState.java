@@ -18,6 +18,8 @@ public class NetworkState {
 
     HashMap<Socket, ServerThread> getConnectionMap() { return sConnectionMap; }
 
+    HashMap<InetAddress, Socket> getsAddressMap() { return sAddressMap; }
+
     ServerThread getServerThread(InetAddress ia) { return sConnectionMap.get(sAddressMap.get(ia)); }
 
     void add(Socket skt, ServerThread serverThread) {
