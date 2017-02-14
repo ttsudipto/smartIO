@@ -1,6 +1,6 @@
 package device;
 
-import sensor.SensorManager;
+import sensor.SensorDataHandler;
 import sensor.representation.Cartesian2D;
 import sensor.representation.Quaternion;
 
@@ -15,18 +15,22 @@ import java.awt.event.InputEvent;
 public class MouseController {
 
     private Robot mRobot;
+    private static boolean sInitialQuat = true;
+    private static SensorDataHandler sSensorDataHandler;
     public MouseController() throws AWTException {
         mRobot = new Robot();
     }
     
     public void move(Quaternion quaternion) {
-        SensorManager sensorManager = new SensorManager(quaternion,50f);
-        Cartesian2D cartesian2D = sensorManager.pointerUpdate(quaternion);
+        if(sInitialQuat) {
+            sSensorDataHandler = new SensorDataHandler(quaternion,50,50f);
+            sInitialQuat = false;
+        }
+        Cartesian2D cartesian2D = sSensorDataHandler.pointerUpdate(quaternion);
         int x = MouseInfo.getPointerInfo().getLocation().x;
         int y = MouseInfo.getPointerInfo().getLocation().y;
         x += (int) cartesian2D.getX();
         y += (int) cartesian2D.getY();
-
         System.out.println("X = " + x + "\tY = " +y);
         mRobot.mouseMove(x, y);
     }
