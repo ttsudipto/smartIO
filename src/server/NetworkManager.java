@@ -42,19 +42,18 @@ public class NetworkManager {
         mBroadcastThread.stopBroadcast();
         mThread = null;
         System.out.println("Broadcast stopped ...");
-
+        
         if(mServer != null) {
             mServer.setStopFlag();
             Thread.sleep(mServer.getTimeout());
             mServer.close();
+            mServer = null;
 
-            HashMap<Socket, ServerThread> cMap = mState.getConnectionMap();
-            Iterator it = cMap.entrySet().iterator();
-            while (it.hasNext()) {
-                Map.Entry<Socket, ServerThread> entry = (Map.Entry<Socket, ServerThread>) it.next();
-                ServerThread st = entry.getValue();
-                st.setStopFlag();
-                Thread.sleep(st.getTimeout());
+            HashMap<InetAddress, Socket> aMap = mState.getsAddressMap();
+            Iterator it = aMap.entrySet().iterator();
+            while(it.hasNext()) {
+                Map.Entry<InetAddress, Socket> entry = (Map.Entry<InetAddress, Socket>) it.next();
+                disconnect(entry.getKey());
             }
 
             System.out.println("Server stopped ...");
