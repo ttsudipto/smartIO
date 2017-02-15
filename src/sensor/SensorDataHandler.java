@@ -8,14 +8,17 @@ import sensor.representation.Vector3f;
  * @author Abhisek Maiti
  * @author Sayantan Majumdar
  */
-public class SensorManager {
+public class SensorDataHandler {
 	//Sensitivity of Mouse Movement [Experimental Value]
-	private float mSensitivity;
-	private double mHcos, mHsin;
+	private float mXSensitivity;
+	private float mYSensitivity;
+	private double mHcos;
+    private double mHsin;
 	private double mBli;
 
-	public SensorManager(Quaternion q, float s) {
-		updateSensitivity(s);
+	public SensorDataHandler(Quaternion q, float xSensitivity, float ySensitvity) {
+		mXSensitivity = xSensitivity;
+		mYSensitivity = ySensitvity;
 		initFix(q);
 	}
 
@@ -26,7 +29,7 @@ public class SensorManager {
 		double blh = -1.0f*Math.atan2(xvec.getY(),xvec.getX());
 		mHcos = Math.cos(blh);
 		mHsin = Math.sin(blh);
-		mBli = Math.asin(zvec.getY());
+		mBli = Math.asin(zvec.getZ());
 	}
 
 	//Get Pointer Location from Quaternion
@@ -36,10 +39,10 @@ public class SensorManager {
 		double xeff = (mHcos * cxv.getX()) - (mHsin * cxv.getY());
 		double yeff = (mHsin * cxv.getX()) - (mHcos * cxv.getY());
 		double hdel = Math.atan2(yeff, xeff);
-		double cli = Math.asin(czv.getY());
-		double yEst = mSensitivity * Math.tan(cli - mBli);
-		initFix(currentQuaternion);
-		double xEst = mSensitivity * Math.tan(hdel);
+		double cli = Math.asin(czv.getZ());
+		double yEst = mYSensitivity * Math.tan(cli - mBli);
+		double xEst = mXSensitivity * Math.tan(hdel);
+        initFix(currentQuaternion);
 		return new Cartesian2D(xEst,yEst);
 	}
 
@@ -56,7 +59,4 @@ public class SensorManager {
 		qt.multiplyByQuat(cqt,qt);
 		return new Vector3f(qt.getX(),qt.getY(),qt.getZ());
 	}
-
-	//Update Sensitivity Constant
-	public final void updateSensitivity(float s) { mSensitivity = s; }
 }
