@@ -45,20 +45,6 @@ public class SensorDataHandler {
 	}
 
 	//Rotate a Vector
-	/*
-	private Vector3f rotateVector(Vector3f v, Quaternion q) {
-		Quaternion qt = new Quaternion();
-		qt.copyFromVec3(v,0.0f);
-		Quaternion cqt = new Quaternion();
-		cqt.setX(-1.0f*q.getX());
-		cqt.setY(-1.0f*q.getY());
-		cqt.setZ(-1.0f*q.getZ());
-		cqt.setW(q.getW());
-		q.multiplyByQuat(qt,qt);
-		qt.multiplyByQuat(cqt,qt);
-		return new Vector3f(qt.getX(),qt.getY(),qt.getZ());
-	}
-	*/
 	private Vector3f rotateVector(Vector3f v, Quaternion q) {
 		float q0 = q.getW();
 		float q1 = q.getX();
