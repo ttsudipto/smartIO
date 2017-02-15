@@ -85,7 +85,19 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
 
     public static void showPairingKeyDialog(String title, String pairingKey) {
         String message = "Type the following pairing key to connect your phone: " + pairingKey;
+        JOptionPane.getRootFrame().dispose();
         JOptionPane.showMessageDialog(null, message, title, JOptionPane.PLAIN_MESSAGE);
+    }
+
+    public static void showIncorrectPKeyDialog(String title) {
+        JOptionPane.getRootFrame().dispose();
+        JOptionPane.showMessageDialog(null, "Incorrect Pairing Key!", title, JOptionPane.PLAIN_MESSAGE);
+    }
+
+    public static void showConnectionConfirmationDialog(String address) {
+        JOptionPane.getRootFrame().dispose();
+        String message = "Connected !!";
+        JOptionPane.showMessageDialog(null, "Connected !!", address, JOptionPane.INFORMATION_MESSAGE);
     }
 
     public void actionPerformed(ActionEvent event) {
