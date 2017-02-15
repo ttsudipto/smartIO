@@ -23,7 +23,7 @@ public class MouseController {
     
     public void move(Quaternion quaternion) {
         if(sInitialQuat) {
-            sSensorDataHandler = new SensorDataHandler(quaternion,50,50f);
+            sSensorDataHandler = new SensorDataHandler(quaternion,750.0f);
             sInitialQuat = false;
         }
         Cartesian2D cartesian2D = sSensorDataHandler.pointerUpdate(quaternion);
@@ -31,7 +31,6 @@ public class MouseController {
         int y = MouseInfo.getPointerInfo().getLocation().y;
         x += (int) cartesian2D.getX();
         y += (int) cartesian2D.getY();
-        System.out.println("X = " + x + "\tY = " +y);
         mRobot.mouseMove(x, y);
     }
 
