@@ -62,8 +62,10 @@ public class NetworkManager {
 
     public void disconnect(InetAddress address) throws IOException, InterruptedException {
         ServerThread st = mState.getServerThread(address);
-        st.setStopFlag();
-        Thread.sleep(st.getTimeout());
-        System.out.println(address.getHostAddress() + " disconnected");
+        try {
+            st.setStopFlag();
+            Thread.sleep(st.getTimeout());
+            System.out.println(address.getHostAddress() + " disconnected");
+        } catch (NullPointerException e) {System.out.println("No connected devices. Skipping ...");}
     }
 }
