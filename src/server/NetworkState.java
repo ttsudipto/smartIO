@@ -31,7 +31,7 @@ public class NetworkState {
 
     void remove(Socket skt) {
         if(sConnectionMap.containsKey(skt)) sConnectionMap.remove(skt);
-        if(sAddressMap.containsKey(skt.getInetAddress()))   sConnectionMap.remove(skt.getInetAddress());
+        if(sAddressMap.containsKey(skt.getInetAddress()))   sAddressMap.remove(skt.getInetAddress());
         if(mListModel.contains(skt.getInetAddress().getHostAddress()))  mListModel.removeElement(skt.
                 getInetAddress().getHostAddress());
     }
