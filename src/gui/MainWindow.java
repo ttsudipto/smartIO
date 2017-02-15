@@ -12,12 +12,7 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.util.List;
 
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JFrame;
-import javax.swing.JRadioButton;
-import javax.swing.JList;
-import javax.swing.ButtonGroup;
+import javax.swing.*;
 
 import server.NetworkManager;
 import server.NetworkState;
@@ -44,6 +39,10 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         this.mManager = manager;
         this.mState = manager.getNetworkState();
         mNetworkThread = new NetworkThread(manager);
+
+        try {
+            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+        } catch(Exception e) {System.out.println("Error in loading look-and-feel ...");}
 
         this.setTitle("SmartIO");
         this.setMinimumSize(new Dimension(640,480));
@@ -82,6 +81,11 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         this.add(mRadioPanel, BorderLayout.NORTH);
         this.add(mList, BorderLayout.CENTER);
         this.setVisible(true);
+    }
+
+    public static void showPairingKeyDialog(String title, String pairingKey) {
+        String message = "Type the following pairing key to connect your phone: " + pairingKey;
+        JOptionPane.showMessageDialog(null, message, title, JOptionPane.PLAIN_MESSAGE);
     }
 
     public void actionPerformed(ActionEvent event) {

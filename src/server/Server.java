@@ -12,6 +12,7 @@ import java.awt.AWTException;
 
 import device.KeyboardController;
 import device.MouseController;
+import gui.MainWindow;
 import security.EKEProvider;
 
 /**
@@ -67,7 +68,11 @@ class Server {
 
                 mPairingKey = EKEProvider.getPairingKey();
                 mEKEProvider = new EKEProvider(mPairingKey, clientPublicKey);
-                System.out.println("Type the following pairing key to connect your phone: " + mPairingKey);
+//                System.out.println("Type the following pairing key to connect your phone: " + mPairingKey);
+                new Thread(
+                        () -> MainWindow.showPairingKeyDialog(clientSocket.getInetAddress().getHostAddress(), mPairingKey)
+                ).start();
+
                 PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
 
                 if(!mBroadcastThread.getBroadcastFlag()) {
