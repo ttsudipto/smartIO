@@ -53,12 +53,12 @@ public class MouseController {
 
             case "upscroll":
                 mRobot.setAutoDelay(100);
-                mRobot.mouseWheel(-40);
+                mRobot.mouseWheel(-2);
                 break;
 
             case "downscroll":
                 mRobot.setAutoDelay(100);
-                mRobot.mouseWheel(40);
+                mRobot.mouseWheel(2);
         }
     }
     public void wait(int m) { mRobot.delay(1000); }

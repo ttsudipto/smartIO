@@ -12,6 +12,7 @@ import java.awt.AWTException;
 
 import device.KeyboardController;
 import device.MouseController;
+import gui.MainWindow;
 import security.EKEProvider;
 
 /**
@@ -33,6 +34,8 @@ class Server {
     private String mReceivedKey;
     private static final int TCP_PORT = 1234;
 
+    private Thread mDialogThread;
+
     Server(NetworkState state, BroadcastThread broadcastThread) throws IOException, AWTException {
         mState = state;
         mBroadcastThread = broadcastThread;
@@ -41,6 +44,7 @@ class Server {
         mServerSocket = new ServerSocket(TCP_PORT);
         mServerSocket.setSoTimeout(200);
         mStopFlag = false;
+        mDialogThread = null;
     }
     
     private boolean isValidClient(Socket socket) throws IOException {
@@ -68,13 +72,27 @@ class Server {
                 mPairingKey = EKEProvider.getPairingKey();
                 mEKEProvider = new EKEProvider(mPairingKey, clientPublicKey);
                 System.out.println("Type the following pairing key to connect your phone: " + mPairingKey);
+
+                mDialogThread = null;
+                mDialogThread = new Thread(
+                        () -> MainWindow.showPairingKeyDialog(clientSocket.getInetAddress().getHostAddress(), mPairingKey)
+                );
+                mDialogThread.start();
+
                 PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
 
                 if(!mBroadcastThread.getBroadcastFlag()) {
                     if (isValidClient(clientSocket)) {
                         out.println(mEKEProvider.encryptString("1"));
+
                         System.out.println("Connected to " + clientSocket.getInetAddress().getHostAddress());
                         System.out.println("Client public key: " + new String(clientPublicKey));
+                        mDialogThread = null;
+                        mDialogThread = new Thread(
+                                () -> MainWindow.showConnectionConfirmationDialog(clientSocket.getInetAddress().getHostAddress())
+                        );
+                        mDialogThread.start();
+
                         ServerThread st = new ServerThread(mState, clientSocket, mMouseController,
                                 mKeyboardController, clientPublicKey, mPairingKey);
                         Thread t = new Thread(st);
@@ -83,7 +101,20 @@ class Server {
                     } else {
                         if(mReceivedKey != null) {
                             System.out.println("Incorrect Pairing Key!");
+
+//                            Should be here ... but somehow (mReceivedKey == null)
+//                            mPairingKeyDialogThread = null;
+//                            mPairingKeyDialogThread = new Thread(
+//                                    () -> MainWindow.showIncorrectPKeyDialog(clientSocket.getInetAddress().getHostAddress())
+//                            );
+//                            mPairingKeyDialogThread.start();
                         }
+                        mDialogThread = null;
+                        mDialogThread = new Thread(
+                                () -> MainWindow.showIncorrectPKeyDialog(clientSocket.getInetAddress().getHostAddress())
+                        );
+                        mDialogThread.start();
+
                         out.println(mEKEProvider.encryptString("0"));
                         clientSocket.close();
                     }
