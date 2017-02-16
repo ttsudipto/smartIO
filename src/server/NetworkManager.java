@@ -40,6 +40,7 @@ public class NetworkManager {
 
     public void stopServer() throws IOException, InterruptedException {
         mBroadcastThread.stopBroadcast();
+        Thread.sleep(mBroadcastThread.getTimeout());
         mThread = null;
         System.out.println("Broadcast stopped ...");
         
