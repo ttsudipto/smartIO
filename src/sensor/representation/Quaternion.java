@@ -344,5 +344,20 @@ public class Quaternion extends Vector4f implements Serializable {
 			output.points[2] = ((float) (this.points[2] * ratioA + bufferQuat.points[2] * ratioB));
 		}
 	}
+
+	//Rotate a Vector by Quaternion
+	public Vector3f rotateVector(Vector3f v) {
+		float q0 = this.points[3];
+		float q1 = this.points[0];
+		float q2 = this.points[1];
+		float q3 = this.points[2];
+		float v1 = v.getX();
+		float v2 = v.getY();
+		float v3 = v.getZ();
+		float x = (1-2*q2*q2-2*q3*q3)*v1 + 2*(q1*q2+q0*q3)*v2 + 2*(q1*q3-q0*q2)*v3;
+		float y = 2*(q1*q2-q0*q3)*v1 + (1-2*q1*q1-2*q3*q3)*v2 + 2*(q2*q3+q0*q1)*v3;
+		float z = 2*(q1*q3-q0*q2) + (q2*q3-q0*q1)*v2 + (1-2*q1*q1-2*q2*q2)*v3;
+		return new Vector3f(x,y,z);
+	}
 }
 

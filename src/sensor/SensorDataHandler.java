@@ -22,8 +22,8 @@ public class SensorDataHandler {
 
 	//Baseline Initialization
 	private void initFix(Quaternion quaternion) {
-		Vector3f xvec = rotateVector(new Vector3f(1.0f,0.0f,0.0f), quaternion);
-		Vector3f zvec = rotateVector(new Vector3f(0.0f,0.0f,1.0f), quaternion);
+		Vector3f xvec = quaternion.rotateVector(new Vector3f(1.0f,0.0f,0.0f));
+		Vector3f zvec = quaternion.rotateVector(new Vector3f(0.0f,0.0f,1.0f));
 		double blh = -1.0f * Math.atan2(xvec.getY(),xvec.getX());
 		mHcos = Math.cos(blh);
 		mHsin = Math.sin(blh);
@@ -32,8 +32,8 @@ public class SensorDataHandler {
 
 	//Get Pointer Location from Quaternion
 	public Cartesian2D pointerUpdate(Quaternion currentQuaternion) {
-		Vector3f cxv = rotateVector(new Vector3f(1.0f, 0.0f, 0.0f), currentQuaternion);
-		Vector3f czv = rotateVector(new Vector3f(0.0f, 0.0f, 1.0f), currentQuaternion);
+		Vector3f cxv = currentQuaternion.rotateVector(new Vector3f(1.0f, 0.0f, 0.0f));
+		Vector3f czv = currentQuaternion.rotateVector(new Vector3f(0.0f, 0.0f, 1.0f));
 		double xeff = (mHcos * cxv.getX()) - (mHsin * cxv.getY());
 		double yeff = (mHsin * cxv.getX()) + (mHcos * cxv.getY());
 		double hdel = Math.atan2(yeff, xeff);
@@ -45,6 +45,7 @@ public class SensorDataHandler {
 	}
 
 	//Rotate a Vector
+	/*
 	private Vector3f rotateVector(Vector3f v, Quaternion q) {
 		float q0 = q.getW();
 		float q1 = q.getX();
@@ -58,4 +59,5 @@ public class SensorDataHandler {
 		float z = 2*(q1*q3-q0*q2) + (q2*q3-q0*q1)*v2 + (1-2*q1*q1-2*q2*q2)*v3;
 		return new Vector3f(x,y,z);
 	}
+	*/
 }
