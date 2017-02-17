@@ -45,7 +45,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
 
     public MainWindow(NetworkManager manager) {
         this.mManager = manager;
-        this.mState = manager.getNetworkState();
+        NetworkState mState = manager.getNetworkState();
         mNetworkThread = new NetworkThread(manager);
 
         try {

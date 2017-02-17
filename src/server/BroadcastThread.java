@@ -20,11 +20,12 @@ class BroadcastThread implements Runnable {
 
     private boolean mStopFlag;
     private static final int BROADCAST_PORT = 1235;
-    private final long TIMEOUT = 1000;
 
     void stopBroadcast() { mStopFlag = true; }
     boolean getBroadcastFlag() { return mStopFlag; }
-    long getTimeout() { return TIMEOUT; }
+    long getTimeout() {
+        return (long) 1000; }
+
 
     @Override
     public void run() {
