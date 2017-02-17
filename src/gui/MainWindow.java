@@ -12,7 +12,15 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JList;
+import javax.swing.UIManager;
+import javax.swing.JButton;
+import javax.swing.JRadioButton;
+import javax.swing.ButtonGroup;
+import javax.swing.JPanel;
+import javax.swing.JOptionPane;
+import javax.swing.JDialog;
 
 import server.NetworkManager;
 import server.NetworkState;
@@ -25,16 +33,13 @@ import server.ServerThread;
 
 public class MainWindow extends JFrame implements ActionListener, WindowListener {
 
-    private JButton mDisconnectButton;
-    private JRadioButton mOnButton, mOffButton;
-    private JPanel mRadioPanel;
-    private JList<String> mList;
+    private JList mList;
     private boolean mLastSelectedOption;
 
     private NetworkManager mManager;
+    private NetworkState mState;
     private NetworkThread mNetworkThread;
     private Thread mThread;
-    private NetworkState mState;
 
     private static final long DIALOG_TIMEOUT = 2000;
 
@@ -54,15 +59,15 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
 
         this.setLayout(new BorderLayout());
 
-        mDisconnectButton = new JButton("Disconnect");
+        JButton mDisconnectButton = new JButton("Disconnect");
         mDisconnectButton.setMargin(new Insets(5,5,5,5));
         mDisconnectButton.setActionCommand("disconnect_clicked");
         mDisconnectButton.addActionListener(this);
 
-        mOnButton = new JRadioButton();
+        JRadioButton mOnButton = new JRadioButton();
         mOnButton.setText("Server On");
         mOnButton.setActionCommand("on");
-        mOffButton = new JRadioButton();
+        JRadioButton mOffButton = new JRadioButton();
         mOffButton.setActionCommand("off");
         mOffButton.setText("Server Off");
         mOffButton.setSelected(true);
@@ -72,7 +77,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         bg.add(mOnButton);
         mOnButton.addActionListener(this);
         mOffButton.addActionListener(this);
-        mRadioPanel = new JPanel(new GridLayout(1, 0));
+        JPanel mRadioPanel = new JPanel(new GridLayout(1, 0));
         mRadioPanel.add(mOnButton);
         mRadioPanel.add(mOffButton);
 

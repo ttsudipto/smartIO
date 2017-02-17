@@ -24,7 +24,7 @@ class BroadcastThread implements Runnable {
 
     void stopBroadcast() { mStopFlag = true; }
     boolean getBroadcastFlag() { return mStopFlag; }
-    public long getTimeout() { return TIMEOUT; }
+    long getTimeout() { return TIMEOUT; }
 
     @Override
     public void run() {
