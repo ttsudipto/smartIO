@@ -43,21 +43,4 @@ public class SensorDataHandler {
         initFix(currentQuaternion);
 		return new Cartesian2D(xEst,yEst);
 	}
-
-	//Rotate a Vector
-	/*
-	private Vector3f rotateVector(Vector3f v, Quaternion q) {
-		float q0 = q.getW();
-		float q1 = q.getX();
-		float q2 = q.getY();
-		float q3 = q.getZ();
-		float v1 = v.getX();
-		float v2 = v.getY();
-		float v3 = v.getZ();
-		float x = (1-2*q2*q2-2*q3*q3)*v1 + 2*(q1*q2+q0*q3)*v2 + 2*(q1*q3-q0*q2)*v3;
-		float y = 2*(q1*q2-q0*q3)*v1 + (1-2*q1*q1-2*q3*q3)*v2 + 2*(q2*q3+q0*q1)*v3;
-		float z = 2*(q1*q3-q0*q2) + (q2*q3-q0*q1)*v2 + (1-2*q1*q1-2*q2*q2)*v3;
-		return new Vector3f(x,y,z);
-	}
-	*/
 }

@@ -4,7 +4,9 @@ import sensor.SensorDataHandler;
 import sensor.representation.Cartesian2D;
 import sensor.representation.Quaternion;
 
-import java.awt.*;
+import java.awt.Robot;
+import java.awt.AWTException;
+import java.awt.MouseInfo;
 import java.awt.event.InputEvent;
 
 /**
