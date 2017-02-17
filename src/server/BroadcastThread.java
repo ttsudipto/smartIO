@@ -33,7 +33,7 @@ class BroadcastThread implements Runnable {
         try {
             while(!mStopFlag) {
                 broadcastData(sPublicKey);
-                Thread.sleep(1000);
+                Thread.sleep(TIMEOUT);
             }
             broadcastData("Stop".getBytes());
         } catch(InterruptedException | IOException e) {
