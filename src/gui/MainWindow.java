@@ -17,6 +17,7 @@ import javax.swing.*;
 import server.NetworkManager;
 import server.NetworkState;
 import server.NetworkThread;
+import server.ServerThread;
 
 /**
  * @author Sudipto Bhattacharjee
@@ -34,6 +35,8 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     private NetworkThread mNetworkThread;
     private Thread mThread;
     private NetworkState mState;
+
+    private static final long DIALOG_TIMEOUT = 2000;
 
     public MainWindow(NetworkManager manager) {
         this.mManager = manager;
@@ -83,21 +86,70 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         this.setVisible(true);
     }
 
-    public static void showPairingKeyDialog(String title, String pairingKey) {
+//    public static int showConnectionRequestDialog(String data) {
+//
+//        String message = data + " wants to connect.\n Do you agree ?";
+//        String title = "Connection confirmation";
+//        Object[] options = {"Yes", "No"};
+//        //final JOptionPane optionPane = new JOptionPane(message,JOptionPane.QUESTION_MESSAGE,JOptionPane.YES_NO_OPTION);
+//        JOptionPane.getRootFrame().dispose();
+//        int n = JOptionPane.showOptionDialog(null,
+//                message,
+//                title,
+//                JOptionPane.YES_NO_OPTION,
+//                JOptionPane.QUESTION_MESSAGE,
+//                null,
+//                options,
+//                options[1]);
+////        optionPane.createInternalFrame(this, )
+//        System.out.println(n);
+//        return n;
+//    }
+
+    public static void showPairingKeyDialog(String title, String pairingKey, ServerThread st) {
         String message = "Type the following pairing key to connect your phone: " + pairingKey;
-        JOptionPane.getRootFrame().dispose();
-        JOptionPane.showMessageDialog(null, message, title, JOptionPane.PLAIN_MESSAGE);
+        JOptionPane option = new JOptionPane(message, JOptionPane.INFORMATION_MESSAGE);
+        JDialog dialog = st.getDialog();
+        try {
+            dialog.dispose();
+        } catch (NullPointerException e) {}
+        dialog = option.createDialog(title);
+        dialog.setModal(false);
+        st.setDialog(dialog);
+        dialog.setVisible(true);
     }
 
-    public static void showIncorrectPKeyDialog(String title) {
-        JOptionPane.getRootFrame().dispose();
-        JOptionPane.showMessageDialog(null, "Incorrect Pairing Key!", title, JOptionPane.PLAIN_MESSAGE);
+    public static void showIncorrectPKeyDialog(String title, ServerThread st) {
+        JOptionPane option = new JOptionPane("Incorrect Pairing Key!",JOptionPane.ERROR_MESSAGE);
+        JDialog dialog = st.getDialog();
+        try {
+            dialog.dispose();
+        } catch(NullPointerException e) {}
+        dialog = option.createDialog(title);
+        dialog.setModal(false);
+        st.setDialog(dialog);
+        dialog.setVisible(true);
+        try {
+            Thread.sleep(DIALOG_TIMEOUT);
+            dialog.dispose();
+        } catch (InterruptedException | NullPointerException e) {}
     }
 
-    public static void showConnectionConfirmationDialog(String address) {
-        JOptionPane.getRootFrame().dispose();
+    public static void showConnectionConfirmationDialog(String title, ServerThread st) {
         String message = "Connected !!";
-        JOptionPane.showMessageDialog(null, "Connected !!", address, JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane option = new JOptionPane(message, JOptionPane.INFORMATION_MESSAGE);
+        JDialog dialog = st.getDialog();
+        try {
+            dialog.dispose();
+        } catch(NullPointerException e) {}
+        dialog = option.createDialog(title);
+        dialog.setModal(false);
+        st.setDialog(dialog);
+        dialog.setVisible(true);
+        try {
+            Thread.sleep(DIALOG_TIMEOUT);
+            dialog.dispose();
+        } catch (InterruptedException | NullPointerException e) {}
     }
 
     public void actionPerformed(ActionEvent event) {
