@@ -175,7 +175,7 @@ public class Quaternion extends Vector4f {
 		float qw;
 
 		float[] mat = mMatrix.getMatrix();
-		int[] indices = null;
+		int[] indices;
 
 		if (this.mMatrix.size() == 16) {
 			if (this.mMatrix.isColumnMajor()) {

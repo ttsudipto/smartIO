@@ -12,11 +12,20 @@ class DataWrapper {
     private String mOperationType;
     private String mData;
     private Quaternion mQuaternion;
+
     private boolean mIsInitQuat;
+    private int mMoveX;
+    private int mMoveY;
 
     DataWrapper(String operationType, String data) {
         mOperationType = operationType;
         mData = data;
+    }
+
+    DataWrapper(int x, int y) {
+        mMoveX = x;
+        mMoveY = y;
+        mOperationType = "Mouse_Touch";
     }
 
     DataWrapper(Quaternion quaternionObject, boolean isInitQuat) {
@@ -33,4 +42,6 @@ class DataWrapper {
     String getData() { return mData; }
     boolean isInitQuat() { return mIsInitQuat; }
     Quaternion getQuaternionObject() { return mQuaternion; }
+    int getX() { return mMoveX; }
+    int getY() { return mMoveY; }
 }

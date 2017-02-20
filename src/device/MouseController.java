@@ -36,6 +36,10 @@ public class MouseController {
         mRobot.mouseMove(x, y);
     }
 
+    public void move(int relativeX, int relativeY) {
+        MouseMove.moveRelatively(mRobot, 40, relativeX, relativeY);
+    }
+
     public void doOperation(String operation) {
         switch (operation) {
             case "left":
@@ -54,12 +58,10 @@ public class MouseController {
                 break;
 
             case "upscroll":
-                mRobot.setAutoDelay(100);
                 mRobot.mouseWheel(-2);
                 break;
 
             case "downscroll":
-                mRobot.setAutoDelay(100);
                 mRobot.mouseWheel(2);
         }
     }
