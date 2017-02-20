@@ -24,15 +24,16 @@ public class ServerThread implements Runnable {
     private Socket mClientSocket;
     private MouseController mMouseController;
     private KeyboardController mKeyboardController;
-    private boolean mStopFlag;
-    private NetworkState mState;
-    private EKEProvider mEKEProvider;
-    private byte[] mClientPublicKey;
-    private String mPairingKey;
-    private String mReceivedKey;
     private BroadcastThread mBroadcastThread;
     private Thread mDialogThread;
     private JDialog mDialog;
+    private NetworkState mState;
+    private EKEProvider mEKEProvider;
+
+    private boolean mStopFlag;
+    private byte[] mClientPublicKey;
+    private String mPairingKey;
+    private String mReceivedKey;
 
     ServerThread(NetworkState state, Socket skt, MouseController mc, KeyboardController kc,
                  BroadcastThread bt)
@@ -180,7 +181,7 @@ public class ServerThread implements Runnable {
                         break;
 
                     case "Mouse_Move":
-                        mMouseController.move(dataWrapper.getQuaternionObject());
+                        mMouseController.move(dataWrapper.getQuaternionObject(), dataWrapper.isInitQuat());
                         break;
 
                     case "Mouse_Button":
@@ -188,7 +189,6 @@ public class ServerThread implements Runnable {
                         break;
 
                     case "Key":
-                        //length of "Key" = 3 and next char is space. Hence beginIndex = 4
                         mKeyboardController.doKeyOperation(dataWrapper.getData());
                 }
             }

@@ -17,18 +17,18 @@ import java.awt.event.InputEvent;
 public class MouseController {
 
     private Robot mRobot;
-    private static boolean sInitialQuat = true;
-    private static SensorDataHandler sSensorDataHandler;
+
+    private SensorDataHandler mSensorDataHandler;
+
     public MouseController() throws AWTException {
         mRobot = new Robot();
     }
     
-    public void move(Quaternion quaternion) {
-        if(sInitialQuat) {
-            sSensorDataHandler = new SensorDataHandler(quaternion,750.0f);
-            sInitialQuat = false;
+    public void move(Quaternion quaternion, boolean isInitQuat) {
+        if(isInitQuat) {
+            mSensorDataHandler = new SensorDataHandler(quaternion,750.0f);
         }
-        Cartesian2D cartesian2D = sSensorDataHandler.pointerUpdate(quaternion);
+        Cartesian2D cartesian2D = mSensorDataHandler.pointerUpdate(quaternion);
         int x = MouseInfo.getPointerInfo().getLocation().x;
         int y = MouseInfo.getPointerInfo().getLocation().y;
         x += (int) cartesian2D.getX();
