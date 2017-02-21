@@ -24,16 +24,17 @@ class MouseMove {
         long endTime = startTime + duration;
         int curX = MouseInfo.getPointerInfo().getLocation().x;
         int curY = MouseInfo.getPointerInfo().getLocation().y;
-        while (System.currentTimeMillis() < endTime) {
-            long curTime = System.currentTimeMillis();
-            float ratio = (float) (curTime - startTime) / duration;
-            int moveX = (int) (curX + (ratio * relativeX));
-            int moveY = (int) (curY + (ratio * relativeY));
+//        while (System.currentTimeMillis() < endTime) {
+//            long curTime = System.currentTimeMillis();
+//            float ratio = (float) (curTime - startTime) / duration;
+            int moveX = (int) (curX + (/*ratio*/1.5 * relativeX));
+            int moveY = (int) (curY + (/*ratio*/1.5 * relativeY));
             moveX = moveX < 0 ? 0 : moveX;
             moveY = moveY < 0 ? 0 : moveY;
             moveX = moveX >= sScreenWidth ? sScreenWidth - 1 : moveX;
             moveY = moveY >= sScreenHeight ? sScreenHeight - 1 : moveY;
             robot.mouseMove(moveX, moveY);
-        }
+//            System.out.println(moveX+" "+moveY);
+//        }
     }
 }
