@@ -7,6 +7,7 @@ import java.awt.Toolkit;
 
 /**
  * @author Sayantan Majumdar
+ * @author Sudipto Bhattacharjee
  */
 
 class MouseMove {
@@ -19,22 +20,15 @@ class MouseMove {
         sScreenHeight = (int) screenSize.getHeight();
     }
 
-    static void moveRelatively(final Robot robot, final long duration, int relativeX, int relativeY) {
-        long startTime = System.currentTimeMillis();
-        long endTime = startTime + duration;
+    static void moveRelatively(Robot robot, int relativeX, int relativeY) {
         int curX = MouseInfo.getPointerInfo().getLocation().x;
         int curY = MouseInfo.getPointerInfo().getLocation().y;
-//        while (System.currentTimeMillis() < endTime) {
-//            long curTime = System.currentTimeMillis();
-//            float ratio = (float) (curTime - startTime) / duration;
-            int moveX = (int) (curX + (/*ratio*/1.5 * relativeX));
-            int moveY = (int) (curY + (/*ratio*/1.5 * relativeY));
-            moveX = moveX < 0 ? 0 : moveX;
-            moveY = moveY < 0 ? 0 : moveY;
-            moveX = moveX >= sScreenWidth ? sScreenWidth - 1 : moveX;
-            moveY = moveY >= sScreenHeight ? sScreenHeight - 1 : moveY;
-            robot.mouseMove(moveX, moveY);
-//            System.out.println(moveX+" "+moveY);
-//        }
+        int moveX = (int) (curX + (/*ratio*/1.5 * relativeX));
+        int moveY = (int) (curY + (/*ratio*/1.5 * relativeY));
+        moveX = moveX < 0 ? 0 : moveX;
+        moveY = moveY < 0 ? 0 : moveY;
+        moveX = moveX >= sScreenWidth ? sScreenWidth - 1 : moveX;
+        moveY = moveY >= sScreenHeight ? sScreenHeight - 1 : moveY;
+        robot.mouseMove(moveX, moveY);
     }
 }

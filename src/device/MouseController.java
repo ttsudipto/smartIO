@@ -37,7 +37,7 @@ public class MouseController {
     }
 
     public void move(int relativeX, int relativeY) {
-        MouseMove.moveRelatively(mRobot, 40, relativeX, relativeY);
+        MouseMove.moveRelatively(mRobot, relativeX, relativeY);
     }
 
     public void doOperation(String operation) {
