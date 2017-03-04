@@ -18,13 +18,9 @@ public class NetworkManager {
     private Thread mThread;
     private NetworkState mState;
 
-    static byte[] sPublicKey;
-
-    public NetworkManager(byte[] publicKey) {
+    public NetworkManager(ServerInfo serverInfo) {
         mState = new NetworkState();
-        sPublicKey = publicKey;
-        mBroadcastThread = new BroadcastThread();
-        System.out.println("Server public key: " + new String(sPublicKey));
+        mBroadcastThread = new BroadcastThread(serverInfo);
     }
 
     public NetworkState getNetworkState() { return mState; }
@@ -43,7 +39,7 @@ public class NetworkManager {
         Thread.sleep(mBroadcastThread.getTimeout());
         mThread = null;
         System.out.println("Broadcast stopped ...");
-        
+
         if(mServer != null) {
             mServer.setStopFlag();
             Thread.sleep(mServer.getTimeout());

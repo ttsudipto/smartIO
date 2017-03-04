@@ -26,7 +26,7 @@ public class MouseController {
     
     public void move(Quaternion quaternion, boolean isInitQuat) {
         if(isInitQuat) {
-            mSensorDataHandler = new SensorDataHandler(quaternion,750.0f);
+            mSensorDataHandler = new SensorDataHandler(quaternion,2000.0f);
         }
         Cartesian2D cartesian2D = mSensorDataHandler.pointerUpdate(quaternion);
         int x = MouseInfo.getPointerInfo().getLocation().x;

@@ -1,19 +1,14 @@
 package server;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
-import java.io.PrintWriter;
 import java.io.IOException;
 import java.awt.AWTException;
 
 import device.KeyboardController;
 import device.MouseController;
-import gui.MainWindow;
-import security.EKEProvider;
 
 /**
  * @author Sudipto Bhattacharjee
@@ -56,9 +51,7 @@ class Server {
                         mKeyboardController, mBroadcastThread);
                 Thread t = new Thread(st);
                 t.start();
-
-//                System.out.println("Dispatched to new ServerThread !!!");
-            } catch (SocketTimeoutException | SocketException e) {}
+            } catch (SocketTimeoutException | SocketException ignored) {}
         }
     }
 

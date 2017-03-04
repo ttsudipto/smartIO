@@ -37,7 +37,6 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     private boolean mLastSelectedOption;
 
     private NetworkManager mManager;
-    private NetworkState mState;
     private NetworkThread mNetworkThread;
     private Thread mThread;
 
@@ -91,33 +90,13 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         this.setVisible(true);
     }
 
-//    public static int showConnectionRequestDialog(String data) {
-//
-//        String message = data + " wants to connect.\n Do you agree ?";
-//        String title = "Connection confirmation";
-//        Object[] options = {"Yes", "No"};
-//        //final JOptionPane optionPane = new JOptionPane(message,JOptionPane.QUESTION_MESSAGE,JOptionPane.YES_NO_OPTION);
-//        JOptionPane.getRootFrame().dispose();
-//        int n = JOptionPane.showOptionDialog(null,
-//                message,
-//                title,
-//                JOptionPane.YES_NO_OPTION,
-//                JOptionPane.QUESTION_MESSAGE,
-//                null,
-//                options,
-//                options[1]);
-////        optionPane.createInternalFrame(this, )
-//        System.out.println(n);
-//        return n;
-//    }
-
     public static void showPairingKeyDialog(String title, String pairingKey, ServerThread st) {
         String message = "Type the following pairing key to connect your phone: " + pairingKey;
         JOptionPane option = new JOptionPane(message, JOptionPane.INFORMATION_MESSAGE);
         JDialog dialog = st.getDialog();
         try {
             dialog.dispose();
-        } catch (NullPointerException e) {}
+        } catch (NullPointerException ignored) {}
         dialog = option.createDialog(title);
         dialog.setModal(false);
         st.setDialog(dialog);
@@ -129,7 +108,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         JDialog dialog = st.getDialog();
         try {
             dialog.dispose();
-        } catch(NullPointerException e) {}
+        } catch(NullPointerException ignored) {}
         dialog = option.createDialog(title);
         dialog.setModal(false);
         st.setDialog(dialog);
@@ -137,7 +116,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         try {
             Thread.sleep(DIALOG_TIMEOUT);
             dialog.dispose();
-        } catch (InterruptedException | NullPointerException e) {}
+        } catch (InterruptedException | NullPointerException ignored) {}
     }
 
     public static void showConnectionConfirmationDialog(String title, ServerThread st) {
@@ -146,7 +125,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         JDialog dialog = st.getDialog();
         try {
             dialog.dispose();
-        } catch(NullPointerException e) {}
+        } catch(NullPointerException ignored) {}
         dialog = option.createDialog(title);
         dialog.setModal(false);
         st.setDialog(dialog);
@@ -154,7 +133,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         try {
             Thread.sleep(DIALOG_TIMEOUT);
             dialog.dispose();
-        } catch (InterruptedException | NullPointerException e) {}
+        } catch (InterruptedException | NullPointerException ignored) {}
     }
 
     public void actionPerformed(ActionEvent event) {
@@ -175,9 +154,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
             mLastSelectedOption = true;
             System.out.println("on clicked");
             mThread = new Thread(mNetworkThread);
-//            System.out.println(nThread.getState().toString());
             mThread.start();
-//            System.out.println(nThread.getState().toString());
         }
 
         else if(event.getActionCommand().equals("off") && mLastSelectedOption) {
@@ -217,10 +194,4 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
 
     @Override
     public void windowDeactivated(WindowEvent windowEvent) {}
-
-//    public void updateList(String[] data) {
-//        listModel.removeAllElements();
-//        for(int i=0; i<data.length; ++i)
-//            listModel.addElement(data[i]);
-//    }
 }

@@ -1,5 +1,7 @@
 package server;
 
+import com.google.gson.Gson;
+
 import java.io.IOException;
 import java.net.NetworkInterface;
 import java.net.InterfaceAddress;
@@ -9,8 +11,6 @@ import java.net.DatagramPacket;
 import java.util.Enumeration;
 import java.util.List;
 
-import static server.NetworkManager.sPublicKey;
-
 /**
  * @author Sudipto Bhattacharjee
  * @author Sayantan Majumdar
@@ -18,24 +18,37 @@ import static server.NetworkManager.sPublicKey;
 
 class BroadcastThread implements Runnable {
 
+    private ServerInfo mServerInfo;
     private boolean mStopFlag;
     private static final int BROADCAST_PORT = 1235;
     private final int TIMEOUT = 1000;
 
-    void stopBroadcast() { mStopFlag = true; }
+    void stopBroadcast() {
+        mStopFlag = true;
+        mServerInfo.setStopFlag();
+        byte[] data = new Gson().toJson(mServerInfo).getBytes();
+        new Thread(() -> {
+           try {
+              broadcastData(data);
+           } catch (IOException ignored) {}
+        }).start();
+    }
     boolean getBroadcastFlag() { return mStopFlag; }
     long getTimeout() { return TIMEOUT; }
 
+    BroadcastThread(ServerInfo serverInfo) { mServerInfo = serverInfo; }
 
     @Override
     public void run() {
         mStopFlag = false;
         try {
+            byte[] data;
             while(!mStopFlag) {
-                broadcastData(sPublicKey);
+                mServerInfo.clearStopFlag();
+                data = new Gson().toJson(mServerInfo).getBytes();
+                broadcastData(data);
                 Thread.sleep(TIMEOUT);
             }
-            broadcastData("Stop".getBytes());
         } catch(InterruptedException | IOException e) {
             e.printStackTrace();
         }
@@ -43,12 +56,10 @@ class BroadcastThread implements Runnable {
 
     private void broadcastData(byte[] data) throws IOException {
         Enumeration<NetworkInterface> nis = NetworkInterface.getNetworkInterfaces();
-
         while (nis.hasMoreElements()) {
             NetworkInterface ni = nis.nextElement();
             if (!ni.isLoopback()) {
                 List<InterfaceAddress> ias = ni.getInterfaceAddresses();
-
                 for(InterfaceAddress addr: ias) {
                     InetAddress broadcastIA = addr.getBroadcast();
                     if(broadcastIA != null) {
@@ -56,7 +67,6 @@ class BroadcastThread implements Runnable {
                         datagramSocket.setBroadcast(true);
                         DatagramPacket datagramPacket = new DatagramPacket(data, data.length,
                                 broadcastIA, BROADCAST_PORT);
-                        if(new String(data).equals("Stop")) System.out.println("Stop broadcasted");
                         datagramSocket.send(datagramPacket);
                         datagramSocket.close();
                     }

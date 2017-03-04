@@ -50,8 +50,7 @@ public class ServerThread implements Runnable {
 
     private boolean isValidPairingKey() throws IOException {
         BufferedReader in = new BufferedReader(new InputStreamReader(mClientSocket.getInputStream()));
-        mReceivedKey = mEKEProvider.decryptString(in.readLine());
-//        System.out.println(mReceivedKey);
+        mReceivedKey = in.readLine();
         return mPairingKey.equals(mReceivedKey);
     }
 
@@ -76,7 +75,6 @@ public class ServerThread implements Runnable {
                             )
             );
             mDialogThread.start();
-
             return isValidPairingKey();
         } catch (IOException e) {
             System.out.println("Exception in ServerThread:validateClient()");
@@ -113,7 +111,6 @@ public class ServerThread implements Runnable {
                 if (isValidClient()) {
                     out.println(mEKEProvider.encryptString("1"));
 
-//                    System.out.println("Client valid !!!");
                     System.out.println("Connected to " + mClientSocket.getInetAddress().getHostAddress());
                     System.out.println("Client public key: " + new String(mClientPublicKey));
                     mDialogThread = null;
@@ -133,16 +130,6 @@ public class ServerThread implements Runnable {
                     closeConnection();
                 }
                 else {
-                    if(mReceivedKey != null) {
-                        System.out.println("Incorrect Pairing Key!");
-
-//                            Should be here ... but somehow (mReceivedKey == null)
-//                            mPairingKeyDialogThread = null;
-//                            mPairingKeyDialogThread = new Thread(
-//                                    () -> MainWindow.showIncorrectPKeyDialog(clientSocket.getInetAddress().getHostAddress())
-//                            );
-//                            mPairingKeyDialogThread.start();
-                    }
                     mDialogThread = null;
                     mDialogThread = new Thread(
                             () -> MainWindow.showIncorrectPKeyDialog
@@ -153,7 +140,9 @@ public class ServerThread implements Runnable {
                     );
                     mDialogThread.start();
 
-                    out.println(mEKEProvider.encryptString("0"));
+                    if(mReceivedKey != null && !mReceivedKey.equals("Cancelled")) {
+                        out.println(mEKEProvider.encryptString("0"));
+                    }
                     mClientSocket.close();
                 }
             }
@@ -161,7 +150,7 @@ public class ServerThread implements Runnable {
                 if(!mClientSocket.isClosed())    mClientSocket.close();
             }
         }
-        catch(Exception e) {
+        catch(IOException|InterruptedException e) {
             e.printStackTrace();
         }
     }

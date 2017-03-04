@@ -209,5 +209,3 @@ public class EKEProvider {
                 .getCertificate(certHolder);
     }
 }
-
-
