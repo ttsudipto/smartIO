@@ -1,4 +1,4 @@
-package server;
+package net;
 
 import java.net.InetAddress;
 import java.net.Socket;
@@ -23,7 +23,7 @@ import javax.swing.DefaultListModel;
  *         </li>
  *     </ol>
  *     The methods to manipulate these data structures are provided in the class.
- *     The {@link #add(Socket, ServerThread)} and {@link #remove(Socket)}
+ *     The {@link #add(ClientInfo, ServerThread)} and {@link #remove(ClientInfo)}
  *     methods are invoked by {@link ServerThread} once it successfully
  *     establishes and closes a client connection respectively.
  * </p>
@@ -81,25 +81,27 @@ public class NetworkState {
     /**
      * Adds a client connection to this {@code NetworkState}.
      *
-     * @param skt the client {@code Socket}.
+     * @param clientInfo the client {@code ClientInfo}.
      * @param serverThread {@code ServerThread} of the client connection.
      */
-    void add(Socket skt, ServerThread serverThread) {
-        sConnectionMap.put(skt, serverThread);
-        sAddressMap.put(skt.getInetAddress(), skt);
-        if(!mListModel.contains(skt.getInetAddress().getHostAddress()))
-            mListModel.addElement(skt.getInetAddress().getHostAddress());
+    void add(ClientInfo clientInfo, ServerThread serverThread) {
+        Socket socket = clientInfo.getSocket();
+        sConnectionMap.put(socket, serverThread);
+        sAddressMap.put(socket.getInetAddress(), socket);
+        String client = clientInfo.getClientInfo() + " (" + socket.getInetAddress().getHostAddress() + ")";
+        if(!mListModel.contains(client))    mListModel.addElement(client);
     }
 
     /**
      * Removes a client connection from this {@code NetworkState}.
      *
-     * @param skt the client {@code Socket}
+     * @param clientInfo the client {@code ClientInfo}
      */
-    void remove(Socket skt) {
-        if(sConnectionMap.containsKey(skt)) sConnectionMap.remove(skt);
-        if(sAddressMap.containsKey(skt.getInetAddress()))   sAddressMap.remove(skt.getInetAddress());
-        if(mListModel.contains(skt.getInetAddress().getHostAddress()))  mListModel.removeElement(skt.
-                getInetAddress().getHostAddress());
+    void remove(ClientInfo clientInfo) {
+        Socket socket = clientInfo.getSocket();
+        if(sConnectionMap.containsKey(socket)) sConnectionMap.remove(socket);
+        if(sAddressMap.containsKey(socket.getInetAddress()))   sAddressMap.remove(socket.getInetAddress());
+        String client = clientInfo.getClientInfo() + " (" + socket.getInetAddress().getHostAddress() + ")";
+        if(mListModel.contains(client)) mListModel.removeElement(client);
     }
 }

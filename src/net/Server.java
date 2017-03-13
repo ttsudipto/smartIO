@@ -1,4 +1,4 @@
-package server;
+package net;
 
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -36,9 +36,7 @@ class Server {
         mStopFlag = false;
     }
 
-    void setStopFlag() {
-        mStopFlag = true;
-    }
+    void setStopFlag() { mStopFlag = true; }
 
     int getTimeout() throws IOException { return mServerSocket.getSoTimeout(); }
 

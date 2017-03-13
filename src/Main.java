@@ -3,9 +3,9 @@ import java.awt.AWTException;
 import java.net.InetAddress;
 
 import security.EKEProvider;
-import server.NetworkManager;
+import net.NetworkManager;
 import gui.MainWindow;
-import server.ServerInfo;
+import net.ServerInfo;
 
 /**
  * @author Sudipto Bhattacharjee
@@ -18,7 +18,6 @@ class Main {
 
         byte[] publicKey = new EKEProvider().getBase64EncodedPubKey();
         String systemInfo = System.getProperty("user.name") + "@" + InetAddress.getLocalHost().getCanonicalHostName();
-        System.out.println(systemInfo);
         ServerInfo serverInfo = new ServerInfo(publicKey, systemInfo);
         NetworkManager manager = new NetworkManager(serverInfo);
         new MainWindow(manager);

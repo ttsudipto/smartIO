@@ -1,4 +1,4 @@
-package server;
+package net;
 
 import java.awt.AWTException;
 import java.awt.event.ActionEvent;
@@ -13,7 +13,7 @@ import java.io.IOException;
  * </p>
  * <p>
  *     This thread gets started by {@link gui.MainWindow} while performing the
- *     action of starting the server - the first possible network operation.
+ *     action of starting the net - the first possible network operation.
  * </p>
  *
  * @see Runnable

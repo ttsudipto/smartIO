@@ -1,4 +1,4 @@
-package server;
+package net;
 
 import java.io.PrintWriter;
 import java.net.Socket;
@@ -29,21 +29,20 @@ public class ServerThread implements Runnable {
     private JDialog mDialog;
     private NetworkState mState;
     private EKEProvider mEKEProvider;
+    private ClientInfo mClientInfo;
 
     private boolean mStopFlag;
-    private byte[] mClientPublicKey;
     private String mPairingKey;
     private String mReceivedKey;
 
-    ServerThread(NetworkState state, Socket skt, MouseController mc, KeyboardController kc,
-                 BroadcastThread bt)
+    ServerThread(NetworkState state, Socket skt, MouseController mc, KeyboardController kc, BroadcastThread bt)
             throws IOException {
         mClientSocket = skt;
         mMouseController = mc;
         mKeyboardController = kc;
         mBroadcastThread = bt;
         mStopFlag = false;
-        this.mState = state;
+        mState = state;
         mDialogThread = null;
         mDialog = null;
     }
@@ -57,19 +56,18 @@ public class ServerThread implements Runnable {
     private boolean isValidClient() {
         try {
             BufferedReader in = new BufferedReader(new InputStreamReader(mClientSocket.getInputStream()));
-            mClientPublicKey = in.readLine().getBytes();
-            System.out.println(mClientSocket.getInetAddress().getHostAddress() +
-                    " wants to connect.");
+            mClientInfo = new Gson().fromJson(in.readLine(), ClientInfo.class);
+            System.out.println(mClientInfo.getClientInfo() + " wants to connect.");
 
             mPairingKey = EKEProvider.getPairingKey();
-            mEKEProvider = new EKEProvider(mPairingKey,mClientPublicKey);
+            mEKEProvider = new EKEProvider(mPairingKey, mClientInfo.getPublicKey());
 
             System.out.println("Type the following pairing key to connect your phone: " + mPairingKey);
             mDialogThread = null;
             mDialogThread = new Thread(
                     () -> MainWindow.showPairingKeyDialog
                             (
-                                    mClientSocket.getInetAddress().getHostAddress(),
+                                    mClientInfo.getClientInfo(),
                                     mPairingKey,
                                     this
                             )
@@ -85,7 +83,7 @@ public class ServerThread implements Runnable {
 
     private void closeConnection() {
         try {
-            mState.remove(mClientSocket);
+            mState.remove(mClientInfo);
             System.out.println(mClientSocket.getInetAddress() + " is now disconnected!");
             if (!mClientSocket.isClosed()) {
                 PrintWriter printWriter = new PrintWriter(mClientSocket.getOutputStream(), true);
@@ -109,22 +107,20 @@ public class ServerThread implements Runnable {
             PrintWriter out = new PrintWriter(mClientSocket.getOutputStream(), true);
             if(!mBroadcastThread.getBroadcastFlag()) {
                 if (isValidClient()) {
+                    mClientInfo.setSocket(mClientSocket);
                     out.println(mEKEProvider.encryptString("1"));
-
-                    System.out.println("Connected to " + mClientSocket.getInetAddress().getHostAddress());
-                    System.out.println("Client public key: " + new String(mClientPublicKey));
                     mDialogThread = null;
                     mDialogThread = new Thread(
                             () -> MainWindow.showConnectionConfirmationDialog
                                     (
-                                            mClientSocket.getInetAddress().getHostAddress(),
+                                            mClientInfo.getClientInfo(),
                                             this
                                     )
                     );
                     mDialogThread.start();
 
                     mClientSocket.setSoTimeout(100);
-                    mState.add(mClientSocket, this);
+                    mState.add(mClientInfo, this);
 
                     doOperation();
                     closeConnection();
@@ -134,7 +130,7 @@ public class ServerThread implements Runnable {
                     mDialogThread = new Thread(
                             () -> MainWindow.showIncorrectPKeyDialog
                                     (
-                                            mClientSocket.getInetAddress().getHostAddress(),
+                                            mClientInfo.getClientInfo(),
                                             this
                                     )
                     );

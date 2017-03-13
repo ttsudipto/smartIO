@@ -1,4 +1,4 @@
-package server;
+package net;
 
 import com.google.gson.Gson;
 import sensor.representation.Quaternion;

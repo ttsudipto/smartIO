@@ -2,7 +2,7 @@ package gui;
 
 import java.awt.Dimension;
 import java.awt.BorderLayout;
-import java.awt. Insets;
+import java.awt.Insets;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,10 +22,10 @@ import javax.swing.JPanel;
 import javax.swing.JOptionPane;
 import javax.swing.JDialog;
 
-import server.NetworkManager;
-import server.NetworkState;
-import server.NetworkThread;
-import server.ServerThread;
+import net.NetworkManager;
+import net.NetworkState;
+import net.NetworkThread;
+import net.ServerThread;
 
 /**
  * @author Sudipto Bhattacharjee
@@ -42,6 +42,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
 
     private static final long DIALOG_TIMEOUT = 2000;
 
+    @SuppressWarnings("unchecked")
     public MainWindow(NetworkManager manager) {
         this.mManager = manager;
         NetworkState mState = manager.getNetworkState();
@@ -136,12 +137,13 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         } catch (InterruptedException | NullPointerException ignored) {}
     }
 
+    @SuppressWarnings("unchecked")
     public void actionPerformed(ActionEvent event) {
-
         if(event.getActionCommand().equals("disconnect_clicked")) {
             List<String> selectedValues = mList.getSelectedValuesList();
             try {
                 for (String values: selectedValues) {
+                    values = values.substring(values.indexOf("(") + 1, values.length() - 1);
                     mManager.disconnect(InetAddress.getByName(values));
                 }
             } catch (IOException | InterruptedException e) {

@@ -1,4 +1,4 @@
-package server;
+package net;
 
 import java.awt.AWTException;
 import java.io.IOException;
@@ -14,7 +14,7 @@ import java.util.Map;
  * <p>
  *     This class creates a {@link NetworkState} which stores the information
  *     regarding the network. It provides methods for start and stop of the
- *     server. It also provides method for disconnecting a client.These
+ *     net. It also provides method for disconnecting a client.These
  *     methods modify the {@code NetworkState} accordingly.
  * </p>
  * <p>
@@ -56,7 +56,7 @@ public class NetworkManager {
     public NetworkState getNetworkState() { return mState; }
 
     /**
-     * Method to start server.
+     * Method to start net.
      *
      * <p>
      *     This is achieved by executing two primary operations :
@@ -82,7 +82,7 @@ public class NetworkManager {
     }
 
     /**
-     * Method to stop server.
+     * Method to stop net.
      *
      * <p>
      *     This is achieved by executing three primary operations :
@@ -107,6 +107,8 @@ public class NetworkManager {
      * @see Server#setStopFlag()
      * @see #disconnect(InetAddress)
      */
+
+    @SuppressWarnings("unchecked")
     public void stopServer() throws IOException, InterruptedException {
         mBroadcastThread.stopBroadcast();
         Thread.sleep(mBroadcastThread.getTimeout());

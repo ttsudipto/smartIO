@@ -23,6 +23,9 @@ import java.security.cert.CertificateException;
 class KeyStoreManager {
 
 	private KeyStore mKeyStore;
+
+	private static Certificate sCertificate;
+
 	private static final String KEY_STORE_TYPE = "pkcs12";
 	private static final String KEY_STORE_ALIAS = "Remouse KeyStore";
 	private static final String KEY_STORE_PASSWORD = "foo";
@@ -32,10 +35,6 @@ class KeyStoreManager {
 		mKeyStore = KeyStore.getInstance(KEY_STORE_TYPE);
 		mKeyStore.load(null, KEY_STORE_PASSWORD.toCharArray());
 	}
-
-	static boolean keyStoreExists() {
-        return new File(KEY_STORE_NAME).exists();
-    }
 
 	void setMasterKey(PrivateKey privateKey, Certificate ...cert) throws KeyStoreException, IOException, CertificateException, NoSuchAlgorithmException {
 		KeyStore.PrivateKeyEntry privateKeyEntry = new KeyStore.PrivateKeyEntry(privateKey, cert);
@@ -51,10 +50,13 @@ class KeyStoreManager {
 
         Key key = keyStore.getKey(KEY_STORE_ALIAS, KEY_STORE_PASSWORD.toCharArray());
         if(key instanceof PrivateKey) {
-            Certificate certificate = keyStore.getCertificate(KEY_STORE_ALIAS);
-            PublicKey publicKey = certificate.getPublicKey();
+            sCertificate = keyStore.getCertificate(KEY_STORE_ALIAS);
+            PublicKey publicKey = sCertificate.getPublicKey();
             return new KeyPair(publicKey, (PrivateKey) key);
         }
         return null;
     }
+
+    static boolean keyStoreExists() { return new File(KEY_STORE_NAME).exists(); }
+    static String getCert() { return sCertificate.toString(); }
 }
