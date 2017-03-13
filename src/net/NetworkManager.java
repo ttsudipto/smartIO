@@ -14,7 +14,7 @@ import java.util.Map;
  * <p>
  *     This class creates a {@link NetworkState} which stores the information
  *     regarding the network. It provides methods for start and stop of the
- *     net. It also provides method for disconnecting a client.These
+ *     server. It also provides method for disconnecting a client.These
  *     methods modify the {@code NetworkState} accordingly.
  * </p>
  * <p>
@@ -56,7 +56,7 @@ public class NetworkManager {
     public NetworkState getNetworkState() { return mState; }
 
     /**
-     * Method to start net.
+     * Method to start server.
      *
      * <p>
      *     This is achieved by executing two primary operations :
