@@ -82,7 +82,7 @@ public class NetworkManager {
     }
 
     /**
-     * Method to stop net.
+     * Method to stop server.
      *
      * <p>
      *     This is achieved by executing three primary operations :
