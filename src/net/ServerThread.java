@@ -49,7 +49,7 @@ public class ServerThread implements Runnable {
 
     private boolean isValidPairingKey() throws IOException {
         BufferedReader in = new BufferedReader(new InputStreamReader(mClientSocket.getInputStream()));
-        mReceivedKey = in.readLine();
+        mReceivedKey = mEKEProvider.decryptString(in.readLine());
         return mPairingKey.equals(mReceivedKey);
     }
 
