@@ -18,11 +18,8 @@ import java.util.List;
  * <p>
  *     This thread continuously sends UDP broadcasts through all
  *     available network interfaces of the PC except point-to-point
- *     and loopback interface. The content of the broadcast data is
- *     a JSon-string of a {@link ServerInfo} object. The JSon string
- *     is created using the Google API -
- *     <a href="https://sites.google.com/site/gson/gson-user-guide">
- *     GSON</a>.
+ *     and loopback interfaces. The content of the broadcast data is
+ *     a JSon-string of a {@link ServerInfo} object.
  * </p>
  * <p>
  *     It is started during server start by the method
@@ -52,7 +49,7 @@ class BroadcastThread implements Runnable {
 
     /**
      * Stops the broadcast. <br/>
-     * Used to exit from the {@link #run()}.
+     * Used to exit from the {@link #run()} method.
      */
     void stopBroadcast() {
         mStopFlag = true;
@@ -68,11 +65,13 @@ class BroadcastThread implements Runnable {
     /**
      * Returns the status of the broadcast.
      *
-     * @return {@code true} is broadcast is active, <br/>{@code false} otherwise.
+     * @return {@code true} if broadcast is active, <br/>{@code false} otherwise.
      */
     boolean getBroadcastFlag() { return mStopFlag; }
 
     /**
+     * Returns the interval between two successive broadcasts.
+     *
      * @return the interval between two successive broadcasts in milliseconds.
      */
     long getTimeout() { return TIMEOUT; }

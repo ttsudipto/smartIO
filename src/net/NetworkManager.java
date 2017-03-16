@@ -134,7 +134,7 @@ public class NetworkManager {
 
     /**
      * Method to disconnect a client. It gets the {@link ServerThread} of
-     * the connection with the client to be disconnected from the network
+     * the connection of the client to be disconnected from the network
      * state by calling {@link NetworkState#getServerThread(InetAddress)}.
      *
      * @param address {@link InetAddress} of the client to be disconnected

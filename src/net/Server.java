@@ -68,14 +68,17 @@ class Server {
 
     /**
      * Sets the stop flag. <br/>
-     * Used to exit from the {@link #listen()}.
+     * Used to exit from the {@link #listen()} method.
      *
      * @see #listen()
      */
     void setStopFlag() { mStopFlag = true; }
 
     /**
-     * @return the timeout of the {@code ServerSocket} used in this {@code Server}.
+     * Returns the timeout of the {@link ServerSocket} used in this {@code Server}.
+     *
+     * @return the timeout of the {@code ServerSocket} used in this {@code Server}
+     *         in milliseconds..
      * @throws IOException
      */
     int getTimeout() throws IOException { return mServerSocket.getSoTimeout(); }

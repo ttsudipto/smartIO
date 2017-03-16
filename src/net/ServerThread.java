@@ -1,6 +1,7 @@
 package net;
 
 import java.io.PrintWriter;
+import java.net.InetAddress;
 import java.net.Socket;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -15,8 +16,63 @@ import security.EKEProvider;
 import javax.swing.JDialog;
 
 /**
- * @author Sudipto Bhattacharjee
- * @author Sayantan Majumdar
+ * Implementation of the {@link Runnable} for the thread that is responsible
+ * for communication with each client.
+ *
+ * <p>
+ *     The actions performed by this thread are :
+ *     <ul>
+ *         <li>Authenticate the client.</li>
+ *         <li>According to the result
+ *             <ul>
+ *                 <li>
+ *                     If the client is not authentic, close the connection
+ *                     and terminate.
+ *                 </li>
+ *                 <li>
+ *                     Otherwise, confirm the connection and start
+ *                     communication with the client.
+ *                 </li>
+ *             </ul>
+ *         </li>
+ *         <li>
+ *             Examine the data received from client and transfer it to
+ *             a <i>controller</i> ({@link MouseController} or
+ *             {@link KeyboardController}) to execute the input operations.
+ *         </li>
+ *     </ul>
+ * </p>
+ * <p>
+ *     Client authentication is done by comparing the pairing key received
+ *     from the client with the one displayed on the pairing key dialog
+ *     window.
+ * </p>
+ * <p>
+ *     It receives data from client and wraps it in a {@link DataWrapper}
+ *     object. It, then, invokes the {@link DataWrapper#getOperationType()}
+ *     method to examine the type of operation requested by the client and
+ *     accordingly transfers the control to either {@link MouseController} or
+ *     {@link KeyboardController}.
+ * </p>
+ * <p>
+ *     This thread is started by the {@link Server#listen()} upon accepting
+ *     every client connection. It is terminated either implicitly after
+ *     unsuccessful authentication of the client or explicitly by the
+ *     {@link NetworkManager} ({@link NetworkManager#stopServer()} and
+ *     {@link NetworkManager#disconnect(InetAddress)}) by invoking the
+ *     {@link #setStopFlag()} method at the time of server stop or
+ *     disconnection of this client A reference of this thread gets stored
+ *     in the {@link NetworkState} after successful authentication of the
+ *     client.
+ * </p>
+ *
+ * @see Runnable
+ * @see DataWrapper
+ * @see DataWrapper#getOperationType()
+ * @see MouseController
+ * @see KeyboardController
+ * @see NetworkManager#stopServer()
+ * @see NetworkManager#disconnect(InetAddress)
  */
 
 public class ServerThread implements Runnable {
@@ -35,6 +91,17 @@ public class ServerThread implements Runnable {
     private String mPairingKey;
     private String mReceivedKey;
 
+    /**
+     * Constructor. <br/>
+     * Initializes the thread.
+     *
+     * @param state {@link NetworkState} of this network.
+     * @param skt client {@link Socket}.
+     * @param mc the {@link MouseController}.
+     * @param kc the {@link KeyboardController}.
+     * @param bt the {@link BroadcastThread}.
+     * @throws IOException
+     */
     ServerThread(NetworkState state, Socket skt, MouseController mc, KeyboardController kc, BroadcastThread bt)
             throws IOException {
         mClientSocket = skt;
@@ -101,6 +168,25 @@ public class ServerThread implements Runnable {
         }
     }
 
+    /**
+     * Performs operations for communication with a client.
+     * <ul>
+     *     <li>Validates the client,</li>
+     *     <li>
+     *         Receives data from client and encapsulates it in a
+     *         {@link DataWrapper} object, and
+     *     </li>
+     *     <li>
+     *         Examines the type of operation requested by the client
+     *         and accordingly transfers the control to a <i>Controller
+     *         </i> ({@link MouseController} or {@link KeyboardController}).
+     *     </li>
+     * </ul>
+     *
+     * @see DataWrapper
+     * @see MouseController
+     * @see KeyboardController
+     */
     @Override
     public void run() {
         try {
@@ -186,10 +272,32 @@ public class ServerThread implements Runnable {
         }
     }
 
+    /**
+     * Sets stop flag.<br/>
+     * Used to exit from the {@link #run()} method.
+     */
     void setStopFlag() { mStopFlag = true; }
+
+    /**
+     * Sets a dialog window.
+     *
+     * @param d a {@link JDialog} object.
+     */
     public void setDialog(JDialog d) { mDialog = d; }
+
+    /**
+     * Returns the {@link JDialog} object used for displaying notifications..
+     *
+     * @return a {@link JDialog} object.
+     */
     public JDialog getDialog() {return mDialog;}
 
+    /**
+     * Returns the timeout of the client {@link Socket}.
+     *
+     * @return timeout of client {@link Socket} in milliseconds
+     * @throws IOException
+     */
     int getTimeout() throws IOException {
         if(!mClientSocket.isClosed())   return mClientSocket.getSoTimeout();
         return 0;

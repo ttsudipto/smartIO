@@ -3,7 +3,7 @@ package net;
 import security.EKEProvider;
 
 /**
- * Encapsulation of the data for UDP broadcast.
+ * Encapsulation of the data sent during UDP broadcast.
  *
  * <p>
  *     This data is broadcast by the {@link BroadcastThread}. This
