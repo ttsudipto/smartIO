@@ -89,7 +89,6 @@ public class ServerThread implements Runnable {
 
     private boolean mStopFlag;
     private String mPairingKey;
-    private String mReceivedKey;
 
     /**
      * Constructor. <br/>
@@ -116,8 +115,8 @@ public class ServerThread implements Runnable {
 
     private boolean isValidPairingKey() throws IOException {
         BufferedReader in = new BufferedReader(new InputStreamReader(mClientSocket.getInputStream()));
-        mReceivedKey = mEKEProvider.decryptString(in.readLine());
-        return mPairingKey.equals(mReceivedKey);
+        String receivedKey = mEKEProvider.decryptString(in.readLine());
+        return mPairingKey.equals(receivedKey);
     }
 
     private boolean isValidClient() {
@@ -222,9 +221,7 @@ public class ServerThread implements Runnable {
                     );
                     mDialogThread.start();
 
-                    if(mReceivedKey != null && !mReceivedKey.equals("Cancelled")) {
-                        out.println(mEKEProvider.encryptString("0"));
-                    }
+                    out.println(mEKEProvider.encryptString("0"));
                     mClientSocket.close();
                 }
             }
