@@ -5,7 +5,25 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author Sayantan Majumdar
+ * Maps the characters to type to the corresponding key codes.
+ *
+ * <p>
+ *     These key codes represent the key(s) to be pressed. The
+ *     mapping is done with the help of two {@link HashMap}s :
+ *     <ol>
+ *         <li>
+ *             <i>Key Map</i> - Maps characters to key codes
+ *             where pressing shift key is not required.
+ *         </li>
+ *         <li>
+ *             <i>Shift Key Map</i> - Maps characters to key
+ *             codes where pressing shift key is required. For
+ *             example, the character {@code %} is mapped to
+ *             {@code 5} since {@code Shift+5} is pressed for
+ *             typing {@code %}.
+ *         </li>
+ *     </ol>
+ * </p>
  */
 class KeyCode {
 
@@ -67,15 +85,40 @@ class KeyCode {
         sShiftKeyMap.put('~', KeyEvent.VK_BACK_QUOTE);
     }
 
+    /**
+     * Checks if {@code Shift} key needs to be pressed for typing
+     * the char {@code c}.
+     *
+     * @param c the character to be checked.
+     * @return {@code true}, if {@code Shift} key needs to be
+     *         pressed, <br/>
+     *         {@code false}, otherwise.
+     */
     static boolean isShiftKey(char c) {
         return sShiftKeyMap.containsKey(c);
     }
 
+    /**
+     * Checks the <i>Shift Key Map</i> to obtain the shift key code
+     * for the char {@code c}.
+     *
+     * @param c the character to be checked.
+     * @return the shift key code for {@code c}, <br/>
+     *         -1, if {@code Shift} key press is not required.
+     */
     static int getShiftCode(char c) {
         if (!sShiftKeyMap.containsKey(c))  return -1;
         return sShiftKeyMap.get(c);
     }
 
+    /**
+     * Checks the <i>Key Map</i> to obtain the key code for the char
+     * {@code c}, if {@code Shift} key press is not required.
+     *
+     * @param c the character to be checked.
+     * @return the key code for {@code c}, <br/>
+     *         -1, if {@code Shift} key press is required.
+     */
     static int getCodeByChar(char c) {
         if (!sKeyMap.containsKey(c))   return -1;
         return sKeyMap.get(c);

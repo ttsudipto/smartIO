@@ -5,15 +5,37 @@ import java.awt.Robot;
 import java.awt.event.KeyEvent;
 
 /**
- * @author Sayantan Majumdar
+ * Utility for performing keyboard input operations.
+ *
+ * <p>
+ *    It uses a {@link Robot} object to generate native system
+ *    input events. This differs from posting events to the AWT
+ *    event queue or AWT components in that the events are
+ *    generated in the platform's native input queue.
+ * </p>
+ *
+ * @see Robot
  */
 public class KeyboardController {
     private Robot mRobot;
 
+    /**
+     * Constructor. <br/>
+     * Initializes this {@code KeyboardController} by
+     * instantiating a {@link Robot} object.
+     *
+     * @throws AWTException
+     */
     public KeyboardController() throws AWTException {
         mRobot = new Robot();
     }
 
+    /**
+     * Method to perform the keyboard input operations.
+     *
+     * @param s {@code String} representing the sequence of
+     *          characters to be typed.
+     */
     public void doKeyOperation(String s) {
 
         if (s.equals("backspace")) {
