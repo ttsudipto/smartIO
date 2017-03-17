@@ -38,16 +38,6 @@ public class KeyboardController {
      */
     public void doKeyOperation(String s) {
 
-        if (s.equals("backspace")) {
-            mRobot.keyPress(KeyEvent.VK_BACK_SPACE);
-            mRobot.keyRelease(KeyEvent.VK_BACK_SPACE);
-            return;
-        }
-        if (s.equals("enter")) {
-            mRobot.keyPress(KeyEvent.VK_ENTER);
-            mRobot.keyRelease(KeyEvent.VK_ENTER);
-            return;
-        }
         int keyLength = s.length();
         if(keyLength == 0) {
             performAction('\n');

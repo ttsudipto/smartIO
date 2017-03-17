@@ -59,6 +59,7 @@ class KeyCode {
         sKeyMap.put('/', KeyEvent.VK_SLASH);
         sKeyMap.put(' ', KeyEvent.VK_SPACE);
         sKeyMap.put('\n', KeyEvent.VK_ENTER);
+        sKeyMap.put('\b', KeyEvent.VK_BACK_SPACE);
 
 
         // set of character which need to be typed with shift key
