@@ -14,26 +14,27 @@ import device.MouseController;
  * Server data structure.
  *
  * <p>
- *     It encapsulates the {@link ServerSocket} used for establishing
- *     TCP connection with the client.
+ *     It encapsulates the {@link java.net.ServerSocket} used for
+ *     establishing TCP connection with the client.
  * </p>
  * <p>
- *     When the {@code Server} starts, the {@link #listen()} method is
- *     called which listens on the port in order to accept incoming
- *     client connections. Upon accepting connection it instantiates
- *     and starts a {@link ServerThread} for each connection.
+ *     When the <code>Server</code> starts, the {@link #listen()}
+ *     method is called which listens on the port in order to accept
+ *     incoming client connections. Upon accepting connection it
+ *     instantiates and starts a {@link ServerThread} for each
+ *     connection.
  * </p>
  * <p>
- *     It also instantiates the {@link MouseController} and
- *     {@link KeyboardController} which is used for mouse and keyboard
- *     control respectively.
+ *     It also instantiates the {@link device.MouseController} and
+ *     {@link device.KeyboardController} which is used for mouse and
+ *     keyboard control respectively.
  * </p>
  *
- * @see ServerSocket
- * @see ServerThread
+ * @see java.net.ServerSocket
+ * @see net.ServerThread
  * @see #listen()
- * @see MouseController
- * @see KeyboardController
+ * @see device.MouseController
+ * @see device.KeyboardController
  */
 
 class Server {
@@ -75,25 +76,28 @@ class Server {
     void setStopFlag() { mStopFlag = true; }
 
     /**
-     * Returns the timeout of the {@link ServerSocket} used in this {@code Server}.
+     * Returns the timeout of the {@link java.net.ServerSocket} used
+     * by this <code>Server</code>.
      *
-     * @return the timeout of the {@code ServerSocket} used in this {@code Server}
-     *         in milliseconds..
+     * @return the timeout in milliseconds of this <code>Server</code>.
      * @throws IOException
      */
     int getTimeout() throws IOException { return mServerSocket.getSoTimeout(); }
 
     /**
+     * Listens continuously on the <i>TCP PORT</i>.
+     *
      * <p>
-     *     Listens continuously on the {@link #TCP_PORT}. Once the server accepts
-     *     a connection, a separate {@link ServerThread} is started for each
-     *     connection.
+     *     Once the server accepts a connection, a separate
+     *     {@link ServerThread} is started for each connection. The
+     *     <i>listening</i> can be stopped by invoking the
+     *     {@link #setStopFlag()}  method.
      * </p>
      *
      * @throws IOException
      * @throws InterruptedException
-     * @see #TCP_PORT
-     * @see ServerThread
+     * @see net.ServerThread
+     * @see #setStopFlag()
      */
     void listen() throws IOException,InterruptedException {
         while(!mStopFlag) {
@@ -109,7 +113,8 @@ class Server {
     }
 
     /**
-     * Closes the {@code ServerSocket} used in this {@code Server}.
+     * Closes the <code>ServerSocket</code> used by this
+     * <code>Server</code>.
      *
      * @throws IOException
      */

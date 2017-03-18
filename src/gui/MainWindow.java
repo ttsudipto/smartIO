@@ -39,15 +39,15 @@ import net.ServerThread;
  *             A disconnect button for disconnecting the selected client.
  *         </li>
  *     </ul>
- *     It also implements {@link ActionListener} for these elements and
- *     {@link WindowListener} for graceful termination of the application
- *     upon closing of this {@code MainWindow}. The window is initialized
- *     and rendered at the time of instantiation by the constructor
- *     {@link #MainWindow(NetworkManager)}.
+ *     It also implements <code>ActionListener</code> for these elements
+ *     and <code>WindowListener</code> for graceful termination of the
+ *     application upon closing of this <code>MainWindow</code>. The
+ *     window is initialized and rendered at the time of instantiation
+ *     by the constructor {@link #MainWindow(NetworkManager)}.
  * </p>
  *
- * @see ActionListener
- * @see WindowListener
+ * @see java.awt.event.ActionListener
+ * @see java.awt.event.WindowListener
  * @see #MainWindow(NetworkManager)
  */
 public class MainWindow extends JFrame implements ActionListener, WindowListener {
@@ -63,9 +63,9 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
 
     /**
      * Constructor. <br/>
-     * Initializes the {@code MainWindow} and displays it.
+     * Initializes the <code>MainWindow</code> and displays it.
      *
-     * @param manager the {@link NetworkManager} for this network.
+     * @param manager the {@link net.NetworkManager} for this network.
      */
     public MainWindow(NetworkManager manager) {
         this.mManager = manager;
@@ -122,8 +122,8 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
      * @param title title of the dialog window - canonical hostname of
      *              the client for which the pairing key is meant.
      * @param pairingKey the pairing key.
-     * @param st the {@link ServerThread} which handles this client.
-     * @see ServerThread
+     * @param st the {@link net.ServerThread} which handles this client.
+     * @see net.ServerThread
      */
     public static void showPairingKeyDialog(String title, String pairingKey, ServerThread st) {
         String message = "Type the following pairing key to connect your phone: " + pairingKey;
@@ -144,8 +144,8 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
      *
      * @param title title of the window - the canonical hostname of the
      *              client.
-     * @param st the {@link ServerThread} which handles this client.
-     * @see ServerThread
+     * @param st the {@link net.ServerThread} which handles this client.
+     * @see net.ServerThread
      */
     public static void showIncorrectPKeyDialog(String title, ServerThread st) {
         JOptionPane option = new JOptionPane("Incorrect Pairing Key!",JOptionPane.ERROR_MESSAGE);
@@ -169,8 +169,8 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
      *
      * @param title title of the window - the canonical hostname of the
      *              client.
-     * @param st the {@link ServerThread} which handles this client.
-     * @see ServerThread
+     * @param st the {@link net.ServerThread} which handles this client.
+     * @see net.ServerThread
      */
     public static void showConnectionConfirmationDialog(String title, ServerThread st) {
         String message = "Connected !!";
@@ -192,8 +192,8 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     /**
      * Invoked when an action occurs.
      *
-     * @param event an {@link ActionEvent} object.
-     * @see ActionEvent
+     * @param event a {@link java.awt.event.ActionEvent} object.
+     * @see java.awt.event.ActionEvent
      */
     @Override
     public void actionPerformed(ActionEvent event) {
@@ -231,12 +231,15 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     public void windowOpened(WindowEvent windowEvent) {}
 
     /**
-     * Gracefully terminates the application by stopping the broadcast,
-     * disconnecting every client and finally stopping the server. It is
-     * called during the closing of this {@code MainWindow}.
+     * Gracefully terminates the application.
+     * <p>
+     *     Termination is done by stopping the broadcast disconnecting
+     *     every client and finally stopping the server. It is called
+     *     during the closing of this <code>MainWindow</code>.
+     * </p>
      *
-     * @param windowEvent a {@link WindowEvent} object.
-     * @see WindowEvent
+     * @param windowEvent a {@link java.awt.event.WindowEvent} object.
+     * @see java.awt.event.WindowEvent
      */
     @Override
     public void windowClosing(WindowEvent windowEvent) {

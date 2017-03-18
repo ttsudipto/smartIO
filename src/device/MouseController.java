@@ -24,9 +24,9 @@ import java.awt.event.InputEvent;
  *     mouse pointer on the basis of 3-D and 2-D inputs from the
  *     mobile device respectively. The {@link #move(Quaternion, boolean)}
  *     method, in turn, calls the
- *     {@link device.MouseMove#moveRelatively(Robot, int, int)}
- *     method. The mouse button inputs are performed by invoking
- *     the {@link #doOperation(String)} method.
+ *     {@link MouseMove#moveRelatively(Robot, int, int)} method.
+ *     The mouse button inputs are performed by invoking the
+ *     {@link #doOperation(String)} method.
  * </p>
  *
  * @see java.awt.Robot

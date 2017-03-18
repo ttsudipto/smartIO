@@ -6,7 +6,7 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 
 /**
- * Provide static methods used by {@link device.MouseController} .
+ * Provides static methods used by {@link MouseController} .
  *
  * <p>
  *     The {@link #moveRelatively(Robot, int, int)} method takes
@@ -31,7 +31,7 @@ class MouseMove {
     /**
      * Method for performing mouse movement proportional to the
      * screen size. This method is invoked by
-     * {@link device.MouseController#move(int, int)} .
+     * {@link MouseController#move(int, int)} .
      *
      * @param robot the {@link java.awt.Robot} object.
      * @param relativeX displacement along x-axis.

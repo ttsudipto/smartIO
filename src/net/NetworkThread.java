@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import java.io.IOException;
 
 /**
- * Implementation of the {@link java.lang.Runnable} of the thread that
+ * Implementation of the {@link java.lang.Runnable} for the thread that
  * executes the network operations.
  *
  * <p>

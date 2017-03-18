@@ -16,8 +16,8 @@ import security.EKEProvider;
 import javax.swing.JDialog;
 
 /**
- * Implementation of the {@link Runnable} for the thread that is responsible
- * for communication with each client.
+ * Implementation of the {@link java.lang.Runnable} for the thread that is
+ * responsible for communication with each client.
  *
  * <p>
  *     The actions performed by this thread are :
@@ -37,8 +37,9 @@ import javax.swing.JDialog;
  *         </li>
  *         <li>
  *             Examine the data received from client and transfer it to
- *             a <i>controller</i> ({@link MouseController} or
- *             {@link KeyboardController}) to execute the input operations.
+ *             a <i>controller</i> ({@link device.MouseController} or
+ *             {@link device.KeyboardController}) to execute the input
+ *             operations.
  *         </li>
  *     </ul>
  * </p>
@@ -51,14 +52,14 @@ import javax.swing.JDialog;
  *     It receives data from client and wraps it in a {@link DataWrapper}
  *     object. It, then, invokes the {@link DataWrapper#getOperationType()}
  *     method to examine the type of operation requested by the client and
- *     accordingly transfers the control to either {@link MouseController} or
- *     {@link KeyboardController}.
+ *     accordingly transfers the control to either {@link device.MouseController}
+ *     or {@link device.KeyboardController}.
  * </p>
  * <p>
  *     This thread is started by the {@link Server#listen()} upon accepting
- *     every client connection. It is terminated either implicitly after
- *     unsuccessful authentication of the client or explicitly by the
- *     {@link NetworkManager} ({@link NetworkManager#stopServer()} and
+ *     every client connection. It gets terminated implicitly after
+ *     unsuccessful authentication of the client. Explicitly, it is terminated
+ *     by the {@link NetworkManager} ({@link NetworkManager#stopServer()} and
  *     {@link NetworkManager#disconnect(InetAddress)}) by invoking the
  *     {@link #setStopFlag()} method at the time of server stop or
  *     disconnection of this client A reference of this thread gets stored
@@ -66,13 +67,13 @@ import javax.swing.JDialog;
  *     client.
  * </p>
  *
- * @see Runnable
- * @see DataWrapper
- * @see DataWrapper#getOperationType()
- * @see MouseController
- * @see KeyboardController
- * @see NetworkManager#stopServer()
- * @see NetworkManager#disconnect(InetAddress)
+ * @see java.lang.Runnable
+ * @see net.DataWrapper
+ * @see net.DataWrapper#getOperationType()
+ * @see device.MouseController
+ * @see device.KeyboardController
+ * @see net.NetworkManager#stopServer()
+ * @see net.NetworkManager#disconnect(InetAddress)
  */
 
 public class ServerThread implements Runnable {
@@ -95,9 +96,9 @@ public class ServerThread implements Runnable {
      * Initializes the thread.
      *
      * @param state {@link NetworkState} of this network.
-     * @param skt client {@link Socket}.
-     * @param mc the {@link MouseController}.
-     * @param kc the {@link KeyboardController}.
+     * @param skt client <code>Socket</code>.
+     * @param mc the {@link device.MouseController}.
+     * @param kc the {@link device.KeyboardController}.
      * @param bt the {@link BroadcastThread}.
      * @throws IOException
      */
@@ -176,15 +177,15 @@ public class ServerThread implements Runnable {
      *         {@link DataWrapper} object, and
      *     </li>
      *     <li>
-     *         Examines the type of operation requested by the client
-     *         and accordingly transfers the control to a <i>Controller
-     *         </i> ({@link MouseController} or {@link KeyboardController}).
+     *         Examines the type of operation requested by the client and
+     *         accordingly transfers the control to a <i>controller</i>
+     *         ({@link device.MouseController} or {@link device.KeyboardController}).
      *     </li>
      * </ul>
      *
-     * @see DataWrapper
-     * @see MouseController
-     * @see KeyboardController
+     * @see net.DataWrapper
+     * @see device.MouseController
+     * @see device.KeyboardController
      */
     @Override
     public void run() {
@@ -278,21 +279,22 @@ public class ServerThread implements Runnable {
     /**
      * Sets a dialog window.
      *
-     * @param d a {@link JDialog} object.
+     * @param d a {@link javax.swing.JDialog} object.
      */
     public void setDialog(JDialog d) { mDialog = d; }
 
     /**
-     * Returns the {@link JDialog} object used for displaying notifications..
+     * Returns the {@link javax.swing.JDialog} object used for
+     * displaying notifications.
      *
-     * @return a {@link JDialog} object.
+     * @return a {@link javax.swing.JDialog} object.
      */
     public JDialog getDialog() {return mDialog;}
 
     /**
-     * Returns the timeout of the client {@link Socket}.
+     * Returns the timeout of the client <code>Socket</code>.
      *
-     * @return timeout of client {@link Socket} in milliseconds
+     * @return timeout of client <code>Socket</code> in milliseconds
      * @throws IOException
      */
     int getTimeout() throws IOException {

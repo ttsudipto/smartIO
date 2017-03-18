@@ -9,7 +9,7 @@ import java.util.Map;
  *
  * <p>
  *     These key codes represent the key(s) to be pressed. The
- *     mapping is done with the help of two {@link HashMap}s :
+ *     mapping is done with the help of two <code>HashMap</code>s :
  *     <ol>
  *         <li>
  *             <i>Key Map</i> - Maps characters to key codes
@@ -18,9 +18,9 @@ import java.util.Map;
  *         <li>
  *             <i>Shift Key Map</i> - Maps characters to key
  *             codes where pressing shift key is required. For
- *             example, the character {@code %} is mapped to
- *             {@code 5} since {@code Shift+5} is pressed for
- *             typing {@code %}.
+ *             example, the character <code>%</code> is mapped
+ *             to <code>5</code> since <code>Shift+5</code> is
+ *             pressed for typing <code>%</code>.
  *         </li>
  *     </ol>
  * </p>
@@ -87,25 +87,26 @@ class KeyCode {
     }
 
     /**
-     * Checks if {@code Shift} key needs to be pressed for typing
-     * the char {@code c}.
+     * Checks if <code>Shift</code> key needs to be pressed for
+     * typing a character.
      *
      * @param c the character to be checked.
-     * @return {@code true}, if {@code Shift} key needs to be
-     *         pressed, <br/>
-     *         {@code false}, otherwise.
+     * @return <code>true</code>, if <code>Shift</code> key
+     *                            needs to be pressed, <br/>
+     *         <code>false</code>, otherwise.
      */
     static boolean isShiftKey(char c) {
         return sShiftKeyMap.containsKey(c);
     }
 
     /**
-     * Checks the <i>Shift Key Map</i> to obtain the shift key code
-     * for the char {@code c}.
+     * Checks the <i>Shift Key Map</i> and obtains the shift key code
+     * for a character..
      *
      * @param c the character to be checked.
-     * @return the shift key code for {@code c}, <br/>
-     *         -1, if {@code Shift} key press is not required.
+     * @return the shift key code for <code>c</code>, <br/>
+     *         <code>-1</code>, if <code>Shift</code> key press
+     *                          is not required.
      */
     static int getShiftCode(char c) {
         if (!sShiftKeyMap.containsKey(c))  return -1;
@@ -113,12 +114,13 @@ class KeyCode {
     }
 
     /**
-     * Checks the <i>Key Map</i> to obtain the key code for the char
-     * {@code c}, if {@code Shift} key press is not required.
+     * Checks the <i>Key Map</i> and obtains the key code for a character
+     * (if <code>Shift</code> key press is not required).
      *
      * @param c the character to be checked.
-     * @return the key code for {@code c}, <br/>
-     *         -1, if {@code Shift} key press is required.
+     * @return the key code for <code>c</code>, <br/>
+     *         <code>-1</code>, if <code>Shift</code> key press is
+     *                          required.
      */
     static int getCodeByChar(char c) {
         if (!sKeyMap.containsKey(c))   return -1;
