@@ -17,34 +17,34 @@ import sensor.representation.Quaternion;
  * </p>
  * <p>
  *     For keyboard input, the <i>type of operation</i> field contains
- *     {@code Key} and the <i>data</i> field contains the sequence of
- *     characters and keyboard strokes for input.
+ *     <code>Key</code> and the <i>data</i> field contains the sequence
+ *     of characters and keyboard strokes for input.
  * </p>
  * <p>
  *     For 3-D mouse movement operation, the <i>type of operation</i>
- *     field contains {@code Mouse_Move} and the <i>data</i> field
- *     contains a {@link Quaternion} object.
+ *     field contains <code>Mouse_Move</code> and the <i>data</i> field
+ *     contains a {@link sensor.representation.Quaternion} object.
  * </p>
  * <p>
  *     For 2-D mouse movement operation, the <i>type of operation</i>
- *     field contains {@code Mouse_Touch} and the <i>data</i> field
- *     contains a pair of integers representing the cartesian coordinates
- *     of the mouse pointer location.
+ *     field contains <code>Mouse_Touch</code> and the <i>data</i> field
+ *     contains a pair of integers representing the displacement along the
+ *     x-axis and y-axis relative to the current mouse pointer location.
  * </p>
  * <p>
  *     For mouse button click operation, the <i>type of operation</i>
- *     field contains {@code Mouse_Button} and the <i>data</i> field
+ *     field contains <code>Mouse_Button</code> and the <i>data</i> field
  *     contains any of the following :
  *     <ul>
- *         <li>{@code left} - representing left click.</li>
- *         <li>{@code right}  - representing right click.</li>
- *         <li>{@code middle} - representing middle button click.</li>
- *         <li>{@code upscroll} - representing scroll up.</li>
- *         <li>{@code downscroll} - representing scroll down.</li>
+ *         <li><code>left</code> - representing left click.</li>
+ *         <li><code>right</code>  - representing right click.</li>
+ *         <li><code>middle</code> - representing middle button click.</li>
+ *         <li><code>upscroll</code> - representing scroll up.</li>
+ *         <li><code>downscroll</code> - representing scroll down.</li>
  *     </ul>
  * </p>
  *
- * @see Quaternion
+ * @see sensor.representation.Quaternion
  * @see device.MouseController
  * @see device.KeyboardController
  */
@@ -61,8 +61,9 @@ class DataWrapper {
 
     /**
      * Constructor. <br/>
-     * Used to create a {@code DataWrapper} for keyboard and mouse
+     * Used to create a <code>DataWrapper</code> for keyboard and mouse
      * button click operations.
+     *
      * @param operationType the <i>type of operation field</i>.
      * @param data the <i>data</i> field.
      */
@@ -73,10 +74,11 @@ class DataWrapper {
 
     /**
      * Constructor. <br/>
-     * Used to create a {@code DataWrapper} for 2-D mouse movement
-     * operation.
-     * @param x x-coordinate data.
-     * @param y y-coordinate data.
+     * Used to create a <code>DataWrapper</code> for 2-D mouse movement
+     * operation. The <i>type of operation</i> field is implicit.
+     *
+     * @param x displacement data along x-axis.
+     * @param y displacement data along y-axis.
      */
     DataWrapper(int x, int y) {
         mMoveX = x;
@@ -86,13 +88,15 @@ class DataWrapper {
 
     /**
      * Constructor. <br/>
-     * Used to create a {@code DataWrapper} for 3-D mouse movement
-     * operation.
-     * @param quaternionObject a {@link Quaternion} object.
-     * @param isInitQuat {@code true}, if {@code quaternionObject}
-     *                   is is the initial {@link Quaternion}, <br/>
-     *                   {@code false}, otherwise.
-     * @see Quaternion
+     * Used to create a <code>DataWrapper</code> for 3-D mouse movement
+     * operation. The <i>type of operation</i> field is implicit.
+     *
+     * @param quaternionObject a {@link sensor.representation.Quaternion}
+     *                         object.
+     * @param isInitQuat <code>true</code>, if <code>quaternionObject</code>
+     *                   is the initial, <br/>
+     *                   <code>false</code>, otherwise.
+     * @see sensor.representation.Quaternion
      */
     DataWrapper(Quaternion quaternionObject, boolean isInitQuat) {
         mOperationType = "Mouse_Move";
@@ -103,9 +107,9 @@ class DataWrapper {
     /**
      * Returns a JSon-string of an object.
      *
-     * @param object the input {@link Object}.
+     * @param object the input {@link java.lang.Object}.
      * @return a JSon-string
-     * @see Gson
+     * @see com.google.gson.Gson
      */
     static String getGsonString(Object object) {
         return new Gson().toJson(object);
@@ -113,14 +117,14 @@ class DataWrapper {
 
     /**
      * Returns the <i>type of operation</i> field of this
-     * {@code DataWrapper}.
+     * <code>DataWrapper</code>.
      *
      * @return the <i>type of operation</i> field.
      */
     String getOperationType() { return mOperationType; }
 
     /**
-     * Returns the <i>data</i> field of this {@code DataWrapper}
+     * Returns the <i>data</i> field of this <code>DataWrapper</code>
      * for keyboard and mouse button click operations.
      *
      * @return the <i>data</i> field.
@@ -128,33 +132,35 @@ class DataWrapper {
     String getData() { return mData; }
 
     /**
-     * Check if the stored {@link Quaternion} object is the initial
-     * one.
+     * Checks if the stored {@link sensor.representation.Quaternion}
+     * object is the initial one.
      *
-     * @return {@code true}, if it is initial, <br/>
-     *         false, otherwise.
+     * @return <code>true</code>, if it is initial, <br/>
+     *         <code>false</code>, otherwise.
      */
     boolean isInitQuat() { return mIsInitQuat; }
 
     /**
-     * Returns the {@link Quaternion} object stored in this
-     * {@code DataWrapper}.
+     * Returns the {@link sensor.representation.Quaternion} object
+     * stored in this <code>DataWrapper</code>.
      *
-     * @return the {@link Quaternion} object.
+     * @return the {@link sensor.representation.Quaternion} object.
      */
     Quaternion getQuaternionObject() { return mQuaternion; }
 
     /**
-     * Returns the x-coordinate value stored in this {@code DataWrapper}.
+     * Returns the displacement value along x-axis stored in this
+     * <code>DataWrapper</code>.
      *
-     * @return the x-coordinate.
+     * @return the displacement along x-axis.
      */
     int getX() { return mMoveX; }
 
     /**
-     * Returns the y-coordinate value stored in this {@code DataWrapper}.
+     * Returns the displacement value along y-axis stored in this
+     * <code>DataWrapper</code>.
      *
-     * @return the y-coordinate.
+     * @return the displacement along y-axis.
      */
     int getY() { return mMoveY; }
 }

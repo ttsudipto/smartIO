@@ -12,8 +12,8 @@ import java.util.Enumeration;
 import java.util.List;
 
 /**
- * Implementation of the {@link Runnable} for the thread responsible
- * for making UDP broadcasts.
+ * Implementation of the {@link java.lang.Runnable} for the thread
+ * responsible for making UDP broadcasts.
  *
  * <p>
  *     This thread continuously sends UDP broadcasts through all
@@ -25,19 +25,19 @@ import java.util.List;
  *     It is started during server start by the method
  *     {@link NetworkManager#startServer()}. It is stopped during
  *     server stop by the method {@link NetworkManager#stopServer()}.
- *     The interval between two successive broadcast is {@value TIMEOUT}
- *     ms.
+ *     The interval between two successive broadcast is
+ *     <code>1000</code> ms.
  * </p>
  * <p>
  *     This UDP broadcast is used for device discovery from the Android
  *     devices.
  * </p>
  *
- * @see Runnable
- * @see ServerInfo
- * @see Gson
- * @see NetworkManager#startServer()
- * @see NetworkManager#stopServer()
+ * @see java.lang.Runnable
+ * @see net.ServerInfo
+ * @see com.google.gson.Gson
+ * @see net.NetworkManager#startServer()
+ * @see net.NetworkManager#stopServer()
  */
 
 class BroadcastThread implements Runnable {
@@ -65,7 +65,8 @@ class BroadcastThread implements Runnable {
     /**
      * Returns the status of the broadcast.
      *
-     * @return {@code true} if broadcast is active, <br/>{@code false} otherwise.
+     * @return <code>true</code>, if broadcast is active, <br/>
+     *         <code>false</code>, otherwise.
      */
     boolean getBroadcastFlag() { return mStopFlag; }
 
@@ -82,7 +83,7 @@ class BroadcastThread implements Runnable {
      *
      * @param serverInfo the {@link ServerInfo} object containing the data to
      *                   be broadcast.
-     * @see ServerInfo
+     * @see net.ServerInfo
      */
     BroadcastThread(ServerInfo serverInfo) { mServerInfo = serverInfo; }
 

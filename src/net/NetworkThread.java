@@ -5,18 +5,18 @@ import java.awt.event.ActionEvent;
 import java.io.IOException;
 
 /**
+ * Implementation of the {@link java.lang.Runnable} of the thread that
+ * executes the network operations.
+ *
  * <p>
- *     This is the implementation of the {@link Runnable} of the thread that
- *     executes the network operations. This keeps away the network operations
- *     from the <i>Swing Event Dispatch Thread</i> and prevents the GUI to
- *     become unresponsive.
- * </p>
- * <p>
- *     This thread gets started by {@link gui.MainWindow} while performing the
- *     action of starting the server - the first possible network operation.
+ *     This keeps away the network operations from the <i>Swing Event
+ *     Dispatch Thread</i> and prevents the GUI from becoming unresponsive.
+ *     This thread gets started by {@link gui.MainWindow} while performing
+ *     the action of starting the server - the first possible network
+ *     operation.
  * </p>
  *
- * @see Runnable
+ * @see java.lang.Runnable
  * @see gui.MainWindow#actionPerformed(ActionEvent)
  */
 public class NetworkThread implements Runnable {
@@ -27,13 +27,13 @@ public class NetworkThread implements Runnable {
      * Constructor. <br/>
      * Initializes the thread.
      *
-     * @param manager the {@code NetworkManager} for this network.
-     * @see NetworkManager
+     * @param manager the {@link NetworkManager} for this network.
+     * @see net.NetworkManager
      */
     public NetworkThread(NetworkManager manager) { this.manager = manager; }
 
     /**
-     * Operations performed by this {@code NetworkThread}.
+     * Operations performed by this <code>NetworkThread</code>.
      */
     @Override
     public void run() {

@@ -14,16 +14,15 @@ import java.util.Map;
  * <p>
  *     This class creates a {@link NetworkState} which stores the information
  *     regarding the network. It provides methods for start and stop of the
- *     server. It also provides method for disconnecting a client.These
- *     methods modify the {@code NetworkState} accordingly.
+ *     server. It also provides method for disconnecting a client. These
+ *     methods modify the <code>NetworkState</code> accordingly.
  * </p>
  * <p>
- *     This class provides back-end of the network operations achieved by the
+ *     This class provides back-end of the network operations initiated by the
  *     GUI of SmartIO.
  * </p>
  *
- * @author Sudipto Bhattacharjee, Sayantan Majumdar, Abhisek Maiti
- * @see NetworkState
+ * @see net.NetworkState
  */
 public class NetworkManager {
 
@@ -35,14 +34,14 @@ public class NetworkManager {
     /**
      * Constructor.
      * <p>
-     *     This instantiates {@code NetworkState} and {@code BroadcastThread}.
-     *     The {@code BroadcastThread} is not started in the constructor.
+     *     This instantiates {@link NetworkState} and {@link BroadcastThread}.
+     *     The <code>BroadcastThread</code> is not started in the constructor.
      *     It can be started using {@link #startServer()}.
      * </p>
      *
      * @param serverInfo a {@link ServerInfo} object.
-     * @see ServerInfo
-     * @see BroadcastThread
+     * @see net.ServerInfo
+     * @see net.BroadcastThread
      * @see #startServer()
      */
     public NetworkManager(ServerInfo serverInfo) {
@@ -51,17 +50,18 @@ public class NetworkManager {
     }
 
     /**
+     * Returns the <code>NetworkState</code> of this network
+     *
      * @return The {@link NetworkState} of this network
      */
     public NetworkState getNetworkState() { return mState; }
 
     /**
      * Method to start server.
-     *
      * <p>
      *     This is achieved by executing two primary operations :
      *     <ul>
-     *         <li>Starting the {@code BroadcastThread}.</li>
+     *         <li>Starting the <code>BroadcastThread</code>.</li>
      *         <li>Calling {@link Server#listen()}.</li>
      *     </ul>
      * </p>
@@ -69,7 +69,7 @@ public class NetworkManager {
      * @throws IOException
      * @throws InterruptedException
      * @throws AWTException
-     * @see BroadcastThread
+     * @see net.BroadcastThread
      * @see Server#listen()
      */
     void startServer() throws IOException, InterruptedException, AWTException {
@@ -83,12 +83,11 @@ public class NetworkManager {
 
     /**
      * Method to stop server.
-     *
      * <p>
      *     This is achieved by executing three primary operations :
      *     <ul>
      *         <li>
-     *             Stopping {@code BroadcastThread} by calling
+     *             Stopping <code>BroadcastThread</code> by calling
      *             {@link BroadcastThread#stopBroadcast()}.
      *         </li>
      *         <li>Calling {@link Server#setStopFlag()}.</li>
@@ -102,7 +101,7 @@ public class NetworkManager {
      *
      * @throws IOException
      * @throws InterruptedException
-     * @see BroadcastThread
+     * @see net.BroadcastThread
      * @see BroadcastThread#stopBroadcast()
      * @see Server#setStopFlag()
      * @see #disconnect(InetAddress)
@@ -137,10 +136,11 @@ public class NetworkManager {
      * the connection of the client to be disconnected from the network
      * state by calling {@link NetworkState#getServerThread(InetAddress)}.
      *
-     * @param address {@link InetAddress} of the client to be disconnected
+     * @param address {@link java.net.InetAddress} of the client to be
+     *                disconnected
      * @throws IOException
      * @throws InterruptedException
-     * @see ServerThread
+     * @see net.ServerThread
      * @see NetworkState#getServerThread(InetAddress)
      */
     public void disconnect(InetAddress address) throws IOException, InterruptedException {

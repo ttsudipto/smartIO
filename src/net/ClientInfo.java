@@ -11,12 +11,12 @@ import java.net.Socket;
  *     <ul>
  *         <li>Public key of the client</li>
  *         <li>Canonical hostname of the client</li>
- *         <li>Client {@link Socket}</li>
+ *         <li>Client <code>Socket</code></li>
  *     </ul>
  * </p>
  *
- * @see Socket
- * @see ServerThread
+ * @see java.net.Socket
+ * @see net.ServerThread
  */
 
 public class ClientInfo {
@@ -28,14 +28,15 @@ public class ClientInfo {
      * Constructor.
      *
      * <p>
-     *     Initializes the {@code ClientInfo} object. The client {@link Socket}
+     *     Initializes this <code>ClientInfo</code> object. The stored
+     *     object of {@link java.net.Socket} (client <code>Socket</code>)
      *     is not initialized. It can be set by the {@link #setSocket(Socket)}
      *     method.
      * </p>
      *
      * @param clientInfo canonical hostname of the client.
      * @param publicKey public key of the client.
-     * @see Socket
+     * @see java.net.Socket
      * @see #setSocket(Socket)
      */
     public ClientInfo(String clientInfo, byte[] publicKey) {
@@ -44,16 +45,17 @@ public class ClientInfo {
     }
 
     /**
-     * Adds client {@link Socket}
+     * Adds {@link java.net.Socket} of the client.
      *
-     * @param socket the client {@link Socket} to be stored.
+     * @param socket the client {@link java.net.Socket} object to be
+     *               stored.
      */
     public void setSocket(Socket socket) { mClientSocket = socket; }
 
     /**
-     * Returns the client socket.
+     * Returns the client <code>Socket</code>.
      *
-     * @return the client {@link Socket}.
+     * @return the client {@link java.net.Socket}.
      */
     public Socket getSocket() { return mClientSocket; }
 
