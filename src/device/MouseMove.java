@@ -6,8 +6,16 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 
 /**
- * @author Sayantan Majumdar
- * @author Sudipto Bhattacharjee
+ * Provide static methods used by {@link device.MouseController} .
+ *
+ * <p>
+ *     The {@link #moveRelatively(Robot, int, int)} method takes
+ *     into account the dimension of the screen and handles the
+ *     input displacement in such a manner that the pointer
+ *     movement is proportional to the screen size.
+ * </p>
+ *
+ * @see device.MouseController
  */
 
 class MouseMove {
@@ -20,6 +28,15 @@ class MouseMove {
         sScreenHeight = (int) screenSize.getHeight();
     }
 
+    /**
+     * Method for performing mouse movement proportional to the
+     * screen size. This method is invoked by
+     * {@link device.MouseController#move(int, int)} .
+     *
+     * @param robot the {@link java.awt.Robot} object.
+     * @param relativeX displacement along x-axis.
+     * @param relativeY displacement along y-axis.
+     */
     static void moveRelatively(Robot robot, int relativeX, int relativeY) {
         int curX = MouseInfo.getPointerInfo().getLocation().x;
         int curY = MouseInfo.getPointerInfo().getLocation().y;
