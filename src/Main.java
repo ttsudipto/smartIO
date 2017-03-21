@@ -1,11 +1,11 @@
-import java.io.IOException;
-import java.awt.AWTException;
-import java.net.InetAddress;
-
-import security.EKEProvider;
-import net.NetworkManager;
 import gui.MainWindow;
+import net.NetworkManager;
 import net.ServerInfo;
+import security.EKEProvider;
+
+import java.awt.*;
+import java.io.IOException;
+import java.net.InetAddress;
 
 /**
  * @author Sudipto Bhattacharjee
@@ -20,6 +20,8 @@ class Main {
         String systemInfo = System.getProperty("user.name") + "@" + InetAddress.getLocalHost().getCanonicalHostName();
         ServerInfo serverInfo = new ServerInfo(publicKey, systemInfo);
         NetworkManager manager = new NetworkManager(serverInfo);
+        System.setProperty("awt.useSystemAAFontSettings","on");
+        System.setProperty("swing.aatext", "true");
         new MainWindow(manager);
     }
 }
