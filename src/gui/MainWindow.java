@@ -1,9 +1,12 @@
 package gui;
 
-import java.awt.Dimension;
-import java.awt.BorderLayout;
-import java.awt.Insets;
-import java.awt.GridLayout;
+import net.NetworkManager;
+import net.NetworkState;
+import net.NetworkThread;
+import net.ServerThread;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
@@ -11,21 +14,6 @@ import java.awt.event.WindowListener;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.util.List;
-
-import javax.swing.JFrame;
-import javax.swing.JList;
-import javax.swing.UIManager;
-import javax.swing.JButton;
-import javax.swing.JRadioButton;
-import javax.swing.ButtonGroup;
-import javax.swing.JPanel;
-import javax.swing.JOptionPane;
-import javax.swing.JDialog;
-
-import net.NetworkManager;
-import net.NetworkState;
-import net.NetworkThread;
-import net.ServerThread;
 
 /**
  * Defines the main window of the application.
@@ -126,7 +114,8 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
      * @see net.ServerThread
      */
     public static void showPairingKeyDialog(String title, String pairingKey, ServerThread st) {
-        String message = "Type the following pairing key to connect your phone: " + pairingKey;
+        String message = "<html>Type the following pairing key to connect your phone: <b><font face=\"Monospaced\"" +
+                " size=\"5\" " + "color=\"red\" >" + pairingKey + "</font></b></html>";
         JOptionPane option = new JOptionPane(message, JOptionPane.INFORMATION_MESSAGE);
         JDialog dialog = st.getDialog();
         try {
