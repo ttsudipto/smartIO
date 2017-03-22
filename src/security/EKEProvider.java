@@ -117,7 +117,7 @@ public class EKEProvider {
 
     private static String generatePairingKey() {
         SecureRandom random = new SecureRandom();
-        StringBuilder stringBuilder = new StringBuilder(new BigInteger(30, random).toString(32));
+        StringBuilder stringBuilder = new StringBuilder(new BigInteger(48, random).toString(32));
         for (int i = 0; i < stringBuilder.length(); i++) {
             char ch = stringBuilder.charAt(i);
             if (Character.isLetter(ch) && Character.isLowerCase(ch) && random.nextFloat() < 0.5) {
