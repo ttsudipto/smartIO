@@ -40,9 +40,6 @@ public class KeyboardController {
 
         if(s.length() == 0) {
             performAction('\n');
-        } else if(s.equals("*b")) {
-            mRobot.keyPress(KeyEvent.VK_BACK_SPACE);
-            mRobot.keyRelease(KeyEvent.VK_BACK_SPACE);
         } else {
             char[] chars = s.toCharArray();
             for (char c : chars)    performAction(c);
