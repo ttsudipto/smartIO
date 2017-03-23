@@ -3,7 +3,7 @@ import net.NetworkManager;
 import net.ServerInfo;
 import security.EKEProvider;
 
-import java.awt.*;
+import java.awt.AWTException;
 import java.io.IOException;
 import java.net.InetAddress;
 
@@ -15,7 +15,6 @@ import java.net.InetAddress;
 class Main {
 
     public static void main(String args[]) throws IOException,AWTException,InterruptedException {
-
         byte[] publicKey = new EKEProvider().getBase64EncodedPubKey();
         String systemInfo = System.getProperty("user.name") + "@" + InetAddress.getLocalHost().getCanonicalHostName();
         ServerInfo serverInfo = new ServerInfo(publicKey, systemInfo);

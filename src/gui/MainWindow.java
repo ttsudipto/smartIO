@@ -5,12 +5,25 @@ import net.NetworkState;
 import net.NetworkThread;
 import net.ServerThread;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JFrame;
+import javax.swing.JList;
+import javax.swing.UIManager;
+import javax.swing.JButton;
+import javax.swing.JRadioButton;
+import javax.swing.ButtonGroup;
+import javax.swing.JPanel;
+import javax.swing.JOptionPane;
+import javax.swing.JDialog;
+
+import java.awt.Dimension;
+import java.awt.BorderLayout;
+import java.awt.Insets;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+
 import java.io.IOException;
 import java.net.InetAddress;
 import java.util.List;

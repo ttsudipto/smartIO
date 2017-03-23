@@ -38,12 +38,15 @@ public class KeyboardController {
      */
     public void doKeyOperation(String s) {
 
-        int keyLength = s.length();
-        if(keyLength == 0) {
+        if(s.length() == 0) {
             performAction('\n');
-            return;
+        } else if(s.equals("*b")) {
+            mRobot.keyPress(KeyEvent.VK_BACK_SPACE);
+            mRobot.keyRelease(KeyEvent.VK_BACK_SPACE);
+        } else {
+            char[] chars = s.toCharArray();
+            for (char c : chars)    performAction(c);
         }
-        for (int index = 0; index < keyLength; ++index) performAction(s.charAt(index));
     }
     private void performAction(char key) {
 
