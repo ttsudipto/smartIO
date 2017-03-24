@@ -117,7 +117,7 @@ public class EKEProvider {
 
     private static String generatePairingKey() {
         SecureRandom random = new SecureRandom();
-        StringBuilder stringBuilder = new StringBuilder(new BigInteger(48, random).toString(32));
+        StringBuilder stringBuilder = new StringBuilder(new BigInteger(48, random).toString(36));
         while(stringBuilder.length() > 6) {
             stringBuilder.deleteCharAt(random.nextInt(stringBuilder.length()));
         }
