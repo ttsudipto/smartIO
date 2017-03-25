@@ -11,11 +11,10 @@ package sensor.representation;
  * <p>
  *     <b>Dot product of two vectors : </b> <br/>
  *     <i>
- *     (a<sub>1</sub>,b<sub>1</sub>,c<sub>1</sub>,d<sub>1</sub>)
- *     &midot;
+ *     (a<sub>1</sub>,b<sub>1</sub>,c<sub>1</sub>,d<sub>1</sub>) .
  *     (a<sub>2</sub>,b<sub>2</sub>,c<sub>2</sub>,d<sub>2</sub>) =
  *     a<sub>1</sub>a<sub>2</sub> + b<sub>1</sub>b<sub>2</sub> +
- *     c<sub>1</sub>c<sub>2</sub> + d<sub>1</sub>+d<sub>2</sub>
+ *     c<sub>1</sub>c<sub>2</sub> + d<sub>1</sub>d<sub>2</sub>
  *     </i>.
  * </p>
  * <p>
@@ -150,7 +149,7 @@ public class Vector4f {
      * Performs the dot product of two vectors.
      *
      * @param input the <code>Vector4f</code> to be multiplied.
-     * @return result of <code>(this &midot; input)</code>.
+     * @return result of <code>(this . input)</code>.
      */
 	float dotProduct(Vector4f input) {
 		return this.mPoints[0] * input.mPoints[0] + this.mPoints[1] * input.mPoints[1] + this.mPoints[2] * input.mPoints[2]
@@ -311,7 +310,7 @@ public class Vector4f {
 	public void w(float w) {
 		this.mPoints[3] = w;
 	}
-	
+
 	private void setXYZW(float x, float y, float z, float w) {
 		this.mPoints[0] = x;
 		this.mPoints[1] = y;

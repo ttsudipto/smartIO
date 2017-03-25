@@ -42,7 +42,7 @@ public class Cartesian2D {
     /**
      * Sets the x-coordinate of this point.
      *
-     * @param x the x-coordinate.
+     * @param y the x-coordinate.
      */
 	public void setY(double y) { this.y = y; }
 }
