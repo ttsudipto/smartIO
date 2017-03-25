@@ -1,19 +1,97 @@
 package sensor.representation;
 
 /**
- * @author Abhisek Maiti
+ * Class to represent a quaternion.
+ *
+ * <p>
+ *     A quaternion <i>H</i> may be identified with R<sup>4</sup>,
+ *     a four-dimensional vector space over the real numbers. The
+ *     elements of this basis are customarily denoted as <i>1</i>,
+ *     <i>i</i>, <i>j</i>, and <i>k</i>. Every element of <i>H</i>
+ *     can be uniquely written as a linear combination of these
+ *     basis elements, that is, as <i>a1 + bi + cj + dk</i>, where
+ *     <i>a</i>, <i>b</i>, <i>c</i>, and <i>d</i> are real
+ *     numbers.
+ * </p>
+ * <p>
+ *     If <i>a + bi + cj + dk</i> is any quaternion, then <i>a</i>
+ *     is called its scalar part and <i>bi + cj + dk</i> is called
+ *     its vector part. The scalar part of a quaternion is always
+ *     real, and the vector part is always pure imaginary.
+ * </p>
+ * <p>
+ *     Using the basis <i>1, i, j, k</i> of H it is possible to
+ *     write <i>H</i> as a set of quadruples:
+ * </p>
+ * <p>
+ *     &nbsp;&nbsp;&nbsp;&nbsp;
+ *     <b><i>H = {(a,b,c,d) | a,b,c,d &isin; R}</i></b>.
+ * </p>
+ * <p>
+ *     Then the basis elements are: <br/>
+ *     <i>1 = (1,0,0,0)</i>, <br/>
+ *     <i>i = (0,1,0,0)</i>, <br/>
+ *     <i>j = (0,0,1,0)</i>, <br/>
+ *     <i>k = (0,0,0,1)</i>. <br/>
+ * </p>
+ * <p>
+ *     <b>Addition of two quaternions : </b><br/>
+ *     <i>
+ *     (a<sub>1</sub>,b<sub>1</sub>,c<sub>1</sub>,d<sub>1</sub>) +
+ *     (a<sub>2</sub>,b<sub>2</sub>,c<sub>2</sub>,d<sub>2</sub>) =
+ *     (a<sub>1</sub>+a<sub>2</sub>, b<sub>1</sub>+b<sub>2</sub>,
+ *     c<sub>1</sub>+c<sub>2</sub>, d<sub>1</sub>+d<sub>2</sub>)
+ *     </i>.
+ * </p>
+ * <p>
+ *     <b>Multiplications of two quaternions : </b><br/>
+ *     <i>
+ *     (a<sub>1</sub>,b<sub>1</sub>,c<sub>1</sub>,d<sub>1</sub>)
+ *     (a<sub>2</sub>,b<sub>2</sub>,c<sub>2</sub>,d<sub>2</sub>) =
+ *     <br/> &nbsp;&nbsp;&nbsp;&nbsp;
+ *     (a<sub>1</sub>a<sub>2</sub> - b<sub>1</sub>b<sub>2</sub> -
+ *     c<sub>1</sub>c<sub>2</sub> - d<sub>1</sub>d<sub>2</sub>,
+ *     <br/> &nbsp;&nbsp;&nbsp;&nbsp;
+ *     a<sub>1</sub>b<sub>2</sub> + b<sub>1</sub>a<sub>2</sub> +
+ *     c<sub>1</sub>d<sub>2</sub> - d<sub>1</sub>c<sub>2</sub>,
+ *     <br/> &nbsp;&nbsp;&nbsp;&nbsp;
+ *     a<sub>1</sub>c<sub>2</sub> - b<sub>1</sub>d<sub>2</sub> +
+ *     c<sub>1</sub>a<sub>2</sub> + d<sub>1</sub>b<sub>2</sub>,
+ *     <br/> &nbsp;&nbsp;&nbsp;&nbsp;
+ *     a<sub>1</sub>d<sub>2</sub> + b<sub>1</sub>c<sub>2</sub> -
+ *     c<sub>1</sub>b<sub>2</sub> + d<sub>1</sub>a<sub>2</sub>)
+ *     </i>.
+ * </p>
+ * <p>
+ *     <b>Normalization of quaternion</b> <i>(a,b,c,d)</i> <br/>
+ *     &nbsp;&nbsp;&nbsp;&nbsp;
+ *     = <i>(a/mag, b/mag, c/mag, d/mag)</i>, <br/>
+ *     where, <br/> &nbsp;&nbsp;&nbsp;&nbsp;
+ *     <i>mag =
+ *     &radic;(a<sup>2</sup>+b<sup>2</sup>+c<sup>2</sup>+d<sup>2</sup>)</i>.
+ * </p>
+ * <p>
+ *     The sensor data for 3-D mouse movement is sent from the
+ *     mobile device is represented in the form of a
+ *     <code>Quaternion</code>.
+ * </p>
+ *
+ * @see sensor.representation.Vector4f
  */
 
 public class Quaternion extends Vector4f {
 
-	/**
-	 * For better performance update it only when it is accessed, not on every change
-	 */
+	//For better performance update it only when it is accessed, not on every change
+
 	private MatrixF4x4 mMatrix;
 	private boolean mDirty = false;
 	private Vector4f mTmpVector = new Vector4f();
 	private Quaternion mTmpQuaternion;
 
+    /**
+     * Constructor. <br/>
+     * Initializes this <code>Quaternion</code>.
+     */
 	public Quaternion() {
 		super();
 		mMatrix = new MatrixF4x4();
@@ -21,7 +99,7 @@ public class Quaternion extends Vector4f {
 	}
 
 	/**
-	 * Normalize this Quaternion
+	 * Normalizes this <code>Quaternion</code>.
 	 */
 	public void normalize() {
 		this.mDirty = true;
@@ -37,6 +115,13 @@ public class Quaternion extends Vector4f {
 		copyVec4(quat);
 	}
 
+    /**
+     * Multiplies this <code>Quaternion</code> with another.
+     *
+     * @param input <code>Quaternion</code> with which
+     *              <code>this</code> is multiplied.
+     * @param output result of <code>(this * input)</code>.
+     */
 	public void multiplyByQuat(Quaternion input, Quaternion output) {
 
 		if (input != output) {
@@ -65,6 +150,14 @@ public class Quaternion extends Vector4f {
 		this.copyVec4(mTmpQuaternion);
 	}
 
+    /**
+     * Multiples this <code>Quaternion</code> with a scalar.
+     * This overrides the {@link Vector4f#multiplyByScalar(float)}
+     * method.
+     *
+     * @param scalar the scalar.
+     * @see sensor.representation.Vector4f#multiplyByScalar(float)
+     */
 	public void multiplyByScalar(float scalar) {
 		this.mDirty = true;
 		super.multiplyByScalar(scalar);
@@ -162,6 +255,14 @@ public class Quaternion extends Vector4f {
 		setW(1);
 	}
 
+    /**
+     * Returns a <code>String</code> representing this
+     * <code>Quaternion</code>. This overrides the
+     * {@link Vector4f#toString()} method.
+     *
+     * @return <code>String</code> representing this
+     *         <code>Quaternion</code>.
+     */
 	@Override
 	public String toString() {
 		return "{X: " + getX() + ", Y:" + getY() + ", Z:" + getZ() + ", W:" + getW() + "}";
@@ -343,7 +444,14 @@ public class Quaternion extends Vector4f {
 		}
 	}
 
-	//Rotate a Vector by Quaternion
+	//
+
+    /**
+     *Rotate a 3-D vector by this <code>Quaternion</code>.
+     *
+     * @param v the {@link Vector3f} to be rotated.
+     * @return the rotated {@link Vector3f}.
+     */
 	public Vector3f rotateVector(Vector3f v) {
 		float q0 = this.mPoints[3];
 		float q1 = this.mPoints[0];
