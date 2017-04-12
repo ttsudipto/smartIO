@@ -86,6 +86,14 @@ public class NetworkState {
     ServerThread getServerThread(InetAddress ia) { return sConnectionMap.get(sAddressMap.get(ia)); }
 
     /**
+     * Checks if any client is connected.
+     *
+     * @return <code>true</code>, if no client is connected, <br/>
+     *         <code>false</code>, otherwise.
+     */
+    public boolean isNoClientConnected() { return mListModel.isEmpty(); }
+
+    /**
      * Adds a client connection to this <code>NetworkState</code>.
      *
      * @param clientInfo the {@link ClientInfo}.
