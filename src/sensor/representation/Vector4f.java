@@ -73,9 +73,9 @@ public class Vector4f {
      * @param w the w-dimension.
      */
 	public Vector4f(Vector3f vector3f, float w) {
-		this.mPoints[0] = vector3f.x();
-		this.mPoints[1] = vector3f.y();
-		this.mPoints[2] = vector3f.z();
+		this.mPoints[0] = vector3f.getX();
+		this.mPoints[1] = vector3f.getY();
+		this.mPoints[2] = vector3f.getZ();
 		this.mPoints[3] = w;
 	}
 
@@ -108,9 +108,9 @@ public class Vector4f {
 	}
 
 	public void add(Vector3f vector, float w) {
-		this.mPoints[0] += vector.x();
-		this.mPoints[1] += vector.y();
-		this.mPoints[2] += vector.z();
+		this.mPoints[0] += vector.getX();
+		this.mPoints[1] += vector.getY();
+		this.mPoints[2] += vector.getZ();
 		this.mPoints[3] += w;
 	}
 
@@ -254,63 +254,9 @@ public class Vector4f {
 		this.mPoints[3] = w;
 	}
 
-    /**
-     * Returns the X-dimension of this <code>Vector4f</code>.
-     *
-     * @return the X-dimension.
-     */
-	float x() {
-		return this.mPoints[0];
-	}
-
-    /**
-     * Returns the Y-dimension of this <code>Vector4f</code>.
-     *
-     * @return the Y-dimension.
-     */
-	float y() {
-		return this.mPoints[1];
-	}
-
-    /**
-     * Returns the Z-dimension of this <code>Vector4f</code>.
-     *
-     * @return the Z-dimension.
-     */
-	float z() {
-		return this.mPoints[2];
-	}
-
-    /**
-     * Returns the W-dimension of this <code>Vector4f</code>.
-     *
-     * @return the W-dimension.
-     */
-	public float w() {
-		return this.mPoints[3];
-	}
-
-    /**
-     * Sets the X-dimension of this <code>Vector4f</code>.
-     *
-     * @param x the X-dimension.
-     */
-	public void x(float x) {
-		this.mPoints[0] = x;
-	}
-
-	public void y(float y) {
-		this.mPoints[1] = y;
-	}
-
-	public void z(float z) {
-		this.mPoints[2] = z;
-	}
-
-	public void w(float w) {
-		this.mPoints[3] = w;
-	}
-
+	/**
+	 * Sets all four dimensions of this <code>Vector4f</code>.
+	 */
 	private void setXYZW(float x, float y, float z, float w) {
 		this.mPoints[0] = x;
 		this.mPoints[1] = y;
@@ -335,9 +281,9 @@ public class Vector4f {
      * @param w <code>float</code> representing the W-dimension.
      */
 	void copyFromV3f(Vector3f input, float w) {
-		mPoints[0] = (input.x());
-		mPoints[1] = (input.y());
-		mPoints[2] = (input.z());
+		mPoints[0] = (input.getX());
+		mPoints[1] = (input.getY());
+		mPoints[2] = (input.getZ());
 		mPoints[3] = (w);
 	}
 
