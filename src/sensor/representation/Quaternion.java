@@ -103,7 +103,8 @@ public class Quaternion extends Vector4f {
 	 */
 	public void normalize() {
 		this.mDirty = true;
-		float mag = (float) Math.sqrt(mPoints[3] * mPoints[3] + mPoints[0] * mPoints[0] + mPoints[1] * mPoints[1] + mPoints[2] * mPoints[2]);
+		float mag = (float) Math.sqrt(mPoints[3] * mPoints[3] + mPoints[0] * mPoints[0] + mPoints[1] * mPoints[1] +
+				mPoints[2] * mPoints[2]);
 		mPoints[3] = mPoints[3] / mag;
 		mPoints[0] = mPoints[0] / mag;
 		mPoints[1] = mPoints[1] / mag;

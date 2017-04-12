@@ -79,14 +79,14 @@ public class Vector3f {
 	}
 
 	public Vector3f(Vector4f vector) {
-		if (vector.w() != 0) {
-			this.mPoints[0] = vector.x() / vector.w();
-			this.mPoints[1] = vector.y() / vector.w();
-			this.mPoints[2] = vector.z() / vector.w();
+		if (vector.getW() != 0) {
+			this.mPoints[0] = vector.getX() / vector.getW();
+			this.mPoints[1] = vector.getY() / vector.getW();
+			this.mPoints[2] = vector.getZ() / vector.getW();
 		} else {
-			this.mPoints[0] = vector.x();
-			this.mPoints[1] = vector.y();
-			this.mPoints[2] = vector.z();
+			this.mPoints[0] = vector.getX();
+			this.mPoints[1] = vector.getY();
+			this.mPoints[2] = vector.getZ();
 		}
 	}
 
@@ -191,45 +191,6 @@ public class Vector3f {
      * @param z the Z-dimension
      */
 	void setZ(float z) {
-		this.mPoints[2] = z;
-	}
-
-    /**
-     * Returns the X-dimension of this <code>Vector3f</code>.
-     *
-     * @return the X-dimension.
-     */
-	float x() {
-		return this.mPoints[0];
-	}
-
-    /**
-     * Returns the Y-dimension of this <code>Vector3f</code>.
-     *
-     * @return the Y-dimension.
-     */
-	float y() {
-		return this.mPoints[1];
-	}
-
-    /**
-     * Returns the Z-dimension of this <code>Vector3f</code>.
-     *
-     * @return the Z-dimension.
-     */
-	float z() {
-		return this.mPoints[2];
-	}
-
-	public void x(float x) {
-		this.mPoints[0] = x;
-	}
-
-	public void y(float y) {
-		this.mPoints[1] = y;
-	}
-
-	public void z(float z) {
 		this.mPoints[2] = z;
 	}
 
