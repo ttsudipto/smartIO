@@ -20,8 +20,16 @@ import java.security.cert.CertificateException;
 import java.util.prefs.Preferences;
 
 /**
- * @author Abhisek Maiti
- * @author Sayantan Majumdar
+ * Class representing the <code>KeyStore</code> module.<br/>
+ *
+ * This class provides the following features:
+ * <ul>
+ *     <li>Store private key.</li>
+ *     <li>
+ *         Store a self-signed certificate that contains the public key and the digital signature.
+ *     </li>
+ * </ul>
+ * The keystore is protected by a randomly generated password.
  */
 class KeyStoreManager {
 
@@ -32,17 +40,43 @@ class KeyStoreManager {
 	private static final String KEY_STORE_PASSWORD = generateKSPassword();
 	private static final String KEY_STORE_NAME = "remouse_keystore";
 
+	/**
+	 * Constructor.
+	 * Initializes this <code>KeyStoreManager</code>.
+	 * @throws CertificateException
+	 * @throws NoSuchAlgorithmException
+	 * @throws KeyStoreException
+	 * @throws IOException
+	 */
 	KeyStoreManager() throws CertificateException, NoSuchAlgorithmException, KeyStoreException, IOException {
 		mKeyStore = KeyStore.getInstance(KEY_STORE_TYPE);
 		mKeyStore.load(null, KEY_STORE_PASSWORD.toCharArray());
 	}
 
+    /**
+     * Stores the private key in the keystore.
+     * @param privateKey the <code>PrivateKey</code> object.
+     * @param cert the <code>Certificate</code> object(s).
+     * @throws KeyStoreException
+     * @throws IOException
+     * @throws CertificateException
+     * @throws NoSuchAlgorithmException
+     */
 	void setMasterKey(PrivateKey privateKey, Certificate ...cert) throws KeyStoreException, IOException, CertificateException, NoSuchAlgorithmException {
 		KeyStore.PrivateKeyEntry privateKeyEntry = new KeyStore.PrivateKeyEntry(privateKey, cert);
 		mKeyStore.setEntry(KEY_STORE_ALIAS, privateKeyEntry,new KeyStore.PasswordProtection(KEY_STORE_PASSWORD.toCharArray()));
         mKeyStore.store(new FileOutputStream(KEY_STORE_NAME), KEY_STORE_PASSWORD.toCharArray());
     }
 
+    /**
+     * Get private and public key pair.
+     * @return <code>KeyPair</code> object.
+     * @throws IOException
+     * @throws KeyStoreException
+     * @throws CertificateException
+     * @throws NoSuchAlgorithmException
+     * @throws UnrecoverableEntryException
+     */
 	static KeyPair getKSKeyPair() throws IOException, KeyStoreException, CertificateException, NoSuchAlgorithmException, UnrecoverableEntryException {
 		FileInputStream fis = new FileInputStream(KEY_STORE_NAME);
 
@@ -57,6 +91,11 @@ class KeyStoreManager {
         return null;
     }
 
+    /**
+     * Returns <code>true</code> if the keystore exists, <code>false</code> otherwise.
+     * @return <code>true</code> if the keystore exists, <br/>
+     *         <code>false</code> otherwise.
+     */
     static boolean keyStoreExists() { return new File(KEY_STORE_NAME).exists(); }
 
     private static String generateKSPassword() {
