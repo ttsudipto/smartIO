@@ -26,9 +26,6 @@ public class ServerInfo {
     private String mServerInfo;
     private String mAddress;
     private boolean mStopFlag;
-    private boolean mIsSelected;
-
-    static final int SERVER_INFO_LENGTH = 600;
 
     /**
      * Constructor. <br/>
@@ -62,7 +59,6 @@ public class ServerInfo {
     }
 
     void setServerAddress(String address) { mAddress = address; }
-    public void setSelected( boolean value) { mIsSelected = value; }
 
     /**
      * Sets the status of the <i>broadcast</i> as <i>inactive</i>.
@@ -75,7 +71,6 @@ public class ServerInfo {
     void clearStopFlag() { mStopFlag = false; }
 
     public boolean getStopFlag() { return mStopFlag; }
-    public boolean isSelected() { return mIsSelected; }
     public byte[] getServerPubKey() { return mServerPubKey; }
     public String getServerInfo() { return mServerInfo; }
     public String getAddress() { return mAddress; }

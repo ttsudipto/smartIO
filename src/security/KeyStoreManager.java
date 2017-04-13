@@ -27,8 +27,6 @@ class KeyStoreManager {
 
 	private KeyStore mKeyStore;
 
-	private static Certificate sCertificate;
-
 	private static final String KEY_STORE_TYPE = "pkcs12";
 	private static final String KEY_STORE_ALIAS = "Remouse KeyStore";
 	private static final String KEY_STORE_PASSWORD = generateKSPassword();
@@ -53,8 +51,7 @@ class KeyStoreManager {
 
         Key key = keyStore.getKey(KEY_STORE_ALIAS, KEY_STORE_PASSWORD.toCharArray());
         if(key instanceof PrivateKey) {
-            sCertificate = keyStore.getCertificate(KEY_STORE_ALIAS);
-            PublicKey publicKey = sCertificate.getPublicKey();
+            PublicKey publicKey = keyStore.getCertificate(KEY_STORE_ALIAS).getPublicKey();
             return new KeyPair(publicKey, (PrivateKey) key);
         }
         return null;
