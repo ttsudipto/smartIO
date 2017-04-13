@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import java.math.BigInteger;
 import java.security.Key;
 import java.security.KeyPair;
 import java.security.KeyStore;
@@ -12,9 +13,11 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
+import java.security.SecureRandom;
 import java.security.UnrecoverableEntryException;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
+import java.util.prefs.Preferences;
 
 /**
  * @author Abhisek Maiti
@@ -28,7 +31,7 @@ class KeyStoreManager {
 
 	private static final String KEY_STORE_TYPE = "pkcs12";
 	private static final String KEY_STORE_ALIAS = "Remouse KeyStore";
-	private static final String KEY_STORE_PASSWORD = "foo";
+	private static final String KEY_STORE_PASSWORD = generateKSPassword();
 	private static final String KEY_STORE_NAME = "remouse_keystore";
 
 	KeyStoreManager() throws CertificateException, NoSuchAlgorithmException, KeyStoreException, IOException {
@@ -58,5 +61,25 @@ class KeyStoreManager {
     }
 
     static boolean keyStoreExists() { return new File(KEY_STORE_NAME).exists(); }
-    static String getCert() { return sCertificate.toString(); }
+
+    private static String generateKSPassword() {
+		Preferences preferences = Preferences.userNodeForPackage(KeyStoreManager.class);
+		String password = preferences.get("Password", null);
+		if(password == null) {
+			SecureRandom random = new SecureRandom();
+			StringBuilder stringBuilder = new StringBuilder(new BigInteger(36, 0, random).toString(Character.MAX_RADIX));
+			while (stringBuilder.length() > 6) {
+				stringBuilder.deleteCharAt(random.nextInt(stringBuilder.length()));
+			}
+			for (int i = 0; i < stringBuilder.length(); i++) {
+				char ch = stringBuilder.charAt(i);
+				if (Character.isLetter(ch) && Character.isLowerCase(ch) && random.nextFloat() < 0.5) {
+					stringBuilder.setCharAt(i, Character.toUpperCase(ch));
+				}
+			}
+			password = stringBuilder.toString();
+			preferences.put("Password", password);
+		}
+		return password;
+	}
 }
