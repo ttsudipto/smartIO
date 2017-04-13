@@ -58,6 +58,7 @@ class DataWrapper {
     private boolean mIsInitQuat;
     private int mMoveX;
     private int mMoveY;
+    private float mSensitivity;
 
     /**
      * Constructor. <br/>
@@ -79,10 +80,12 @@ class DataWrapper {
      *
      * @param x displacement data along x-axis.
      * @param y displacement data along y-axis.
+     * @param sensitivity mouse movement sensitivity
      */
-    DataWrapper(int x, int y) {
+    DataWrapper(int x, int y, float sensitivity) {
         mMoveX = x;
         mMoveY = y;
+        mSensitivity = sensitivity;
         mOperationType = "Mouse_Touch";
     }
 
@@ -96,11 +99,13 @@ class DataWrapper {
      * @param isInitQuat <code>true</code>, if <code>quaternionObject</code>
      *                   is the initial, <br/>
      *                   <code>false</code>, otherwise.
+     * @param sensitivity mouse movement sensitivity
      * @see sensor.representation.Quaternion
      */
-    DataWrapper(Quaternion quaternionObject, boolean isInitQuat) {
+    DataWrapper(Quaternion quaternionObject, boolean isInitQuat, float sensitivity) {
         mOperationType = "Mouse_Move";
         mIsInitQuat = isInitQuat;
+        mSensitivity = sensitivity;
         mQuaternion = quaternionObject;
     }
 
@@ -163,4 +168,11 @@ class DataWrapper {
      * @return the displacement along y-axis.
      */
     int getY() { return mMoveY; }
+
+    /**
+     * Returns the mouse movement sensitivity value stored in this
+     * <code>DataWrapper</code>
+     * @return the mouse movement sensitivity
+     */
+    float getSensitivity() { return mSensitivity; }
 }

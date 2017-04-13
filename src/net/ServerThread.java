@@ -250,11 +250,11 @@ public class ServerThread implements Runnable {
                         break;
 
                     case "Mouse_Move":
-                        mMouseController.move(dataWrapper.getQuaternionObject(), dataWrapper.isInitQuat());
+                        mMouseController.move(dataWrapper.getQuaternionObject(), dataWrapper.isInitQuat(), dataWrapper.getSensitivity());
                         break;
 
                     case "Mouse_Touch":
-                        mMouseController.move(dataWrapper.getX(), dataWrapper.getY());
+                        mMouseController.move(dataWrapper.getX(), dataWrapper.getY(), dataWrapper.getSensitivity());
                         break;
 
                     case "Mouse_Button":

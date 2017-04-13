@@ -19,19 +19,19 @@ import java.awt.event.InputEvent;
  *    generated in the platform's native input queue.
  * </p>
  * <p>
- *     The {@link #move(Quaternion, boolean)} and
- *     {@link #move(int, int)} methods are invoked for moving the
+ *     The {@link #move(Quaternion, boolean, float)} and
+ *     {@link #move(int, int, float)} methods are invoked for moving the
  *     mouse pointer on the basis of 3-D and 2-D inputs from the
- *     mobile device respectively. The {@link #move(Quaternion, boolean)}
+ *     mobile device respectively. The {@link #move(Quaternion, boolean, float)}
  *     method, in turn, calls the
- *     {@link MouseMove#moveRelatively(Robot, int, int)} method.
+ *     {@link MouseMove#moveRelatively(Robot, int, int, float)} method.
  *     The mouse button inputs are performed by invoking the
  *     {@link #doOperation(String)} method.
  * </p>
  *
  * @see java.awt.Robot
  * @see sensor.representation.Quaternion
- * @see device.MouseMove#moveRelatively(Robot, int, int)
+ * @see device.MouseMove#moveRelatively(Robot, int, int, float)
  */
 
 public class MouseController {
@@ -61,9 +61,9 @@ public class MouseController {
      *                   initial, <br/>
      *                   <code>false</code>, otherwise.
      */
-    public void move(Quaternion quaternion, boolean isInitQuat) {
+    public void move(Quaternion quaternion, boolean isInitQuat, float sensitivity) {
         if(isInitQuat) {
-            mSensorDataHandler = new SensorDataHandler(quaternion,2000.0f);
+            mSensorDataHandler = new SensorDataHandler(quaternion,sensitivity);
         }
         Cartesian2D cartesian2D = mSensorDataHandler.pointerUpdate(quaternion);
         int x = MouseInfo.getPointerInfo().getLocation().x;
@@ -80,9 +80,7 @@ public class MouseController {
      * @param relativeX displacement along x-axis.
      * @param relativeY displacement along y-axis.
      */
-    public void move(int relativeX, int relativeY) {
-        MouseMove.moveRelatively(mRobot, relativeX, relativeY);
-    }
+    public void move(int relativeX, int relativeY, float sensitivity) { MouseMove.moveRelatively(mRobot, relativeX, relativeY, sensitivity); }
 
     /**
      * Method to perform mouse button click operations.
