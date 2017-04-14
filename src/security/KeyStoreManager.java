@@ -20,16 +20,25 @@ import java.security.cert.CertificateException;
 import java.util.prefs.Preferences;
 
 /**
- * Class representing the <code>KeyStore</code> module.<br/>
+ * Manages the operations on the <code>KeyStore</code>.
  *
- * This class provides the following features:
- * <ul>
- *     <li>Store private key.</li>
- *     <li>
- *         Store a self-signed certificate that contains the public key and the digital signature.
- *     </li>
- * </ul>
- * The keystore is protected by a randomly generated password.
+ * <p>
+ *     This class provides a {@link java.security.KeyStore} which stores :
+ *     <ul>
+ *         <li> The private key ({@link java.security.PrivateKey}).</li>
+ *         <li>
+ *             A self-signed certificate ({@link java.security.cert.Certificate})
+ *             that contains the public key and the digital signature.
+ *         </li>
+ *     </ul>
+ *     The <code>KeyStore</code> is protected by a randomly generated
+ *     password.
+ * </p>
+ *
+ * @see security.EKEProvider
+ * @see java.security.KeyStore
+ * @see java.security.KeyPair
+ * @see java.security.cert.Certificate
  */
 class KeyStoreManager {
 
@@ -41,8 +50,9 @@ class KeyStoreManager {
 	private static final String KEY_STORE_NAME = "remouse_keystore";
 
 	/**
-	 * Constructor.
+	 * Constructor. <br/>
 	 * Initializes this <code>KeyStoreManager</code>.
+     *
 	 * @throws CertificateException
 	 * @throws NoSuchAlgorithmException
 	 * @throws KeyStoreException
@@ -54,9 +64,11 @@ class KeyStoreManager {
 	}
 
     /**
-     * Stores the private key in the keystore.
-     * @param privateKey the <code>PrivateKey</code> object.
-     * @param cert the <code>Certificate</code> object(s).
+     * Method to store the private key and the certificate in the
+     * <code>KeyStore</code>.
+     *
+     * @param privateKey the {@link java.security.PrivateKey} object.
+     * @param cert the {@link java.security.cert.Certificate} object(s).
      * @throws KeyStoreException
      * @throws IOException
      * @throws CertificateException
@@ -69,8 +81,9 @@ class KeyStoreManager {
     }
 
     /**
-     * Get private and public key pair.
-     * @return <code>KeyPair</code> object.
+     * Returns the  private-public key pair.
+     * .
+     * @return {@link java.security.KeyPair} object.
      * @throws IOException
      * @throws KeyStoreException
      * @throws CertificateException
@@ -92,9 +105,10 @@ class KeyStoreManager {
     }
 
     /**
-     * Returns <code>true</code> if the keystore exists, <code>false</code> otherwise.
-     * @return <code>true</code> if the keystore exists, <br/>
-     *         <code>false</code> otherwise.
+     * Checks if a <code>KeyStore</code> exists.
+     *
+     * @return <code>true</code>, if the <code>KeyStore</code> exists, <br/>
+     *         <code>false</code>, otherwise.
      */
     static boolean keyStoreExists() { return new File(KEY_STORE_NAME).exists(); }
 

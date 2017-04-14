@@ -46,6 +46,13 @@ public class KeyboardController {
         }
     }
 
+    /**
+     * Method to perform keyboard input operations
+     * for different function keys.
+     *
+     * @param s <code>String</code> representing the
+     *          key to be pressed.
+     */
     public void doSpecialKeyOperation(String s) {
         switch (s) {
             case "Ctrl_On":

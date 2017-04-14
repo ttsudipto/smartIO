@@ -17,9 +17,10 @@ import sensor.representation.Quaternion;
  * </p>
  * <p>
  *     For keyboard input, the <i>type of operation</i> field contains
- *     <code>Key</code> and the <i>data</i> field contains the sequence
- *     of characters and keyboard strokes for input.In case of special
- *     keys, the <code>data</code> field contains the special key type.
+ *     <code>Key</code> or <code>Special_Key</code>. The <i>data</i>
+ *     field contains the sequence of characters and keyboard strokes
+ *     for input. In case of special keys, the <i>data</i> field
+ *     contains the special key identifier.
  * </p>
  * <p>
  *     For 3-D mouse movement operation, the <i>type of operation</i>
