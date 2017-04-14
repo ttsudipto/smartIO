@@ -45,6 +45,109 @@ public class KeyboardController {
             for (char c : chars)    performAction(c);
         }
     }
+
+    public void doSpecialKeyOperation(String s) {
+        switch (s) {
+            case "Ctrl_On":
+                mRobot.keyPress(KeyEvent.VK_CONTROL);
+                break;
+
+            case "Ctrl_Off":
+                mRobot.keyRelease(KeyEvent.VK_CONTROL);
+                break;
+
+            case "Alt_On":
+                mRobot.keyPress(KeyEvent.VK_ALT);
+                break;
+
+            case "Alt_Off":
+                mRobot.keyRelease(KeyEvent.VK_ALT);
+                break;
+
+            case "Shift_On":
+                mRobot.keyPress(KeyEvent.VK_SHIFT);
+                break;
+
+            case "Shift_Off":
+                mRobot.keyRelease(KeyEvent.VK_SHIFT);
+                break;
+
+            case "Del":
+                performSpecialAction(KeyEvent.VK_DELETE);
+                break;
+
+            case "Esc":
+                performSpecialAction(KeyEvent.VK_ESCAPE);
+                break;
+
+            case "Tab":
+                performSpecialAction(KeyEvent.VK_TAB);
+                break;
+
+            case "F1":
+                performSpecialAction(KeyEvent.VK_F1);
+                break;
+
+            case "F2":
+                performSpecialAction(KeyEvent.VK_F2);
+                break;
+
+            case "F3":
+                performSpecialAction(KeyEvent.VK_F3);
+                break;
+
+            case "F4":
+                performSpecialAction(KeyEvent.VK_F4);
+                break;
+
+            case "F5":
+                performSpecialAction(KeyEvent.VK_F5);
+                break;
+
+            case "F6":
+                performSpecialAction(KeyEvent.VK_F6);
+                break;
+
+            case "F7":
+                performSpecialAction(KeyEvent.VK_F7);
+                break;
+
+            case "F8":
+                performSpecialAction(KeyEvent.VK_F8);
+                break;
+
+            case "F9":
+                performSpecialAction(KeyEvent.VK_F9);
+                break;
+
+            case "F10":
+                performSpecialAction(KeyEvent.VK_F10);
+                break;
+
+            case "F11":
+                performSpecialAction(KeyEvent.VK_F11);
+                break;
+
+            case "F12":
+                performSpecialAction(KeyEvent.VK_F12);
+                break;
+
+            case "Up":
+                performSpecialAction(KeyEvent.VK_UP);
+                break;
+
+            case "Down":
+                performSpecialAction(KeyEvent.VK_DOWN);
+                break;
+
+            case "Left":
+                performSpecialAction(KeyEvent.VK_LEFT);
+                break;
+
+            case "Right":
+                performSpecialAction(KeyEvent.VK_RIGHT);
+        }
+    }
     private void performAction(char key) {
 
         if(KeyCode.isShiftKey(key)) {
@@ -68,5 +171,10 @@ public class KeyboardController {
         mRobot.keyPress(keyCode);
         mRobot.keyRelease(keyCode);
         mRobot.keyRelease(KeyEvent.VK_SHIFT);
+    }
+
+    private void performSpecialAction(int keyCode) {
+        mRobot.keyPress(keyCode);
+        mRobot.keyRelease(keyCode);
     }
 }

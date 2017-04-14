@@ -263,6 +263,10 @@ public class ServerThread implements Runnable {
 
                     case "Key":
                         mKeyboardController.doKeyOperation(dataWrapper.getData());
+                        break;
+
+                    case "Special_Key":
+                        mKeyboardController.doSpecialKeyOperation(dataWrapper.getData());
                 }
             }
         } catch (IOException e) {
