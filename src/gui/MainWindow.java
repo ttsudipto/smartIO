@@ -42,6 +42,7 @@ import java.util.List;
  *         <li>
  *             A disconnect button for disconnecting the selected client.
  *         </li>
+ *         <li>A button form displaying a 3D demo.</li>
  *     </ul>
  *     It also implements <code>ActionListener</code> for these elements
  *     and <code>WindowListener</code> for graceful termination of the
