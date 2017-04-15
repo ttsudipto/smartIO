@@ -9,6 +9,7 @@ import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.awt.GLCanvas;
 import com.jogamp.opengl.glu.GLU;
 import com.jogamp.opengl.util.FPSAnimator;
+import sensor.representation.Quaternion;
 
 import javax.swing.JFrame;
 import java.awt.event.WindowAdapter;
@@ -20,11 +21,16 @@ import static com.jogamp.opengl.GL.GL_SRC_ALPHA;
 public class Cube implements GLEventListener {
 
 	private GLU mGlu = new GLU();
-	private float mRquad = 0.0f;
+	//private float mRquad = 0.0f;
 	private JFrame mJFrame;
 	private boolean mStarted;
 
 	Cube() { mStarted = false; }
+
+	//Please modify This method accordingly
+	private Quaternion getQuaternion() {
+		return new Quaternion();
+	}
 
 	@Override
 	public void display(GLAutoDrawable drawable) {
@@ -33,8 +39,10 @@ public class Cube implements GLEventListener {
 		gl.glLoadIdentity();
 		gl.glTranslatef( 0f, 0f, -7f );
 
+		Quaternion mQuat = getQuaternion();
+
 		// Rotate The Cube On X, Y & Z i.e. pass quaternion as argument
-		gl.glRotatef(mRquad, 1.0f, 1.0f, 1.0f);
+		gl.glRotatef(mQuat.getW(), mQuat.getX(), mQuat.getY(), mQuat.getZ());
 
 		//giving different colors to different sides
 		gl.glBegin(GL2.GL_QUADS); // Start Drawing The Cube
@@ -75,8 +83,6 @@ public class Cube implements GLEventListener {
 		gl.glVertex3f( 1.0f, -1.0f, -1.0f ); // Bottom Right Of The Quad
 		gl.glEnd(); // Done Drawing The Quad
 		gl.glFlush();
-
-		mRquad = ((mRquad + 1.0f) % 360);
 	}
 
 	@Override
