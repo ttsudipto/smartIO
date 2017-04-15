@@ -38,14 +38,14 @@ public class Vector3f {
 
 	private float[] mPoints = new float[3];
 
-    /**
-     * Constructor. <br/>
-     * Creates the <code>Vector3f (x,y,z)</code>.
-     *
-     * @param x the X-dimension.
-     * @param y the Y-dimension.
-     * @param z the Z-dimension.
-     */
+	/**
+	 * Constructor. <br/>
+	 * Creates the <code>Vector3f (x,y,z)</code>.
+	 *
+	 * @param x the X-dimension.
+	 * @param y the Y-dimension.
+	 * @param z the Z-dimension.
+	 */
 	public Vector3f(float x, float y, float z) {
 		this.mPoints[0] = x;
 		this.mPoints[1] = y;
@@ -58,20 +58,20 @@ public class Vector3f {
 		this.mPoints[2] = value;
 	}
 
-    /**
-     * Constructor. <br/>
-     * Default constructor.
-     */
+	/**
+	 * Constructor. <br/>
+	 * Default constructor.
+	 */
 	public Vector3f() {
 	}
 
-    /**
-     * Constructor. <br/>
-     * Copy constructor. Copies another <code>Vector3f</code> to
-     * this one.
-     *
-     * @param vector the <code>Vector3f</code> to be copied.
-     */
+	/**
+	 * Constructor. <br/>
+	 * Copy constructor. Copies another <code>Vector3f</code> to
+	 * this one.
+	 *
+	 * @param vector the <code>Vector3f</code> to be copied.
+	 */
 	public Vector3f(Vector3f vector) {
 		this.mPoints[0] = vector.mPoints[0];
 		this.mPoints[1] = vector.mPoints[1];
@@ -90,11 +90,11 @@ public class Vector3f {
 		}
 	}
 
-    /**
-     * Returns the array representation of this <code>Vector3f</code>.
-     *
-     * @return the array <code>[ X, Y, Z ]</code>.
-     */
+	/**
+	 * Returns the array representation of this <code>Vector3f</code>.
+	 *
+	 * @return the array <code>[ X, Y, Z ]</code>.
+	 */
 	float[] toArray() {
 		return this.mPoints;
 	}
@@ -117,20 +117,20 @@ public class Vector3f {
 		this.mPoints[2] -= subtrahend.mPoints[2];
 	}
 
-    /**
-     * Multiples this <code>Vector3f</code> with a scalar.
-     * .
-     * @param scalar the scalar.
-     */
+	/**
+	 * Multiples this <code>Vector3f</code> with a scalar.
+	 * .
+	 * @param scalar the scalar.
+	 */
 	public void multiplyByScalar(float scalar) {
 		this.mPoints[0] *= scalar;
 		this.mPoints[1] *= scalar;
 		this.mPoints[2] *= scalar;
 	}
 
-    /**
-     * Normalizes this <code>Vector3f</code>.
-     */
+	/**
+	 * Normalizes this <code>Vector3f</code>.
+	 */
 	public void normalize() {
 
 		double a = Math.sqrt(mPoints[0] * mPoints[0] + mPoints[1] * mPoints[1] + mPoints[2] * mPoints[2]);
@@ -140,79 +140,79 @@ public class Vector3f {
 
 	}
 
-    /**
-     * Returns the X-dimension of this <code>Vector3f</code>.
-     *
-     * @return the X-dimension.
-     */
+	/**
+	 * Returns the X-dimension of this <code>Vector3f</code>.
+	 *
+	 * @return the X-dimension.
+	 */
 	public float getX() {
 		return mPoints[0];
 	}
 
-    /**
-     * Returns the Y-dimension of this <code>Vector3f</code>.
-     *
-     * @return the Y-dimension.
-     */
+	/**
+	 * Returns the Y-dimension of this <code>Vector3f</code>.
+	 *
+	 * @return the Y-dimension.
+	 */
 	public float getY() {
 		return mPoints[1];
 	}
 
-    /**
-     * Returns the Z-dimension of this <code>Vector3f</code>.
-     *
-     * @return the Z-dimension.
-     */
+	/**
+	 * Returns the Z-dimension of this <code>Vector3f</code>.
+	 *
+	 * @return the Z-dimension.
+	 */
 	public float getZ() {
 		return mPoints[2];
 	}
 
-    /**
-     * Sets the X-dimension of this <code>Vector3f</code>.
-     *
-     * @param x the X-dimension
-     */
+	/**
+	 * Sets the X-dimension of this <code>Vector3f</code>.
+	 *
+	 * @param x the X-dimension
+	 */
 	void setX(float x) {
 		this.mPoints[0] = x;
 	}
 
-    /**
-     * Sets the Y-dimension of this <code>Vector3f</code>.
-     *
-     * @param y the Y-dimension
-     */
+	/**
+	 * Sets the Y-dimension of this <code>Vector3f</code>.
+	 *
+	 * @param y the Y-dimension
+	 */
 	void setY(float y) {
 		this.mPoints[1] = y;
 	}
 
-    /**
-     * Sets the Z-dimension of this <code>Vector3f</code>.
-     *
-     * @param z the Z-dimension
-     */
+	/**
+	 * Sets the Z-dimension of this <code>Vector3f</code>.
+	 *
+	 * @param z the Z-dimension
+	 */
 	void setZ(float z) {
 		this.mPoints[2] = z;
 	}
 
-    /**
-     * Sets this <code>Vector3f</code> as <code>(x,y,z)</code>.
-     *
-     * @param x the X-dimension.
-     * @param y the Y-dimension.
-     * @param z the Z-dimension.
-     */
+	/**
+	 * Sets this <code>Vector3f</code> as <code>(x,y,z)</code>.
+	 *
+	 * @param x the X-dimension.
+	 * @param y the Y-dimension.
+	 * @param z the Z-dimension.
+	 */
 	public void setXYZ(float x, float y, float z) {
 		this.mPoints[0] = x;
 		this.mPoints[1] = y;
 		this.mPoints[2] = z;
 	}
 
-    /**
-     * Performs the dot product of two vectors.
-     *
-     * @param inputVec the <code>Vector3f</code> to be multiplied.
-     * @return result of <code>(this . inputVec)</code>.
-     */
+	/**
+	 * Performs the dot product of two vectors.
+	 *
+	 * @param inputVec the <code>Vector3f</code> to be multiplied.
+	 * @return result of <code>(this . inputVec)</code>.
+	 */
 	public float dotProduct(Vector3f inputVec) {
 		return mPoints[0] * inputVec.mPoints[0] + mPoints[1] * inputVec.mPoints[1] + mPoints[2] * inputVec.mPoints[2];
 
@@ -228,14 +228,14 @@ public class Vector3f {
 		return (float) Math.sqrt(mPoints[0] * mPoints[0] + mPoints[1] * mPoints[1] + mPoints[2] * mPoints[2]);
 	}
 
-    /**
-     * Returns the <code>String</code> representation of this <code>
-     * Vector3f</code>. <br/>
-     * It overrides the {@link java.lang.Object#toString()} method.
-     *
-     * @return <code>String</code> representing this
-     *         <code>Vector3f</code>.
-     */
+	/**
+	 * Returns the <code>String</code> representation of this <code>
+	 * Vector3f</code>. <br/>
+	 * It overrides the {@link java.lang.Object#toString()} method.
+	 *
+	 * @return <code>String</code> representing this
+	 *         <code>Vector3f</code>.
+	 */
 	@Override
 	public String toString() {
 		return "X:" + mPoints[0] + " Y:" + mPoints[1] + " Z:" + mPoints[2];

@@ -94,10 +94,10 @@ public class Quaternion extends Vector4f {
 	private Vector4f mTmpVector = new Vector4f();
 	private Quaternion mTmpQuaternion;
 
-    /**
-     * Constructor. <br/>
-     * Initializes this <code>Quaternion</code>.
-     */
+	/**
+	 * Constructor. <br/>
+	 * Initializes this <code>Quaternion</code>.
+	 */
 	public Quaternion() {
 		super();
 		mMatrix = new MatrixF4x4();
@@ -127,13 +127,13 @@ public class Quaternion extends Vector4f {
 		copyVec4(quat);
 	}
 
-    /**
-     * Multiplies this <code>Quaternion</code> with another.
-     *
-     * @param input <code>Quaternion</code> with which
-     *              <code>this</code> is multiplied.
-     * @param output result of <code>(this * input)</code>.
-     */
+	/**
+	 * Multiplies this <code>Quaternion</code> with another.
+	 *
+	 * @param input <code>Quaternion</code> with which
+	 *              <code>this</code> is multiplied.
+	 * @param output result of <code>(this * input)</code>.
+	 */
 	public void multiplyByQuat(Quaternion input, Quaternion output) {
 
 		if (input != output) {
@@ -157,7 +157,7 @@ public class Quaternion extends Vector4f {
 	/**
 	 * Multiply this quaternion by the input quaternion
 	 *
-	 * @param input
+	 * @param input Quaternion to be multiplied with
 	 */
 	public void multiplyByQuat(Quaternion input) {
 		this.mDirty = true;
@@ -167,14 +167,14 @@ public class Quaternion extends Vector4f {
 		this.copyVec4(mTmpQuaternion);
 	}
 
-    /**
-     * Multiples this <code>Quaternion</code> with a scalar.
-     * This overrides the {@link Vector4f#multiplyByScalar(float)}
-     * method.
-     *
-     * @param scalar the scalar.
-     * @see sensor.representation.Vector4f#multiplyByScalar(float)
-     */
+	/**
+	 * Multiples this <code>Quaternion</code> with a scalar.
+	 * This overrides the {@link Vector4f#multiplyByScalar(float)}
+	 * method.
+	 *
+	 * @param scalar the scalar.
+	 * @see sensor.representation.Vector4f#multiplyByScalar(float)
+	 */
 	public void multiplyByScalar(float scalar) {
 		this.mDirty = true;
 		super.multiplyByScalar(scalar);
@@ -310,14 +310,14 @@ public class Quaternion extends Vector4f {
 		setW(1);
 	}
 
-    /**
-     * Returns a <code>String</code> representing this
-     * <code>Quaternion</code>. This overrides the
-     * {@link Vector4f#toString()} method.
-     *
-     * @return <code>String</code> representing this
-     *         <code>Quaternion</code>.
-     */
+	/**
+	 * Returns a <code>String</code> representing this
+	 * <code>Quaternion</code>. This overrides the
+	 * {@link Vector4f#toString()} method.
+	 *
+	 * @return <code>String</code> representing this
+	 *         <code>Quaternion</code>.
+	 */
 	@Override
 	public String toString() {
 		return "{X: " + getX() + ", Y:" + getY() + ", Z:" + getZ() + ", W:" + getW() + "}";
@@ -497,13 +497,13 @@ public class Quaternion extends Vector4f {
 	}
 
 	/**
-	 * Get a linear interpolation between this quaternion and the input quaternion, storing the result in the output
-	 * quaternion.
+	 * Get a linear interpolation between this quaternion and the input quaternion, storing the
+	 * result in the output quaternion.
 	 *
 	 * @param input The quaternion to be slerped with this quaternion.
 	 * @param output The quaternion to store the result in.
-	 * @param t The ratio between the two quaternions where 0 <= t <= 1.0 . Increase value of t will bring rotation
-	 *            closer to the input quaternion.
+	 * @param t The ratio between the two quaternions where 0 <= t <= 1.0 . Increase value of t will
+	 * bring rotation closer to the input quaternion.
 	 */
 	public void slerp(Quaternion input, Quaternion output, float t) {
 		// Calculate angle between them
@@ -544,12 +544,12 @@ public class Quaternion extends Vector4f {
 
 	//
 
-    /**
-     *Rotate a 3-D vector by this <code>Quaternion</code>.
-     *
-     * @param v the {@link Vector3f} to be rotated.
-     * @return the rotated {@link Vector3f}.
-     */
+	/**
+	 *Rotate a 3-D vector by this <code>Quaternion</code>.
+	 *
+	 * @param v the {@link Vector3f} to be rotated.
+	 * @return the rotated {@link Vector3f}.
+	 */
 	public Vector3f rotateVector(Vector3f v) {
 		float q0 = this.mPoints[3];
 		float q1 = this.mPoints[0];
