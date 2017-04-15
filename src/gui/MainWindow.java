@@ -54,10 +54,9 @@ import java.util.List;
  * @see java.awt.event.WindowListener
  * @see #MainWindow(NetworkManager)
  */
-public class MainWindow extends JFrame implements ActionListener, ItemListener, WindowListener {
+public class MainWindow extends JFrame implements ActionListener, WindowListener {
 
     private JList mList;
-    private JCheckBox mCheckBox;
     private boolean mLastSelectedOption;
 
     private NetworkManager mManager;
@@ -65,6 +64,9 @@ public class MainWindow extends JFrame implements ActionListener, ItemListener, 
     private NetworkThread mNetworkThread;
     private Thread mThread;
     private final Cube mCube = new Cube();
+
+    private final int WINDOW_WIDTH = 640;
+    private final int WINDOW_HEIGHT = 480;
 
     private static final long DIALOG_TIMEOUT = 2000;
 
@@ -84,7 +86,7 @@ public class MainWindow extends JFrame implements ActionListener, ItemListener, 
         } catch(Exception e) {System.out.println("Error in loading look-and-feel ...");}
 
         this.setTitle("SmartIO");
-        this.setMinimumSize(new Dimension(640,480));
+        this.setMinimumSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.addWindowListener(this);
 
@@ -94,9 +96,13 @@ public class MainWindow extends JFrame implements ActionListener, ItemListener, 
         disconnectButton.setMargin(new Insets(5,5,5,5));
         disconnectButton.setActionCommand("disconnect_clicked");
         disconnectButton.addActionListener(this);
-
-        mCheckBox = new JCheckBox("Display 3D Cube");
-        mCheckBox.addItemListener(this);
+        JButton cubeButton = new JButton("3d Cube Demo");
+        cubeButton.setActionCommand("3d_clicked");
+        cubeButton.setMargin(new Insets(5,5,5,5));
+        cubeButton.addActionListener(this);
+        JPanel buttonPanel = new JPanel(new GridLayout(1,0));
+        buttonPanel.add(disconnectButton);
+        buttonPanel.add(cubeButton);
 
         JRadioButton mOnButton = new JRadioButton();
         mOnButton.setText("Server On");
@@ -119,8 +125,7 @@ public class MainWindow extends JFrame implements ActionListener, ItemListener, 
         mList.setLayoutOrientation(JList.VERTICAL);
         mList.setFixedCellHeight(50);
 
-        this.add(disconnectButton, BorderLayout.SOUTH);
-        this.add(mCheckBox, BorderLayout.WEST);
+        this.add(buttonPanel,BorderLayout.SOUTH);
         this.add(radioPanel, BorderLayout.NORTH);
         this.add(mList, BorderLayout.CENTER);
         this.setVisible(true);
@@ -237,15 +242,9 @@ public class MainWindow extends JFrame implements ActionListener, ItemListener, 
                 mThread = null;
             } catch (Exception e) { e.printStackTrace(); }
         }
-    }
-
-    @Override
-    public void itemStateChanged(ItemEvent event) {
-        if(mCheckBox.isSelected() && !mState.isNoClientConnected()) {
-            mCube.showCube();
-        } else {
-            mCheckBox.setSelected(false);
-            mCube.closeCube();
+        else if(event.getActionCommand().equals("3d_clicked")) {
+            if(!mState.isNoClientConnected() && !mCube.isStarted())
+                mCube.showCube();
         }
     }
 

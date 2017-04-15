@@ -135,6 +135,7 @@ public class Cube implements GLEventListener {
 			public void windowClosing(WindowEvent e) {
 				animator.stop();
 				mJFrame.dispose();
+                mStarted = false;
 			}
 		});
 		animator.start();
@@ -144,7 +145,8 @@ public class Cube implements GLEventListener {
 	void closeCube() {
 	    if(mStarted) {
             mJFrame.dispatchEvent(new WindowEvent(mJFrame, WindowEvent.WINDOW_CLOSING));
-            mStarted = false;
         }
 	}
+
+	boolean isStarted() { return mStarted; }
 }
