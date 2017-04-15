@@ -5,12 +5,28 @@ import net.NetworkState;
 import net.NetworkThread;
 import net.ServerThread;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JFrame;
+import javax.swing.JList;
+import javax.swing.JCheckBox;
+import javax.swing.UIManager;
+import javax.swing.JButton;
+import javax.swing.JRadioButton;
+import javax.swing.ButtonGroup;
+import javax.swing.JPanel;
+import javax.swing.JOptionPane;
+import javax.swing.JDialog;
+
+import java.awt.Dimension;
+import java.awt.BorderLayout;
+import java.awt.Insets;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+
 import java.io.IOException;
 import java.net.InetAddress;
 import java.util.List;
@@ -38,14 +54,17 @@ import java.util.List;
  * @see java.awt.event.WindowListener
  * @see #MainWindow(NetworkManager)
  */
-public class MainWindow extends JFrame implements ActionListener, WindowListener {
+public class MainWindow extends JFrame implements ActionListener, ItemListener, WindowListener {
 
     private JList mList;
+    private JCheckBox mCheckBox;
     private boolean mLastSelectedOption;
 
     private NetworkManager mManager;
+    private NetworkState mState;
     private NetworkThread mNetworkThread;
     private Thread mThread;
+    private final Cube mCube = new Cube();
 
     private static final long DIALOG_TIMEOUT = 2000;
 
@@ -57,7 +76,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
      */
     public MainWindow(NetworkManager manager) {
         this.mManager = manager;
-        NetworkState mState = manager.getNetworkState();
+        mState = manager.getNetworkState();
         mNetworkThread = new NetworkThread(manager);
 
         try {
@@ -71,10 +90,13 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
 
         this.setLayout(new BorderLayout());
 
-        JButton mDisconnectButton = new JButton("Disconnect");
-        mDisconnectButton.setMargin(new Insets(5,5,5,5));
-        mDisconnectButton.setActionCommand("disconnect_clicked");
-        mDisconnectButton.addActionListener(this);
+        JButton disconnectButton = new JButton("Disconnect");
+        disconnectButton.setMargin(new Insets(5,5,5,5));
+        disconnectButton.setActionCommand("disconnect_clicked");
+        disconnectButton.addActionListener(this);
+
+        mCheckBox = new JCheckBox("Display 3D Cube");
+        mCheckBox.addItemListener(this);
 
         JRadioButton mOnButton = new JRadioButton();
         mOnButton.setText("Server On");
@@ -83,23 +105,23 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         mOffButton.setActionCommand("off");
         mOffButton.setText("Server Off");
         mOffButton.setSelected(true);
-
         mLastSelectedOption = false;
         ButtonGroup bg = new ButtonGroup();
         bg.add(mOffButton);
         bg.add(mOnButton);
         mOnButton.addActionListener(this);
         mOffButton.addActionListener(this);
-        JPanel mRadioPanel = new JPanel(new GridLayout(1, 0));
-        mRadioPanel.add(mOnButton);
-        mRadioPanel.add(mOffButton);
+        JPanel radioPanel = new JPanel(new GridLayout(1, 0));
+        radioPanel.add(mOnButton);
+        radioPanel.add(mOffButton);
 
         mList = new JList<>(mState.getListModel());
         mList.setLayoutOrientation(JList.VERTICAL);
         mList.setFixedCellHeight(50);
 
-        this.add(mDisconnectButton, BorderLayout.SOUTH);
-        this.add(mRadioPanel, BorderLayout.NORTH);
+        this.add(disconnectButton, BorderLayout.SOUTH);
+        this.add(mCheckBox, BorderLayout.WEST);
+        this.add(radioPanel, BorderLayout.NORTH);
         this.add(mList, BorderLayout.CENTER);
         this.setVisible(true);
     }
@@ -215,13 +237,17 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
                 mThread = null;
             } catch (Exception e) { e.printStackTrace(); }
         }
-        else if(event.getActionCommand().equals("checked")) {
-
-        }
     }
 
     @Override
-    public void windowOpened(WindowEvent windowEvent) {}
+    public void itemStateChanged(ItemEvent event) {
+        if(mCheckBox.isSelected() && !mState.isNoClientConnected()) {
+            mCube.showCube();
+        } else {
+            mCheckBox.setSelected(false);
+            mCube.closeCube();
+        }
+    }
 
     /**
      * Gracefully terminates the application.
@@ -243,6 +269,9 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void windowOpened(WindowEvent windowEvent) {}
 
     @Override
     public void windowClosed(WindowEvent windowEvent) {}
