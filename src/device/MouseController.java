@@ -37,8 +37,9 @@ import java.awt.event.InputEvent;
 public class MouseController {
 
     private Robot mRobot;
-
     private SensorDataHandler mSensorDataHandler;
+
+    private static Quaternion sQuaternion;
 
     /**
      * Constructor. <br/>
@@ -62,6 +63,7 @@ public class MouseController {
      *                   <code>false</code>, otherwise.
      */
     public void move(Quaternion quaternion, boolean isInitQuat, float sensitivity) {
+        sQuaternion = quaternion;
         if(isInitQuat) {
             mSensorDataHandler = new SensorDataHandler(quaternion,sensitivity);
         }
@@ -123,4 +125,7 @@ public class MouseController {
         }
     }
     public void wait(int m) { mRobot.delay(1000); }
+    public static Quaternion getQuaternion() {
+        return sQuaternion;
+    }
 }

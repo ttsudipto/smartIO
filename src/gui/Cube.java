@@ -17,6 +17,7 @@ import java.awt.event.WindowEvent;
 
 import static com.jogamp.opengl.GL.GL_ONE_MINUS_SRC_ALPHA;
 import static com.jogamp.opengl.GL.GL_SRC_ALPHA;
+import static device.MouseController.getQuaternion;
 
 public class Cube implements GLEventListener {
 
@@ -27,11 +28,6 @@ public class Cube implements GLEventListener {
 
 	Cube() { mStarted = false; }
 
-	//Please modify This method accordingly
-	private Quaternion getQuaternion() {
-		return new Quaternion();
-	}
-
 	@Override
 	public void display(GLAutoDrawable drawable) {
 		final GL2 gl = drawable.getGL().getGL2();
@@ -39,10 +35,11 @@ public class Cube implements GLEventListener {
 		gl.glLoadIdentity();
 		gl.glTranslatef( 0f, 0f, -7f );
 
-		Quaternion mQuat = getQuaternion();
+		Quaternion quaternion = getQuaternion();
+		System.out.println(quaternion);
 
 		// Rotate The Cube On X, Y & Z i.e. pass quaternion as argument
-		gl.glRotatef(mQuat.getW(), mQuat.getX(), mQuat.getY(), mQuat.getZ());
+		gl.glRotatef(quaternion.getW(), quaternion.getX(), quaternion.getY(), quaternion.getZ());
 
 		//giving different colors to different sides
 		gl.glBegin(GL2.GL_QUADS); // Start Drawing The Cube
