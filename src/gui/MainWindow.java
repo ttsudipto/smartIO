@@ -65,9 +65,8 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     private Thread mThread;
     private final Cube mCube = new Cube();
 
-    private final int WINDOW_WIDTH = 640;
-    private final int WINDOW_HEIGHT = 480;
-
+    private static final int WINDOW_WIDTH = 640;
+    private static final int WINDOW_HEIGHT = 480;
     private static final long DIALOG_TIMEOUT = 2000;
 
     /**
@@ -96,7 +95,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         disconnectButton.setMargin(new Insets(5,5,5,5));
         disconnectButton.setActionCommand("disconnect_clicked");
         disconnectButton.addActionListener(this);
-        JButton cubeButton = new JButton("3d Cube Demo");
+        JButton cubeButton = new JButton("3D Cube Demo");
         cubeButton.setActionCommand("3d_clicked");
         cubeButton.setMargin(new Insets(5,5,5,5));
         cubeButton.addActionListener(this);
@@ -104,22 +103,22 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         buttonPanel.add(disconnectButton);
         buttonPanel.add(cubeButton);
 
-        JRadioButton mOnButton = new JRadioButton();
-        mOnButton.setText("Server On");
-        mOnButton.setActionCommand("on");
-        JRadioButton mOffButton = new JRadioButton();
-        mOffButton.setActionCommand("off");
-        mOffButton.setText("Server Off");
-        mOffButton.setSelected(true);
+        JRadioButton onButton = new JRadioButton();
+        onButton.setText("Server On");
+        onButton.setActionCommand("on");
+        JRadioButton offButton = new JRadioButton();
+        offButton.setActionCommand("off");
+        offButton.setText("Server Off");
+        offButton.setSelected(true);
         mLastSelectedOption = false;
         ButtonGroup bg = new ButtonGroup();
-        bg.add(mOffButton);
-        bg.add(mOnButton);
-        mOnButton.addActionListener(this);
-        mOffButton.addActionListener(this);
+        bg.add(offButton);
+        bg.add(onButton);
+        onButton.addActionListener(this);
+        offButton.addActionListener(this);
         JPanel radioPanel = new JPanel(new GridLayout(1, 0));
-        radioPanel.add(mOnButton);
-        radioPanel.add(mOffButton);
+        radioPanel.add(onButton);
+        radioPanel.add(offButton);
 
         mList = new JList<>(mState.getListModel());
         mList.setLayoutOrientation(JList.VERTICAL);

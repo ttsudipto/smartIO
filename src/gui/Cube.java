@@ -80,7 +80,7 @@ public class Cube implements GLEventListener {
 	}
 
 	@Override
-	public void dispose( GLAutoDrawable drawable ) {}
+	public void dispose(GLAutoDrawable drawable) {}
 
 	@Override
 	public void init( GLAutoDrawable drawable ) {
@@ -99,7 +99,7 @@ public class Cube implements GLEventListener {
 	}
 
 	@Override
-	public void reshape( GLAutoDrawable drawable, int x, int y, int width, int height ) {
+	public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
 		final GL2 gl = drawable.getGL().getGL2();
 		if( height <= 0 )
 		height = 1;
@@ -122,13 +122,13 @@ public class Cube implements GLEventListener {
 		final GLCanvas glcanvas = new GLCanvas( capabilities );
 		Cube cube = new Cube();
 
-		glcanvas.addGLEventListener( cube );
-		glcanvas.setSize( 512, 512 );
+		glcanvas.addGLEventListener(cube);
+		glcanvas.setSize(512, 512);
 
-		mJFrame = new JFrame ( " Multicolored Cube" );
-		mJFrame.getContentPane().add( glcanvas );
-		mJFrame.setSize( mJFrame.getContentPane().getPreferredSize() );
-		mJFrame.setVisible( true );
+		mJFrame = new JFrame (" Multicolored Cube");
+		mJFrame.getContentPane().add(glcanvas);
+		mJFrame.setSize(mJFrame.getContentPane().getPreferredSize());
+		mJFrame.setVisible(true);
 		final FPSAnimator animator = new FPSAnimator(glcanvas, 300,true);
 		mJFrame.addWindowListener(new WindowAdapter() {
 			@Override
