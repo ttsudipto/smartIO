@@ -1,10 +1,9 @@
 package net;
 
+import javax.swing.*;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.util.HashMap;
-
-import javax.swing.DefaultListModel;
 
 /**
  * Stores the state information about the network.
@@ -92,6 +91,7 @@ public class NetworkState {
      *         <code>false</code>, otherwise.
      */
     public boolean isNoClientConnected() { return mListModel.isEmpty(); }
+
 
     /**
      * Adds a client connection to this <code>NetworkState</code>.

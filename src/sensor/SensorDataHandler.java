@@ -20,6 +20,10 @@ public class SensorDataHandler {
 		initFix(q);
 	}
 
+	public SensorDataHandler(Quaternion q) {
+		initFix(q);
+	}
+
 	//Baseline Initialization
 	private void initFix(Quaternion quaternion) {
 		Vector3f xvec = quaternion.rotateVector(new Vector3f(1.0f,0.0f,0.0f));

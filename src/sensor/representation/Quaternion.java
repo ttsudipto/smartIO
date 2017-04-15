@@ -14,6 +14,12 @@ package sensor.representation;
  *     numbers.
  * </p>
  * <p>
+ * 		Quaternions allow for elegant descriptions of 3D rotations, interpolations as well as extrapolations and
+ * 		compared to Euler angles, they don't suffer from gimbal lock. Interpolations between two Quaternions are called
+ * 		SLERP (Spherical Linear Interpolation).
+ * </p>
+ *
+ * <p>
  *     If <i>a + bi + cj + dk</i> is any quaternion, then <i>a</i>
  *     is called its scalar part and <i>bi + cj + dk</i> is called
  *     its vector part. The scalar part of a quaternion is always
@@ -111,6 +117,11 @@ public class Quaternion extends Vector4f {
 		mPoints[2] = mPoints[2] / mag;
 	}
 
+	/**
+	 * Copies the values from the given quaternion to this one
+	 *
+	 * @param quat The quaternion to copy from
+	 */
 	public void set(Quaternion quat) {
 		this.mDirty = true;
 		copyVec4(quat);
@@ -143,6 +154,11 @@ public class Quaternion extends Vector4f {
 		}
 	}
 
+	/**
+	 * Multiply this quaternion by the input quaternion
+	 *
+	 * @param input
+	 */
 	public void multiplyByQuat(Quaternion input) {
 		this.mDirty = true;
 		if(mTmpQuaternion == null) mTmpQuaternion = new Quaternion();
@@ -164,11 +180,21 @@ public class Quaternion extends Vector4f {
 		super.multiplyByScalar(scalar);
 	}
 
+	/**
+	 * Add a quaternion to this quaternion
+	 *
+	 * @param input The quaternion that you want to add to this one
+	 */
 	public void addQuat(Quaternion input) {
 		this.mDirty = true;
 		addQuat(input, this);
 	}
 
+	/**
+	 * Add a quaternion to this quaternion and stores it into output.
+	 *
+	 * @param input The quaternion that you want to add to this one
+	 */
 	private void addQuat(Quaternion input, Quaternion output) {
 		output.setX(getX() + input.getX());
 		output.setY(getY() + input.getY());
@@ -176,11 +202,22 @@ public class Quaternion extends Vector4f {
 		output.setW(getW() + input.getW());
 	}
 
+	/**
+	 * Subtract a quaternion to this quaternion
+	 *
+	 * @param input The quaternion to be subtracted from this one
+	 */
 	public void subQuat(Quaternion input) {
 		this.mDirty = true;
 		subQuat(input, this);
 	}
 
+	/**
+	 * Subtract another quaternion from this quaternion and store the result in the output quaternion
+	 *
+	 * @param input The quaternion to be subtracted from this quaternion
+	 * @param output The quaternion where the output will be stored.
+	 */
 	private void subQuat(Quaternion input, Quaternion output) {
 		output.setX(getX() - input.getX());
 		output.setY(getY() - input.getY());
@@ -188,6 +225,10 @@ public class Quaternion extends Vector4f {
 		output.setW(getW() - input.getW());
 	}
 
+	/**
+	 * Converts this Quaternion into the Rotation-Matrix representation which can be accessed by
+	 * {@link Quaternion#getMatrix4x4 getMatrix4x4}
+	 */
 	private void convertQuatToMatrix() {
 		float x = mPoints[0];
 		float y = mPoints[1];
@@ -212,6 +253,11 @@ public class Quaternion extends Vector4f {
 		mMatrix.setW3(1);
 	}
 
+	/**
+	 * Get an axis angle representation of this quaternion.
+	 *
+	 * @param output Vector4f axis angle.
+	 */
 	public void toAxisAngle(Vector4f output) {
 		if (getW() > 1) {
 			normalize();
@@ -239,6 +285,11 @@ public class Quaternion extends Vector4f {
 		output.mPoints[3] = angle;
 	}
 
+	/**
+	 * Returns the heading, attitude and bank of this quaternion as euler angles in the double array respectively
+	 *
+	 * @return An array of size 3 containing the euler angles for this quaternion
+	 */
 	public double[] toEulerAngles() {
 		double[] ret = new double[3];
 
@@ -248,6 +299,9 @@ public class Quaternion extends Vector4f {
 		return ret;
 	}
 
+	/**
+	 * Sets the quaternion to an identity quaternion of 0,0,0,1.
+	 */
 	private void loadIdentityQuat() {
 		this.mDirty = true;
 		setX(0);
@@ -269,6 +323,11 @@ public class Quaternion extends Vector4f {
 		return "{X: " + getX() + ", Y:" + getY() + ", Z:" + getZ() + ", W:" + getW() + "}";
 	}
 
+	/**
+	 * This is an internal method used to build a quaternion from a rotation matrix and then sets the current quaternion
+	 * from that matrix.
+	 *
+	 */
 	private void generateQuaternionFromMatrix() {
 
 		float qx;
@@ -338,6 +397,13 @@ public class Quaternion extends Vector4f {
 		setW(qw);
 	}
 
+
+	/**
+	 * The values of this quaternion can be set based on a rotation matrix. If the supplied matrix is not a rotation
+	 * matrix this will fail. A 4x4 matrix must be provided.
+	 *
+	 * @param mMatrix A column major rotation matrix
+	 */
 	public void setColumnMajor(float[] mMatrix) {
 
 		this.mMatrix.setMatrix(mMatrix);
@@ -346,6 +412,12 @@ public class Quaternion extends Vector4f {
 		generateQuaternionFromMatrix();
 	}
 
+	/**
+	 * The values for this quaternion can be set based on a rotation matrix. If the matrix you supply is not a
+	 * rotation matrix this will fail.
+	 *
+	 * @param mMatrix A column major rotation matrix
+	 */
 	public void setRowMajor(float[] mMatrix) {
 
 		this.mMatrix.setMatrix(mMatrix);
@@ -376,6 +448,12 @@ public class Quaternion extends Vector4f {
 		mDirty = true;
 	}
 
+	/**
+	 * Rotation is in degrees. Set this quaternion from the supplied axis angle.
+	 *
+	 * @param vec The vector of rotation
+	 * @param rot The angle of rotation around that vector in degrees.
+	 */
 	public void setAxisAngle(Vector3f vec, float rot) {
 		double s = Math.sin(Math.toRadians(rot / 2));
 		setX(vec.getX() * (float) s);
@@ -386,6 +464,13 @@ public class Quaternion extends Vector4f {
 		mDirty = true;
 	}
 
+	/**
+	 * Same as <code>setAxisAngle</code>
+	 * Takes the angles in Radian.
+	 *
+	 * @param vec The vector of rotation.
+	 * @param rot The angle of rotation around that vector in degrees.
+	 */
 	public void setAxisAngleRad(Vector3f vec, double rot) {
 		double s = rot / 2;
 		setX(vec.getX() * (float) s);
@@ -396,6 +481,9 @@ public class Quaternion extends Vector4f {
 		mDirty = true;
 	}
 
+	/**
+	 * @return Returns this Quaternion in the Rotation Matrix representation
+	 */
 	public MatrixF4x4 getMatrix4x4() {
 		if (mDirty) {
 			convertQuatToMatrix();
@@ -408,6 +496,15 @@ public class Quaternion extends Vector4f {
 		copyFromV3f(vec, w);
 	}
 
+	/**
+	 * Get a linear interpolation between this quaternion and the input quaternion, storing the result in the output
+	 * quaternion.
+	 *
+	 * @param input The quaternion to be slerped with this quaternion.
+	 * @param output The quaternion to store the result in.
+	 * @param t The ratio between the two quaternions where 0 <= t <= 1.0 . Increase value of t will bring rotation
+	 *            closer to the input quaternion.
+	 */
 	public void slerp(Quaternion input, Quaternion output, float t) {
 		// Calculate angle between them
 		Quaternion bufferQuat;

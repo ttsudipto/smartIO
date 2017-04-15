@@ -51,7 +51,7 @@ import sensor.representation.Quaternion;
  * @see device.KeyboardController
  */
 
-class DataWrapper {
+public class DataWrapper {
 
     private String mOperationType;
     private String mData;

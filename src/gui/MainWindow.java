@@ -5,25 +5,12 @@ import net.NetworkState;
 import net.NetworkThread;
 import net.ServerThread;
 
-import javax.swing.JFrame;
-import javax.swing.JList;
-import javax.swing.UIManager;
-import javax.swing.JButton;
-import javax.swing.JRadioButton;
-import javax.swing.ButtonGroup;
-import javax.swing.JPanel;
-import javax.swing.JOptionPane;
-import javax.swing.JDialog;
-
-import java.awt.Dimension;
-import java.awt.BorderLayout;
-import java.awt.Insets;
-import java.awt.GridLayout;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-
 import java.io.IOException;
 import java.net.InetAddress;
 import java.util.List;
@@ -96,6 +83,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         mOffButton.setActionCommand("off");
         mOffButton.setText("Server Off");
         mOffButton.setSelected(true);
+
         mLastSelectedOption = false;
         ButtonGroup bg = new ButtonGroup();
         bg.add(mOffButton);
@@ -226,6 +214,9 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
                 mManager.stopServer();
                 mThread = null;
             } catch (Exception e) { e.printStackTrace(); }
+        }
+        else if(event.getActionCommand().equals("checked")) {
+
         }
     }
 
