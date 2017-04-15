@@ -39,7 +39,7 @@ public class MouseController {
     private Robot mRobot;
     private SensorDataHandler mSensorDataHandler;
 
-    private static Quaternion sQuaternion;
+    private static Quaternion sQuaternion = new Quaternion();
 
     /**
      * Constructor. <br/>
