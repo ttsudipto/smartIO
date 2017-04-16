@@ -1,12 +1,17 @@
 package gui;
 
-import com.jogamp.opengl.*;
+import com.jogamp.opengl.GLEventListener;
+import com.jogamp.opengl.GLAutoDrawable;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GLProfile;
+import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.awt.GLCanvas;
 import com.jogamp.opengl.glu.GLU;
 import com.jogamp.opengl.util.FPSAnimator;
 import sensor.representation.Vector4f;
 
-import javax.swing.*;
+import javax.swing.JFrame;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -17,7 +22,6 @@ import static device.MouseController.getQuaternion;
 public class Cube implements GLEventListener {
 
 	private GLU mGlu = new GLU();
-	//private float mRquad = 0.0f;
 	private JFrame mJFrame;
 	private boolean mStarted;
 
@@ -30,14 +34,10 @@ public class Cube implements GLEventListener {
 		gl.glLoadIdentity();
 		gl.glTranslatef( 0f, 0f, -7f );
 
-		//Quaternion quaternion = getQuaternion();
 		Vector4f mAxisAngle = new Vector4f();
 		getQuaternion().toAxisAngle(mAxisAngle);
-		//System.out.print(quaternion);
 
 		// Rotate The Cube On X, Y & Z i.e. pass quaternion as argument
-		//double angle = 2 * Math.acos(quaternion.getW())*180/Math.PI;
-		//System.out.println(" angle: " + angle);
 		gl.glRotatef(mAxisAngle.getW(), mAxisAngle.getX(), mAxisAngle.getY(), mAxisAngle.getZ());
 
 		//giving different colors to different sides
