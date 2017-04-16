@@ -36,10 +36,12 @@ public class Cube implements GLEventListener {
 		gl.glTranslatef( 0f, 0f, -7f );
 
 		Quaternion quaternion = getQuaternion();
-		System.out.println(quaternion);
+		//System.out.print(quaternion);
 
 		// Rotate The Cube On X, Y & Z i.e. pass quaternion as argument
-		gl.glRotatef(quaternion.getW(), quaternion.getX(), quaternion.getY(), quaternion.getZ());
+		double angle = Math.acos(quaternion.getW())*180/Math.PI;
+		//System.out.println(" angle: " + angle);
+		gl.glRotatef((float) angle, quaternion.getX(), quaternion.getY(), quaternion.getZ());
 
 		//giving different colors to different sides
 		gl.glBegin(GL2.GL_QUADS); // Start Drawing The Cube
@@ -80,7 +82,7 @@ public class Cube implements GLEventListener {
 		gl.glVertex3f( 1.0f, -1.0f, -1.0f ); // Bottom Right Of The Quad
 		gl.glEnd(); // Done Drawing The Quad
 		gl.glFlush();
-	}
+    }
 
 	@Override
 	public void dispose(GLAutoDrawable drawable) {}
@@ -143,12 +145,6 @@ public class Cube implements GLEventListener {
 		});
 		animator.start();
 		mStarted = true;
-	}
-
-	void closeCube() {
-	    if(mStarted) {
-            mJFrame.dispatchEvent(new WindowEvent(mJFrame, WindowEvent.WINDOW_CLOSING));
-        }
 	}
 
 	boolean isStarted() { return mStarted; }
