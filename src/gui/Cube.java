@@ -39,7 +39,7 @@ public class Cube implements GLEventListener {
 		//System.out.print(quaternion);
 
 		// Rotate The Cube On X, Y & Z i.e. pass quaternion as argument
-		double angle = Math.acos(quaternion.getW())*180/Math.PI;
+		double angle = 2 * Math.acos(quaternion.getW())*180/Math.PI;
 		//System.out.println(" angle: " + angle);
 		gl.glRotatef((float) angle, quaternion.getX(), quaternion.getY(), quaternion.getZ());
 
