@@ -81,8 +81,8 @@ class KeyStoreManager {
     }
 
     /**
-     * Returns the  private-public key pair.
-     * .
+     * Returns the private-public key pair.
+     *
      * @return {@link java.security.KeyPair} object.
      * @throws IOException
      * @throws KeyStoreException
