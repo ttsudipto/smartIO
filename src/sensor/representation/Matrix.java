@@ -9,10 +9,10 @@ package sensor.representation;
  *     matrices stored in column-major order:
  *
  *     <pre>
- *         m[offset +  0] m[offset +  4] m[offset +  8] m[offset + 12]
- *         m[offset +  1] m[offset +  5] m[offset +  9] m[offset + 13]
- *         m[offset +  2] m[offset +  6] m[offset + 10] m[offset + 14]
- *         m[offset +  3] m[offset +  7] m[offset + 11] m[offset + 15]
+ *         m[offset +  0]    m[offset +  4]    m[offset +  8]    m[offset + 12]
+ *         m[offset +  1]    m[offset +  5]    m[offset +  9]    m[offset + 13]
+ *         m[offset +  2]    m[offset +  6]    m[offset + 10]    m[offset + 14]
+ *         m[offset +  3]    m[offset +  7]    m[offset + 11]    m[offset + 15]
  *     </pre>
  * </p>
  * <p>
@@ -319,7 +319,7 @@ class Matrix {
 	}
 
 	/**
-	 * Define a projection matrix in terms of six clip planes.
+	 * Defines a projection matrix in terms of six clip planes.
 	 *
 	 * @param m the float array that holds the perspective matrix.
 	 * @param offset the offset into <code>m</code> where the perspective
@@ -376,7 +376,7 @@ class Matrix {
 	}
 
 	/**
-	 * Define a projection matrix in terms of a field of view angle, an
+	 * Defines a projection matrix in terms of a field of view angle, an
 	 * aspect ratio, and Z clip planes.
 	 *
 	 * @param m the float array that holds the perspective matrix.
@@ -433,7 +433,7 @@ class Matrix {
 	}
 
 	/**
-	 * Scales matrix <code>m</code>by <i>x</i>, <i>y</i>, and <i>z</i>.
+	 * Scales matrix <code>m</code> by <i>x</i>, <i>y</i>, and <i>z</i>.
 	 *
 	 * @param sm the result.
 	 * @param smOffset index into <code>sm</code> where the result matrix starts.
