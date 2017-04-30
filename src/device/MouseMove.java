@@ -31,12 +31,12 @@ class MouseMove {
     /**
      * Method for performing mouse movement proportional to the
      * screen size. This method is invoked by
-     * {@link MouseController#move(int, int, float)} .
+     * {@link MouseController#move(int, int, float)}.
      *
      * @param robot the {@link java.awt.Robot} object.
      * @param relativeX displacement along x-axis.
      * @param relativeY displacement along y-axis.
-     * @param sensitivity mouse movement senstivity
+     * @param sensitivity mouse movement sensitivity.
      */
     static void moveRelatively(Robot robot, int relativeX, int relativeY, float sensitivity) {
         int curX = MouseInfo.getPointerInfo().getLocation().x;

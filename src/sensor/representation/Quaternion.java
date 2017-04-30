@@ -14,11 +14,12 @@ package sensor.representation;
  *     numbers.
  * </p>
  * <p>
- * 		Quaternions allow for elegant descriptions of 3D rotations, interpolations as well as extrapolations and
- * 		compared to Euler angles, they don't suffer from gimbal lock. Interpolations between two Quaternions are called
- * 		SLERP (Spherical Linear Interpolation).
+ * 	   Quaternions allow for elegant descriptions of 3D rotations,
+ * 	   interpolations as well as extrapolations and compared to
+ * 	   Euler angles, they don't suffer from gimbal lock.
+ * 	   Interpolations between two Quaternions are called SLERP
+ * 	   (Spherical Linear Interpolation).
  * </p>
- *
  * <p>
  *     If <i>a + bi + cj + dk</i> is any quaternion, then <i>a</i>
  *     is called its scalar part and <i>bi + cj + dk</i> is called
@@ -95,7 +96,8 @@ public class Quaternion extends Vector4f {
 	private Quaternion mTmpQuaternion;
 
 	/**
-	 * Constructor. <br/>
+	 * Constructor.
+     *
 	 * Initializes this <code>Quaternion</code>.
 	 */
 	public Quaternion() {
@@ -169,7 +171,7 @@ public class Quaternion extends Vector4f {
 	}
 
 	/**
-	 * Multiples this <code>Quaternion</code> with a scalar. <br/>
+	 * Multiples this <code>Quaternion</code> with a scalar.
      *
 	 * This overrides the {@link Vector4f#multiplyByScalar(float)}
 	 * method.

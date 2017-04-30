@@ -50,7 +50,8 @@ class KeyStoreManager {
 	private static final String KEY_STORE_NAME = "remouse_keystore";
 
 	/**
-	 * Constructor. <br/>
+	 * Constructor.
+	 *
 	 * Initializes this <code>KeyStoreManager</code>.
      *
 	 * @throws CertificateException

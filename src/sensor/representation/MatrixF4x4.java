@@ -33,7 +33,8 @@ public class MatrixF4x4 {
 	public float[] matrix;
 
 	/**
-     * Constructor. <br/>
+     * Constructor.
+	 *
      * Initializes this <code>MatrixF4x4</code>.
 	 */
 	public MatrixF4x4() {
@@ -69,7 +70,8 @@ public class MatrixF4x4 {
 	}
 
 	/**
-	 * Sets the matrix from a float[16] array. <br/>
+	 * Sets the matrix from a float[16] array.
+     *
      * If the matrix isn't 16 long then the matrix will be invalid.
 	 *
 	 * @param source the source matrixF4x4.
@@ -87,7 +89,8 @@ public class MatrixF4x4 {
 	}
 
 	/**
-	 * Multiplies the given vector by this <code>MatrixF4x4</code>. <br/>
+	 * Multiplies the given vector by this <code>MatrixF4x4</code>.
+     *
      * This should only be used if the matrix is of size 16.
 	 *
 	 * @param vector a {@link Vector4f}.
@@ -133,7 +136,8 @@ public class MatrixF4x4 {
 	}
 
 	/**
-	 * Multiplies the given vector by this <code>MatrixF4x4</code>. <br/>
+	 * Multiplies the given vector by this <code>MatrixF4x4</code>.
+     *
      * This should only be used if the matrix is of size 9.
 	 *
 	 * @param vector a {@link Vector3f}.

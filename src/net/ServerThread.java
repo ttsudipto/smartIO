@@ -92,7 +92,8 @@ public class ServerThread implements Runnable {
     private String mPairingKey;
 
     /**
-     * Constructor. <br/>
+     * Constructor.
+     *
      * Initializes the thread.
      *
      * @param state {@link NetworkState} of this network.
@@ -275,7 +276,8 @@ public class ServerThread implements Runnable {
     }
 
     /**
-     * Sets stop flag.<br/>
+     * Sets stop flag.
+     *
      * Used to exit from the {@link #run()} method.
      */
     void setStopFlag() { mStopFlag = true; }
@@ -298,7 +300,7 @@ public class ServerThread implements Runnable {
     /**
      * Returns the timeout of the client <code>Socket</code>.
      *
-     * @return timeout of client <code>Socket</code> in milliseconds
+     * @return timeout of client <code>Socket</code> in milliseconds.
      * @throws IOException
      */
     int getTimeout() throws IOException {

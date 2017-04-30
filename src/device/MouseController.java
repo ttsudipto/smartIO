@@ -42,7 +42,8 @@ public class MouseController {
     private static Quaternion sQuaternion = new Quaternion();
 
     /**
-     * Constructor. <br/>
+     * Constructor.
+     *
      * Initializes this <code>MouseController</code> by
      * instantiating a {@link java.awt.Robot} object.
      *

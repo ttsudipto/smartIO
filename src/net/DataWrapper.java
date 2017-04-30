@@ -63,7 +63,8 @@ public class DataWrapper {
     private float mSensitivity;
 
     /**
-     * Constructor. <br/>
+     * Constructor.
+     *
      * Used to create a <code>DataWrapper</code> for keyboard and mouse
      * button click operations.
      *
@@ -76,8 +77,10 @@ public class DataWrapper {
     }
 
     /**
-     * Constructor. <br/>
+     * Constructor.
+     *
      * Used to create a <code>DataWrapper</code> for special keys like Ctrl, Alt etc.
+     *
      * @param data the <i>data</i> field.
      */
     DataWrapper(String data) {
@@ -86,13 +89,14 @@ public class DataWrapper {
     }
 
     /**
-     * Constructor. <br/>
+     * Constructor.
+     *
      * Used to create a <code>DataWrapper</code> for 2-D mouse movement
      * operation. The <i>type of operation</i> field is implicit.
      *
      * @param x displacement data along x-axis.
      * @param y displacement data along y-axis.
-     * @param sensitivity mouse movement sensitivity
+     * @param sensitivity mouse movement sensitivity.
      */
     DataWrapper(int x, int y, float sensitivity) {
         mMoveX = x;
@@ -102,7 +106,8 @@ public class DataWrapper {
     }
 
     /**
-     * Constructor. <br/>
+     * Constructor.
+     *
      * Used to create a <code>DataWrapper</code> for 3-D mouse movement
      * operation. The <i>type of operation</i> field is implicit.
      *
@@ -111,7 +116,7 @@ public class DataWrapper {
      * @param isInitQuat <code>true</code>, if <code>quaternionObject</code>
      *                   is the initial, <br/>
      *                   <code>false</code>, otherwise.
-     * @param sensitivity mouse movement sensitivity
+     * @param sensitivity mouse movement sensitivity.
      * @see sensor.representation.Quaternion
      */
     DataWrapper(Quaternion quaternionObject, boolean isInitQuat, float sensitivity) {
@@ -183,8 +188,9 @@ public class DataWrapper {
 
     /**
      * Returns the mouse movement sensitivity value stored in this
-     * <code>DataWrapper</code>
-     * @return the mouse movement sensitivity
+     * <code>DataWrapper</code>.
+     *
+     * @return the mouse movement sensitivity.
      */
     float getSensitivity() { return mSensitivity; }
 }

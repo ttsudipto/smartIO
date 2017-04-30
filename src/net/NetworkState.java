@@ -45,13 +45,15 @@ public class NetworkState {
     private DefaultListModel<String> mListModel;
 
     /**
-     * Constructor. <br/>
+     * Constructor.
+     *
      * Initializes the state of the network.
      */
     NetworkState() { mListModel = new DefaultListModel<>(); }
 
     /**
-     * Returns the {@link javax.swing.ListModel}. <br/>
+     * Returns the {@link javax.swing.ListModel}.
+     *
      * It is used by the GUI to populate a list displaying the client
      * connections.
      *
@@ -61,7 +63,7 @@ public class NetworkState {
     public DefaultListModel getListModel() { return mListModel; }
 
     /**
-     * Returns the <i>Connection Map</i>
+     * Returns the <i>Connection Map</i>.
      *
      * @return <code>HashMap<Socket, ServerThread></code>.
      * @see java.util.HashMap
@@ -69,7 +71,7 @@ public class NetworkState {
     HashMap<Socket, ServerThread> getConnectionMap() { return sConnectionMap; }
 
     /**
-     * Returns the <i>Address Map</i>
+     * Returns the <i>Address Map</i>.
      *
      * @return <code>HashMap<InetAddress, Socket></code>.
      * @see java.util.HashMap

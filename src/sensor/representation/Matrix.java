@@ -126,7 +126,7 @@ class Matrix {
 	/**
 	 * Transposes a 4 x 4 matrix.
 	 *
-	 * @param mTrans the array that holds the output inverted matrix
+	 * @param mTrans the array that holds the output inverted matrix.
 	 * @param mTransOffset an offset where the inverted matrix is stored.
 	 * @param m the input array.
 	 * @param mOffset an offset into <code>m</code> where the matrix is stored.
@@ -437,7 +437,7 @@ class Matrix {
 	 *
 	 * @param sm the result.
 	 * @param smOffset index into <code>sm</code> where the result matrix starts.
-	 * @param m source matrix
+	 * @param m source matrix.
 	 * @param mOffset index into <code>m</code> where the source matrix starts.
 	 * @param x scale factor x.
 	 * @param y scale factor y.
@@ -491,16 +491,16 @@ class Matrix {
 	}
 
 	/**
-	 * Rotates matrix m by angle a (in degrees) around the axis (x, y, z)
+	 * Rotates matrix m by angle a (in degrees) around the axis (x, y, z).
 	 *
-	 * @param rm returns the result
-	 * @param rmOffset index into rm where the result matrix starts
-	 * @param m source matrix
-	 * @param mOffset index into m where the source matrix starts
-	 * @param a angle to rotate in degrees
-	 * @param x scale factor x
-	 * @param y scale factor y
-	 * @param z scale factor z
+	 * @param rm returns the result.
+	 * @param rmOffset index into rm where the result matrix starts.
+	 * @param m source matrix.
+	 * @param mOffset index into m where the source matrix starts.
+	 * @param a angle to rotate in degrees.
+	 * @param x scale factor x.
+	 * @param y scale factor y.
+	 * @param z scale factor z.
 	 */
 	public static void rotateM(float[] rm, int rmOffset, float[] m, int mOffset, float a, float x, float y, float z) {
 		synchronized (TEMP_MATRIX_ARRAY) {
@@ -511,14 +511,14 @@ class Matrix {
 
 	/**
 	 * Rotates matrix m in place by angle a (in degrees)
-	 * around the axis (x, y, z)
+	 * around the axis (x, y, z).
 	 *
-	 * @param m source matrix
-	 * @param mOffset index into m where the matrix starts
-	 * @param a angle to rotate in degrees
-	 * @param x scale factor x
-	 * @param y scale factor y
-	 * @param z scale factor z
+	 * @param m source matrix.
+	 * @param mOffset index into m where the matrix starts.
+	 * @param a angle to rotate in degrees.
+	 * @param x scale factor x.
+	 * @param y scale factor y.
+	 * @param z scale factor z.
 	 */
 	public static void rotateM(float[] m, int mOffset, float a, float x, float y, float z) {
 		synchronized (TEMP_MATRIX_ARRAY) {

@@ -104,7 +104,7 @@ public class EKEProvider {
     }
 
     /**
-     * Constructor. <br/>
+     * Constructor.
      *
      * <p>
      *     Initializes this <code>EKEProvider</code>. If keystore
@@ -137,7 +137,7 @@ public class EKEProvider {
     }
 
     /**
-     * Constructor. <br/>
+     * Constructor.
      *
      * <p>
      *     Initializes this <code>EKEProvider</code>.

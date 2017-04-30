@@ -8,7 +8,8 @@ public class Cartesian2D {
 	private double y;
 
     /**
-     * Constructor. <br/>
+     * Constructor.
+	 *
      * Initializes this <code>Cartesian2D</code> point.
      * @param x the x-coordinate.
      * @param y the y-coordinate.

@@ -49,7 +49,8 @@ class Server {
     private static final int TCP_PORT = 1234;
 
     /**
-     * Constructor. <br/>
+     * Constructor.
+     *
      * Initializes the server.
      *
      * @param state {@link NetworkState} of this network.
@@ -68,7 +69,8 @@ class Server {
     }
 
     /**
-     * Sets the stop flag. <br/>
+     * Sets the stop flag.
+     *
      * Used to exit from the {@link #listen()} method.
      *
      * @see #listen()

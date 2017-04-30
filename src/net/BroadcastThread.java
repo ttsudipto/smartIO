@@ -48,7 +48,8 @@ class BroadcastThread implements Runnable {
     private static final int TIMEOUT = 1000;
 
     /**
-     * Stops the broadcast. <br/>
+     * Stops the broadcast.
+     *
      * Used to exit from the {@link #run()} method.
      */
     void stopBroadcast() {
@@ -78,7 +79,8 @@ class BroadcastThread implements Runnable {
     long getTimeout() { return TIMEOUT; }
 
     /**
-     * Constructor. <br/>
+     * Constructor.
+     *
      * Initializes this thread.
      *
      * @param serverInfo the {@link ServerInfo} object containing the data to

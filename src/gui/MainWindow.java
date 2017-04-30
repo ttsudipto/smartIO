@@ -68,7 +68,8 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     private static final long DIALOG_TIMEOUT = 2000;
 
     /**
-     * Constructor. <br/>
+     * Constructor.
+     *
      * Initializes the <code>MainWindow</code> and displays it.
      *
      * @param manager the {@link net.NetworkManager} for this network.

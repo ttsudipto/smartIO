@@ -50,7 +50,7 @@ public class NetworkManager {
     }
 
     /**
-     * Returns the <code>NetworkState</code> of this network
+     * Returns the <code>NetworkState</code> of this network.
      *
      * @return The {@link NetworkState} of this network
      */
@@ -132,12 +132,14 @@ public class NetworkManager {
     }
 
     /**
-     * Method to disconnect a client. It gets the {@link ServerThread} of
-     * the connection of the client to be disconnected from the network
-     * state by calling {@link NetworkState#getServerThread(InetAddress)}.
+     * Method to disconnect a client.
+     *
+     * It gets the {@link ServerThread} of the connection of the client
+     * to be disconnected from the network state by calling
+     * {@link NetworkState#getServerThread(InetAddress)}.
      *
      * @param address {@link java.net.InetAddress} of the client to be
-     *                disconnected
+     *                disconnected.
      * @throws IOException
      * @throws InterruptedException
      * @see net.ServerThread

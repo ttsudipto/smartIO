@@ -101,7 +101,7 @@ class KeyCode {
 
     /**
      * Checks the <i>Shift Key Map</i> and obtains the shift key code
-     * for a character..
+     * for a character.
      *
      * @param c the character to be checked.
      * @return the shift key code for <code>c</code>, <br/>

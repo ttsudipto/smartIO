@@ -20,7 +20,8 @@ public class KeyboardController {
     private Robot mRobot;
 
     /**
-     * Constructor. <br/>
+     * Constructor.
+     *
      * Initializes this <code>KeyboardController</code> by
      * instantiating a {@link java.awt.Robot} object.
      *

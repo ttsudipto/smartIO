@@ -24,7 +24,8 @@ public class NetworkThread implements Runnable {
     private NetworkManager manager;
 
     /**
-     * Constructor. <br/>
+     * Constructor.
+     *
      * Initializes the thread.
      *
      * @param manager the {@link NetworkManager} for this network.
