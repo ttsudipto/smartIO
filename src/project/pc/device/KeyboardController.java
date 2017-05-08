@@ -80,6 +80,26 @@ public class KeyboardController {
                 mRobot.keyRelease(KeyEvent.VK_SHIFT);
                 break;
 
+            case "Home":
+                performSpecialAction(KeyEvent.VK_HOME);
+                break;
+
+            case "End":
+                performSpecialAction(KeyEvent.VK_END);
+                break;
+
+            case "Page_Up":
+                performSpecialAction(KeyEvent.VK_PAGE_UP);
+                break;
+
+            case "Page_Down":
+                performSpecialAction(KeyEvent.VK_PAGE_DOWN);
+                break;
+
+            case "Insert":
+                performSpecialAction(KeyEvent.VK_INSERT);
+                break;
+
             case "Del":
                 performSpecialAction(KeyEvent.VK_DELETE);
                 break;
