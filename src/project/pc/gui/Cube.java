@@ -19,6 +19,9 @@ import static com.jogamp.opengl.GL.GL_ONE_MINUS_SRC_ALPHA;
 import static com.jogamp.opengl.GL.GL_SRC_ALPHA;
 import static project.pc.device.MouseController.getQuaternion;
 
+/**
+ * Class to render multi-colored 3D cube
+ */
 public class Cube implements GLEventListener {
 
 	private GLU mGlu = new GLU();
@@ -27,6 +30,10 @@ public class Cube implements GLEventListener {
 
 	Cube() { mStarted = false; }
 
+	/**
+	 * Displays the 3D cube
+	 * @param drawable {@link com.jogamp.opengl.GLAutoDrawable} object used as the canvas
+	 */
 	@Override
 	public void display(GLAutoDrawable drawable) {
 		final GL2 gl = drawable.getGL().getGL2();
@@ -38,7 +45,6 @@ public class Cube implements GLEventListener {
 		getQuaternion().toAxisAngle(mAxisAngle);
 
 		// Rotate The Cube On X, Y & Z i.e. pass quaternion as argument
-		//gl.glRotatef(mAxisAngle.getW(), mAxisAngle.getX(), mAxisAngle.getY(), mAxisAngle.getZ());
 		gl.glRotatef(mAxisAngle.getW(), mAxisAngle.getX(), mAxisAngle.getZ(), (-1)*mAxisAngle.getY());
 
 		//giving different colors to different sides
@@ -82,9 +88,17 @@ public class Cube implements GLEventListener {
 		gl.glFlush();
     }
 
-	@Override
+	/**
+	 * Event when canvas is disposed.
+	 * @param drawable {@link com.jogamp.opengl.GLAutoDrawable} object to be disposed.
+	 */
+    @Override
 	public void dispose(GLAutoDrawable drawable) {}
 
+	/**
+	 * Initializes the canvas.
+	 * @param drawable {@link com.jogamp.opengl.GLAutoDrawable} object used as canvas.
+	 */
 	@Override
 	public void init( GLAutoDrawable drawable ) {
 		final GL2 gl = drawable.getGL().getGL2();
@@ -101,6 +115,14 @@ public class Cube implements GLEventListener {
 
 	}
 
+	/**
+	 * Resizes the canvas.
+	 * @param drawable canvas to be resized.
+	 * @param x x-coordinate of the lower left corner of the canvas.
+	 * @param y y-coordinate of the lower left corner of the canvas.
+	 * @param width Width of the canvas.
+	 * @param height Height of the canvas.
+	 */
 	@Override
 	public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
 		final GL2 gl = drawable.getGL().getGL2();
@@ -117,6 +139,9 @@ public class Cube implements GLEventListener {
 		gl.glLoadIdentity();
 	}
 
+	/**
+	 * Renders the cube on canvas.
+	 */
 	void showCube() {
 		final GLProfile profile = GLProfile.get(GLProfile.GL2);
 		GLCapabilities capabilities = new GLCapabilities(profile);
@@ -145,5 +170,10 @@ public class Cube implements GLEventListener {
 		mStarted = true;
 	}
 
+	/**
+	 * Checks if rendering has been started.
+	 *
+	 * @return true if currently rendering is in progress otherwise false.
+	 */
 	boolean isStarted() { return mStarted; }
 }
