@@ -20,7 +20,9 @@ import static com.jogamp.opengl.GL.GL_SRC_ALPHA;
 import static project.pc.device.MouseController.getQuaternion;
 
 /**
- * Class to render multi-colored 3D cube
+ * Class to render multi-colored 3D cube.
+ *
+ * It is used for demonstration purposes.
  */
 public class Cube implements GLEventListener {
 
@@ -28,11 +30,18 @@ public class Cube implements GLEventListener {
 	private JFrame mJFrame;
 	private boolean mStarted;
 
+    /**
+     * Constructor.
+     *
+     * Initializes this <code>Cube</code> object.
+     */
 	Cube() { mStarted = false; }
 
 	/**
-	 * Displays the 3D cube
-	 * @param drawable {@link com.jogamp.opengl.GLAutoDrawable} object used as the canvas
+	 * Displays the 3D cube.
+     *
+	 * @param drawable a <code>com.jogamp.opengl.GLAutoDrawable</code> object
+     *                 used as the canvas.
 	 */
 	@Override
 	public void display(GLAutoDrawable drawable) {
@@ -88,15 +97,12 @@ public class Cube implements GLEventListener {
 		gl.glFlush();
     }
 
-	/**
-	 * Event when canvas is disposed.
-	 * @param drawable {@link com.jogamp.opengl.GLAutoDrawable} object to be disposed.
-	 */
     @Override
 	public void dispose(GLAutoDrawable drawable) {}
 
 	/**
 	 * Initializes the canvas.
+     *
 	 * @param drawable {@link com.jogamp.opengl.GLAutoDrawable} object used as canvas.
 	 */
 	@Override
@@ -117,10 +123,11 @@ public class Cube implements GLEventListener {
 
 	/**
 	 * Resizes the canvas.
-	 * @param drawable canvas to be resized.
+     *
+	 * @param drawable the canvas to be resized.
 	 * @param x x-coordinate of the lower left corner of the canvas.
 	 * @param y y-coordinate of the lower left corner of the canvas.
-	 * @param width Width of the canvas.
+	 * @param width width of the canvas.
 	 * @param height Height of the canvas.
 	 */
 	@Override
@@ -173,7 +180,8 @@ public class Cube implements GLEventListener {
 	/**
 	 * Checks if rendering has been started.
 	 *
-	 * @return true if currently rendering is in progress otherwise false.
+	 * @return <code>true</code>, if currently rendering is in progress, <br/>
+     *         <code>false</code>, otherwise.
 	 */
 	boolean isStarted() { return mStarted; }
 }
