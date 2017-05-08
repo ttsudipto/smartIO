@@ -248,9 +248,9 @@ public class Quaternion extends Vector4f {
 
 		float s = (float) Math.sqrt(1 - getW() * getW());
 		if (s < 0.001) {
-			x = 1; //mPoints[0]; To get normalised axis replace with x=1 y=z=0
-			y = 0; //mPoints[1];
-			z = 0; //mPoints[2];
+			x = mPoints[0]; // To get normalised axis replace with x=1 y=z=0
+			y = mPoints[1];
+			z = mPoints[2];
 		} else {
 			// normalise axis
 			x = mPoints[0] / s;
