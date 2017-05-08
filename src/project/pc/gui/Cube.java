@@ -38,7 +38,8 @@ public class Cube implements GLEventListener {
 		getQuaternion().toAxisAngle(mAxisAngle);
 
 		// Rotate The Cube On X, Y & Z i.e. pass quaternion as argument
-		gl.glRotatef(mAxisAngle.getW(), mAxisAngle.getX(), mAxisAngle.getY(), mAxisAngle.getZ());
+		//gl.glRotatef(mAxisAngle.getW(), mAxisAngle.getX(), mAxisAngle.getY(), mAxisAngle.getZ());
+		gl.glRotatef(mAxisAngle.getW(), mAxisAngle.getX(), mAxisAngle.getZ(), (-1)*mAxisAngle.getY());
 
 		//giving different colors to different sides
 		gl.glBegin(GL2.GL_QUADS); // Start Drawing The Cube
