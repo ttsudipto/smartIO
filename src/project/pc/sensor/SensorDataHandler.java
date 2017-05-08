@@ -5,25 +5,50 @@ import project.pc.sensor.representation.Quaternion;
 import project.pc.sensor.representation.Vector3f;
 
 /**
- * @author Abhisek Maiti
- * @author Sayantan Majumdar
+ * Class to transform filtered sensor data into mouse pointer movement data
+ *
  */
 public class SensorDataHandler {
 	//Sensitivity of Mouse Movement [Experimental Value]
+	/**
+	 * @param mSensitivity Sensitivity co-efficient of the mouse pointer movement.
+	 */
 	private float mSensitivity;
+
+	/**
+	 * @param mHcos <code>cosine</code> of heading.
+	 */
 	private double mHcos;
+
+	/**
+	 * @param mHsin <code>sine</code> of heading.
+	 */
     private double mHsin;
+
+    /**
+	 * @param mBli Baseline Index.
+	 */
 	private double mBli;
 
+	/**
+	 * Constructor.
+	 *
+	 * Creates an instance of <code>SensorDataHandler</code>.
+	 *
+	 * @param q Initial <code>Quaternion</code> object.
+	 * @param sensitivity Sensitivity co-efficient of the mouse movement.
+	 */
 	public SensorDataHandler(Quaternion q, float sensitivity) {
 		mSensitivity = sensitivity;
 		initFix(q);
 	}
 
-	public SensorDataHandler(Quaternion q) {
-		initFix(q);
-	}
-
+	/**
+	 *
+	 * Initializes the baseline orientation.
+	 *
+	 * @param quaternion Initial <code>Quaternion</code> object.
+	 */
 	//Baseline Initialization
 	private void initFix(Quaternion quaternion) {
 		Vector3f xvec = quaternion.rotateVector(new Vector3f(1.0f,0.0f,0.0f));
@@ -34,6 +59,13 @@ public class SensorDataHandler {
 		mBli = Math.asin(zvec.getY());
 	}
 
+	/**
+	 *
+	 * Determines pointer location from current <code>Quaternion</code> object.
+	 * @param currentQuaternion Current <code>Quaternion</code> object acquired after filtering.
+	 * @return an object of {@link project.pc.sensor.representation.Cartesian2D} containing current pointer location.
+	 *
+	 */
 	//Get Pointer Location from Quaternion
 	public Cartesian2D pointerUpdate(Quaternion currentQuaternion) {
 		Vector3f cxv = currentQuaternion.rotateVector(new Vector3f(1.0f, 0.0f, 0.0f));
