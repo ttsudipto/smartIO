@@ -1,9 +1,7 @@
 package project.pc.device;
 
-import java.awt.Dimension;
 import java.awt.MouseInfo;
 import java.awt.Robot;
-import java.awt.Toolkit;
 
 /**
  * Provides static methods used by {@link MouseController} .
@@ -19,14 +17,6 @@ import java.awt.Toolkit;
  */
 
 class MouseMove {
-    private static int sScreenWidth;
-    private static int sScreenHeight;
-
-    static {
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        sScreenWidth = (int) screenSize.getWidth();
-        sScreenHeight = (int) screenSize.getHeight();
-    }
 
     /**
      * Method for performing mouse movement proportional to the
@@ -45,8 +35,6 @@ class MouseMove {
         int moveY = (int) (curY + (/*ratio*/sensitivity * relativeY));
         moveX = moveX < 0 ? 0 : moveX;
         moveY = moveY < 0 ? 0 : moveY;
-        moveX = moveX >= sScreenWidth ? sScreenWidth - 1 : moveX;
-        moveY = moveY >= sScreenHeight ? sScreenHeight - 1 : moveY;
         robot.mouseMove(moveX, moveY);
     }
 }
