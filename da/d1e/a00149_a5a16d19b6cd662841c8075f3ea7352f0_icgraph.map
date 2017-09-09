@@ -1,0 +1,6 @@
+<map id="project.pc.net.ServerThread.getTimeout" name="project.pc.net.ServerThread.getTimeout">
+<area shape="rect" id="node2" href="$d9/d47/a00129.html#a7213b1ea044d9c361299b497bc8308b3" title="Method to disconnect a client. " alt="" coords="228,39,453,63"/>
+<area shape="rect" id="node3" href="$dd/d42/a00109.html#af518df4286470e49c976c3410c72100b" title="Invoked when an action occurs. " alt="" coords="748,5,928,41"/>
+<area shape="rect" id="node4" href="$d9/d47/a00129.html#a61581904d96f5be8906b740585486ebc" title="Method to stop server. " alt="" coords="501,61,696,97"/>
+<area shape="rect" id="node5" href="$dd/d42/a00109.html#a9b7fdbe2729882c790a6366878b5c5c3" title="Gracefully terminates the application. " alt="" coords="744,65,932,101"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="project.pc.sensor.representation.Vector4f.Vector4f" name="project.pc.sensor.representation.Vector4f.Vector4f">
+<area shape="rect" id="node2" href="$dd/d4c/a00177.html#a3cad02da7bcd7671731cef01eb04fdaf" title="Returns the X&#45;dimension of this Vector3f. " alt="" coords="232,5,411,41"/>
+<area shape="rect" id="node3" href="$dd/d4c/a00177.html#af1f7d78724c9d942780ff7d2f67a8cd8" title="Returns the Y&#45;dimension of this Vector3f. " alt="" coords="232,65,411,101"/>
+<area shape="rect" id="node4" href="$dd/d4c/a00177.html#a5fe713af4beb1b2632472b75517dcb88" title="Returns the Z&#45;dimension of this Vector3f. " alt="" coords="232,125,411,161"/>
+</map>

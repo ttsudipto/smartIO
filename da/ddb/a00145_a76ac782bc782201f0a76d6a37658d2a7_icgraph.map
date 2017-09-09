@@ -1,0 +1,6 @@
+<map id="project.pc.net.ServerInfo.setStopFlag" name="project.pc.net.ServerInfo.setStopFlag">
+<area shape="rect" id="node2" href="$d9/d4b/a00117.html#a8404f199c060a916efffc04bb92032b8" title="Stops the broadcast. " alt="" coords="209,36,347,72"/>
+<area shape="rect" id="node3" href="$d9/d47/a00129.html#a61581904d96f5be8906b740585486ebc" title="Method to stop server. " alt="" coords="395,36,589,72"/>
+<area shape="rect" id="node4" href="$dd/d42/a00109.html#af518df4286470e49c976c3410c72100b" title="Invoked when an action occurs. " alt="" coords="641,5,821,41"/>
+<area shape="rect" id="node5" href="$dd/d42/a00109.html#a9b7fdbe2729882c790a6366878b5c5c3" title="Gracefully terminates the application. " alt="" coords="637,65,825,101"/>
+</map>

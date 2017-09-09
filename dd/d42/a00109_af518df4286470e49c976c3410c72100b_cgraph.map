@@ -1,0 +1,18 @@
+<map id="project.pc.gui.MainWindow.actionPerformed" name="project.pc.gui.MainWindow.actionPerformed">
+<area shape="rect" id="node2" href="$d9/d47/a00129.html#a7213b1ea044d9c361299b497bc8308b3" title="Method to disconnect a client. " alt="" coords="476,102,701,126"/>
+<area shape="rect" id="node6" href="$d9/d47/a00129.html#a61581904d96f5be8906b740585486ebc" title="Method to stop server. " alt="" coords="233,271,428,307"/>
+<area shape="rect" id="node14" href="$d0/de8/a00133.html#af4cc4667abd04a7a988a4d626e1ddf48" title="Checks if any client is connected. " alt="" coords="249,331,413,367"/>
+<area shape="rect" id="node15" href="$d3/d32/a00105.html#a50efb8f189cb639486da4780c53fad02" title="Checks if rendering has been started. " alt="" coords="251,391,410,415"/>
+<area shape="rect" id="node16" href="$d3/d32/a00105.html#ac332931bf5edd05e3096d1df86b23c1d" title="Renders the cube on canvas. " alt="" coords="247,470,415,494"/>
+<area shape="rect" id="node3" href="$d0/de8/a00133.html#a98b2d231bf77423258ab8e2f3f3a5c0f" title="Returns the ServerThread for a client connection. " alt="" coords="751,5,923,41"/>
+<area shape="rect" id="node4" href="$da/d1e/a00149.html#ab57650eb365d7ac7bf6b60acd9e2c254" title="Sets stop flag. " alt="" coords="750,65,923,101"/>
+<area shape="rect" id="node5" href="$da/d1e/a00149.html#a5a16d19b6cd662841c8075f3ea7352f0" title="Returns the timeout of the client Socket. " alt="" coords="749,125,924,161"/>
+<area shape="rect" id="node7" href="$d9/d4b/a00117.html#a8404f199c060a916efffc04bb92032b8" title="Stops the broadcast. " alt="" coords="520,151,657,187"/>
+<area shape="rect" id="node9" href="$d9/d4b/a00117.html#a4bd5c7e3daf54b19982abbc2980f9e9b" title="Returns the interval between two successive broadcasts. " alt="" coords="520,211,657,247"/>
+<area shape="rect" id="node10" href="$d5/d4e/a00141.html#acc46bdb42c52665b6dc480df0778b579" title="Sets the stop flag. " alt="" coords="519,271,658,307"/>
+<area shape="rect" id="node11" href="$d5/d4e/a00141.html#aa9e4cda8a511c5e8cced84ea0f98f616" title="Returns the timeout of the java.net.ServerSocket used by this Server. " alt="" coords="519,331,658,367"/>
+<area shape="rect" id="node12" href="$d5/d4e/a00141.html#ad90235e3b8adb261fe3d1bd8735e676e" title="Closes the ServerSocket used by this Server. " alt="" coords="515,391,663,415"/>
+<area shape="rect" id="node13" href="$d0/de8/a00133.html#a36036bd99972c88f733ade697a6bf153" title="Returns the Address Map. " alt="" coords="500,440,677,476"/>
+<area shape="rect" id="node8" href="$da/ddb/a00145.html#a76ac782bc782201f0a76d6a37658d2a7" title="Sets the status of the broadcast as inactive. " alt="" coords="759,185,915,221"/>
+<area shape="rect" id="node17" href="$d3/d32/a00105.html#aad770a0934b4b3a7c89063e4b92c9a6c" title="Constructor. " alt="" coords="517,501,660,525"/>
+</map>

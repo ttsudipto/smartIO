@@ -1,0 +1,5 @@
+<map id="project.pc.sensor.representation.Vector4f.setY" name="project.pc.sensor.representation.Vector4f.setY">
+<area shape="rect" id="node2" href="$d7/d3f/a00173.html#a587ad2d9d4efce7ab90b761815c2350a" title="Multiples this Quaternion with a scalar. " alt="" coords="232,5,411,41"/>
+<area shape="rect" id="node3" href="$d7/d3f/a00173.html#aed8aaebaee10c25caacaa50b1ee55baf" title="Returns the heading, attitude and bank of this Quaternion as euler angles in the double array respect..." alt="" coords="232,65,411,101"/>
+<area shape="rect" id="node4" href="$d7/d3f/a00173.html#a8080165fcc9bcca528eb672a1e15ec96" title="Returns a String representing this Quaternion. " alt="" coords="232,125,411,161"/>
+</map>

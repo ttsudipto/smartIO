@@ -1,0 +1,5 @@
+<map id="project.pc.sensor.representation.Vector3f.dotProduct" name="project.pc.sensor.representation.Vector3f.dotProduct">
+<area shape="rect" id="node2" href="$dd/d4c/a00177.html#a5af9da6256ea1a6a78cc5baee432e405" title="Sets the X&#45;dimension of this Vector3f. " alt="" coords="232,5,411,41"/>
+<area shape="rect" id="node3" href="$dd/d4c/a00177.html#a246061c705f72ccfe795b4222df0cf05" title="Sets the Y&#45;dimension of this Vector3f. " alt="" coords="232,65,411,101"/>
+<area shape="rect" id="node4" href="$dd/d4c/a00177.html#a4064cab6b7c0665b4ad10ac114a7b964" title="Sets the Z&#45;dimension of this Vector3f. " alt="" coords="232,125,411,161"/>
+</map>

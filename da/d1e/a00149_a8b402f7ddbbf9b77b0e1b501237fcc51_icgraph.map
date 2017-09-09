@@ -1,0 +1,7 @@
+<map id="project.pc.net.ServerThread.getDialog" name="project.pc.net.ServerThread.getDialog">
+<area shape="rect" id="node2" href="$dd/d42/a00109.html#ae27e3d2453405f787a49ec39170b0b90" title="Shows a dialog window displaying the pairing key. " alt="" coords="228,5,405,41"/>
+<area shape="rect" id="node4" href="$dd/d42/a00109.html#aa4cbd50f8430b8a0d741a86312f29c1d" title="Shows a dialog window displaying the error that an incorrect pairing key is sent by the client..." alt="" coords="228,65,405,101"/>
+<area shape="rect" id="node6" href="$dd/d42/a00109.html#a7c92096c43058ae8785238f7e6986289" title="Shows a dialog window displaying the information that a client is successfully connected. " alt="" coords="228,125,405,161"/>
+<area shape="rect" id="node3" href="$da/d1e/a00149.html#a386a1fb7b5607e2c4f68846c76e7cebd" title="Constructor. " alt="" coords="461,5,620,41"/>
+<area shape="rect" id="node5" href="$da/d1e/a00149.html#a6262e65e0cfc1e2830af1ab11eabf116" title="Performs operations for communication with a client. " alt="" coords="453,101,628,125"/>
+</map>

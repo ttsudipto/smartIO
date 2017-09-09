@@ -1,0 +1,35 @@
+<map id="project.pc.net.ServerThread.run" name="project.pc.net.ServerThread.run">
+<area shape="rect" id="node2" href="$d9/d4b/a00117.html#a515aa8a56cf37d12ecc99906dc6ce5e5" title="Returns the status of the broadcast. " alt="" coords="262,5,406,41"/>
+<area shape="rect" id="node3" href="$d8/dfa/a00121.html#a2c117e3f059891739f2aae7c381a0935" title="Adds java.net.Socket of the client. " alt="" coords="259,65,409,101"/>
+<area shape="rect" id="node4" href="$da/d01/a00153.html#a358af2d8a6e28fff1cad953d1524f2f5" title="Method to encrypt plaintext using AES 256&#45;bit encryption algorithm. " alt="" coords="229,125,439,161"/>
+<area shape="rect" id="node5" href="$dd/d42/a00109.html#a7c92096c43058ae8785238f7e6986289" title="Shows a dialog window displaying the information that a client is successfully connected. " alt="" coords="245,185,423,221"/>
+<area shape="rect" id="node8" href="$d8/dfa/a00121.html#a6036266a6ec66852427a016c37d4feeb" title="Returns the canonical hostname of the client. " alt="" coords="501,305,653,341"/>
+<area shape="rect" id="node9" href="$d0/de8/a00133.html#a7295c2727c8359a1228c006a8a58df25" title="Adds a client connection to this NetworkState. " alt="" coords="247,357,421,381"/>
+<area shape="rect" id="node11" href="$dd/d42/a00109.html#aa4cbd50f8430b8a0d741a86312f29c1d" title="Shows a dialog window displaying the error that an incorrect pairing key is sent by the client..." alt="" coords="245,245,423,281"/>
+<area shape="rect" id="node12" href="$da/d01/a00153.html#a7b612b8772ef017393e75ca8e33350a8" title="Method to decrypt cipher text using AES&#45;256 bit decryption algorithm. " alt="" coords="229,405,439,441"/>
+<area shape="rect" id="node13" href="$dc/dfe/a00125.html#aaf36ebdf066fddb71a0e6a6a7ba29eef" title="Returns the type of operation field of this DataWrapper. " alt="" coords="248,465,420,501"/>
+<area shape="rect" id="node14" href="$da/d1e/a00149.html#ab57650eb365d7ac7bf6b60acd9e2c254" title="Sets stop flag. " alt="" coords="247,525,421,561"/>
+<area shape="rect" id="node15" href="$d1/d84/a00097.html#ab76fce85b9d26d9601b0cc113d524bd6" title="Method to perform mouse move on the basis of 3&#45;D input from the mobile device. " alt="" coords="228,586,440,610"/>
+<area shape="rect" id="node23" href="$dc/dfe/a00125.html#a09bcf20a6aa13bd9c8ef1bfaa8e0194f" title="Returns the project.pc.sensor.representation.Quaternion object stored in this DataWrapper. " alt="" coords="248,635,420,671"/>
+<area shape="rect" id="node24" href="$dc/dfe/a00125.html#a21ab6a8749638b0a2e90c6e8ea9ace0e" title="Checks if the stored project.pc.sensor.representation.Quaternion object is the initial one..." alt="" coords="252,695,416,731"/>
+<area shape="rect" id="node25" href="$dc/dfe/a00125.html#a32a66618dc0a8c892e539426c4f24b1b" title="Returns the mouse movement sensitivity value stored in this DataWrapper. " alt="" coords="248,755,420,791"/>
+<area shape="rect" id="node26" href="$dc/dfe/a00125.html#a00d64709351558cbf911e0eb42e12bcb" title="Returns the displacement value along x&#45;axis stored in this DataWrapper. " alt="" coords="245,815,423,839"/>
+<area shape="rect" id="node27" href="$dc/dfe/a00125.html#acf9e81c8f715548c0846bb1caad4e54a" title="Returns the displacement value along y&#45;axis stored in this DataWrapper. " alt="" coords="245,863,423,887"/>
+<area shape="rect" id="node28" href="$d1/d84/a00097.html#aaaacdf40d241e6b2b72a6380f915c341" title="Method to perform mouse button click operations. " alt="" coords="235,912,433,948"/>
+<area shape="rect" id="node29" href="$dc/dfe/a00125.html#ac0d2ebd067b1765a1810195c5af02180" title="Returns the data field of this DataWrapper for keyboard and mouse button click operations. " alt="" coords="237,973,431,997"/>
+<area shape="rect" id="node30" href="$db/dab/a00089.html#ae930289f82ce2481eda6c76760d5c9e6" title="Method to perform the keyboard input operations. " alt="" coords="259,1021,409,1057"/>
+<area shape="rect" id="node31" href="$db/dab/a00089.html#a4520a89e12855f0b6dabcb788604fba9" title="Method to perform keyboard input operations for different function keys. " alt="" coords="243,1081,425,1117"/>
+<area shape="rect" id="node6" href="$da/d1e/a00149.html#a8b402f7ddbbf9b77b0e1b501237fcc51" title="Returns the javax.swing.JDialog object used for displaying notifications. " alt="" coords="490,185,665,221"/>
+<area shape="rect" id="node7" href="$da/d1e/a00149.html#a50960f7dd8b9f80a7962f2520170ddb5" title="Sets a dialog window. " alt="" coords="491,245,664,281"/>
+<area shape="rect" id="node10" href="$d8/dfa/a00121.html#a9c964c18e633743493ad49ab9e7a2d53" title="Returns the client Socket. " alt="" coords="501,365,653,401"/>
+<area shape="rect" id="node16" href="$de/df3/a00185.html#ada934d56bb8ee100d1b467f16be30885" title="Determines pointer location from current Quaternion object. " alt="" coords="500,520,655,556"/>
+<area shape="rect" id="node21" href="$d6/d7d/a00161.html#a62c0872f133e2ffc3f16211de4288b5f" title="Returns the x&#45;coordinate of this point. " alt="" coords="488,580,667,616"/>
+<area shape="rect" id="node22" href="$d6/d7d/a00161.html#a2001b342b42f29a044c197d3edba612c" title="Returns the y&#45;coordinate of this point. " alt="" coords="488,640,667,676"/>
+<area shape="rect" id="node17" href="$d7/d3f/a00173.html#a8a6671613dce4e8f950f2a51d4ba31c0" title="Rotates a 3&#45;D vector by this Quaternion. " alt="" coords="715,520,893,556"/>
+<area shape="rect" id="node18" href="$dd/d4c/a00177.html#a3cad02da7bcd7671731cef01eb04fdaf" title="Returns the X&#45;dimension of this Vector3f. " alt="" coords="941,460,1120,496"/>
+<area shape="rect" id="node19" href="$dd/d4c/a00177.html#af1f7d78724c9d942780ff7d2f67a8cd8" title="Returns the Y&#45;dimension of this Vector3f. " alt="" coords="941,580,1120,616"/>
+<area shape="rect" id="node20" href="$dd/d4c/a00177.html#a5fe713af4beb1b2632472b75517dcb88" title="Returns the Z&#45;dimension of this Vector3f. " alt="" coords="941,520,1120,556"/>
+<area shape="rect" id="node32" href="$d4/d7d/a00093.html#a2ebdf487b91420f50009ac775f2f85ea" title="Checks if Shift key needs to be pressed for typing a character. " alt="" coords="498,1021,657,1057"/>
+<area shape="rect" id="node33" href="$d4/d7d/a00093.html#af2f91211ca763bed7e49fec52ad2c784" title="Checks the Shift Key Map and obtains the shift key code for a character. " alt="" coords="494,1081,661,1117"/>
+<area shape="rect" id="node34" href="$d4/d7d/a00093.html#a13e2b73c6da0cea92a43ee3bccd3ccb9" title="Checks the Key Map and obtains the key code for a character (if Shift key press is not required)..." alt="" coords="494,1141,661,1177"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="project.pc.gui.MainWindow.showPairingKeyDialog" name="project.pc.gui.MainWindow.showPairingKeyDialog">
+<area shape="rect" id="node2" href="$da/d1e/a00149.html#a8b402f7ddbbf9b77b0e1b501237fcc51" title="Returns the javax.swing.JDialog object used for displaying notifications. " alt="" coords="231,5,405,41"/>
+<area shape="rect" id="node3" href="$da/d1e/a00149.html#a50960f7dd8b9f80a7962f2520170ddb5" title="Sets a dialog window. " alt="" coords="231,65,405,101"/>
+</map>

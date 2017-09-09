@@ -1,0 +1,5 @@
+<map id="project.pc.device.KeyboardController.doSpecialKeyOperation" name="project.pc.device.KeyboardController.doSpecialKeyOperation">
+<area shape="rect" id="node2" href="$d4/d7d/a00093.html#a2ebdf487b91420f50009ac775f2f85ea" title="Checks if Shift key needs to be pressed for typing a character. " alt="" coords="240,5,399,41"/>
+<area shape="rect" id="node3" href="$d4/d7d/a00093.html#af2f91211ca763bed7e49fec52ad2c784" title="Checks the Shift Key Map and obtains the shift key code for a character. " alt="" coords="236,65,403,101"/>
+<area shape="rect" id="node4" href="$d4/d7d/a00093.html#a13e2b73c6da0cea92a43ee3bccd3ccb9" title="Checks the Key Map and obtains the key code for a character (if Shift key press is not required)..." alt="" coords="236,125,403,161"/>
+</map>

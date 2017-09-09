@@ -1,0 +1,6 @@
+<map id="project.pc.sensor.representation.Quaternion.rotateVector" name="project.pc.sensor.representation.Quaternion.rotateVector">
+<area shape="rect" id="node2" href="$de/df3/a00185.html#ab05bb45ac0b4f0a4b9024959af5e8f1a" title="Constructor. " alt="" coords="232,5,413,41"/>
+<area shape="rect" id="node3" href="$de/df3/a00185.html#ada934d56bb8ee100d1b467f16be30885" title="Determines pointer location from current Quaternion object. " alt="" coords="245,65,400,101"/>
+<area shape="rect" id="node4" href="$d1/d84/a00097.html#ab76fce85b9d26d9601b0cc113d524bd6" title="Method to perform mouse move on the basis of 3&#45;D input from the mobile device. " alt="" coords="461,71,673,95"/>
+<area shape="rect" id="node5" href="$da/d1e/a00149.html#a6262e65e0cfc1e2830af1ab11eabf116" title="Performs operations for communication with a client. " alt="" coords="721,71,896,95"/>
+</map>

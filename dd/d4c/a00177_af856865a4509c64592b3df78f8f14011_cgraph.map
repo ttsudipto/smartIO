@@ -1,0 +1,7 @@
+<map id="project.pc.sensor.representation.Vector3f.Vector3f" name="project.pc.sensor.representation.Vector3f.Vector3f">
+<area shape="rect" id="node2" href="$dd/d4c/a00177.html#a79c9e2e7e4b07e2342cd1b27836bc4f7" title="Constructor. " alt="" coords="232,5,411,41"/>
+<area shape="rect" id="node3" href="$d8/d64/a00181.html#a48e9fceb563581330e4e3ea84974a430" title="Returns the W&#45;dimension of this Vector4f. " alt="" coords="232,65,411,101"/>
+<area shape="rect" id="node4" href="$d8/d64/a00181.html#a39d6f5ec8dd92c6e5c45fc3e608e271d" title="Returns the X&#45;dimension of this Vector4f. " alt="" coords="232,125,411,161"/>
+<area shape="rect" id="node5" href="$d8/d64/a00181.html#a2ff229e91866dceffbfe26646e7b5291" title="Returns the Y&#45;dimension of this Vector4f. " alt="" coords="232,185,411,221"/>
+<area shape="rect" id="node6" href="$d8/d64/a00181.html#abecc3cdd45a1c08b935d73403074d80e" title="Returns the Z&#45;dimension of this Vector4f. " alt="" coords="232,245,411,281"/>
+</map>

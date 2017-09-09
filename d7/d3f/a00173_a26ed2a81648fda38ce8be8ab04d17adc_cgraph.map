@@ -1,0 +1,4 @@
+<map id="project.pc.sensor.representation.Quaternion.toAxisAngle" name="project.pc.sensor.representation.Quaternion.toAxisAngle">
+<area shape="rect" id="node2" href="$d8/d64/a00181.html#a48e9fceb563581330e4e3ea84974a430" title="Returns the W&#45;dimension of this Vector4f. " alt="" coords="232,5,411,41"/>
+<area shape="rect" id="node3" href="$d7/d3f/a00173.html#a6789f63c1e94ed1cecf35e6fdda4be44" title="Normalizes this Quaternion. " alt="" coords="232,65,411,101"/>
+</map>

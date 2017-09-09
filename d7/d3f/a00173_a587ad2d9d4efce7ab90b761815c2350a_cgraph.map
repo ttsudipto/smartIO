@@ -1,0 +1,26 @@
+<map id="project.pc.sensor.representation.Quaternion.multiplyByScalar" name="project.pc.sensor.representation.Quaternion.multiplyByScalar">
+<area shape="rect" id="node2" href="$d8/d64/a00181.html#aa310e9a8132527db2a7c5aedecb01751" title="Sets the X&#45;dimension of this Vector4f. " alt="" coords="232,5,411,41"/>
+<area shape="rect" id="node3" href="$d8/d64/a00181.html#a39d6f5ec8dd92c6e5c45fc3e608e271d" title="Returns the X&#45;dimension of this Vector4f. " alt="" coords="232,65,411,101"/>
+<area shape="rect" id="node4" href="$d8/d64/a00181.html#a8d5fddfc447490659870800d6ba5350b" title="Sets the Y&#45;dimension of this Vector4f. " alt="" coords="232,125,411,161"/>
+<area shape="rect" id="node5" href="$d8/d64/a00181.html#a2ff229e91866dceffbfe26646e7b5291" title="Returns the Y&#45;dimension of this Vector4f. " alt="" coords="232,185,411,221"/>
+<area shape="rect" id="node6" href="$d8/d64/a00181.html#a0a70cdaa3fc44849c5ca56b3a060338a" title="Sets the Z&#45;dimension of this Vector4f. " alt="" coords="232,245,411,281"/>
+<area shape="rect" id="node7" href="$d8/d64/a00181.html#abecc3cdd45a1c08b935d73403074d80e" title="Returns the Z&#45;dimension of this Vector4f. " alt="" coords="232,305,411,341"/>
+<area shape="rect" id="node8" href="$d8/d64/a00181.html#ac347b2a8b40966d32f15d5ba5b361489" title="Sets the W&#45;dimension of this Vector4f. " alt="" coords="232,365,411,401"/>
+<area shape="rect" id="node9" href="$d8/d64/a00181.html#a48e9fceb563581330e4e3ea84974a430" title="Returns the W&#45;dimension of this Vector4f. " alt="" coords="232,425,411,461"/>
+<area shape="rect" id="node10" href="$de/d53/a00169.html#ac3ac7a2e22ed935389a471b88ee8689e" title="Sets the value of X0. " alt="" coords="232,485,411,521"/>
+<area shape="rect" id="node11" href="$de/d53/a00169.html#ad30ae2e8a0d1630572a48e2d509dfc38" title="Sets the value of X1. " alt="" coords="232,545,411,581"/>
+<area shape="rect" id="node12" href="$de/d53/a00169.html#ad386e915fd7c129df9df392c29c9eef6" title="Sets the value of X2. " alt="" coords="232,605,411,641"/>
+<area shape="rect" id="node13" href="$de/d53/a00169.html#aada168387d414b39f3168e8029f0699c" title="Sets the value of X3. " alt="" coords="232,665,411,701"/>
+<area shape="rect" id="node14" href="$de/d53/a00169.html#a559deb528466011516178d9d5c0c4909" title="Sets the value of Y0. " alt="" coords="232,725,411,761"/>
+<area shape="rect" id="node15" href="$de/d53/a00169.html#a8ef949df772a61e66d71aeca3d35b738" title="Sets the value of Y1. " alt="" coords="232,785,411,821"/>
+<area shape="rect" id="node16" href="$de/d53/a00169.html#ac5a935a5db7c4f3749ea46469eb8a856" title="Sets the value of Y2. " alt="" coords="232,845,411,881"/>
+<area shape="rect" id="node17" href="$de/d53/a00169.html#a2b6f4a7c1f91cc17c21a84b792e6686d" title="Sets the value of Y3. " alt="" coords="232,905,411,941"/>
+<area shape="rect" id="node18" href="$de/d53/a00169.html#ac74c62ee63fa2648b749acc13e18c7e6" title="Sets the value of Z0. " alt="" coords="232,965,411,1001"/>
+<area shape="rect" id="node19" href="$de/d53/a00169.html#a59a4fc57cfbf2859ffdb19913b86bd66" title="Sets the value of Z1. " alt="" coords="232,1025,411,1061"/>
+<area shape="rect" id="node20" href="$de/d53/a00169.html#afe414cc0a99108d1fd8d1f966657fe51" title="Sets the value of Z2. " alt="" coords="232,1085,411,1121"/>
+<area shape="rect" id="node21" href="$de/d53/a00169.html#ad183080dada14f56a48e9e5f0b3032db" title="Sets the value of Z3. " alt="" coords="232,1145,411,1181"/>
+<area shape="rect" id="node22" href="$de/d53/a00169.html#a5c5f336177f62d34424cd0f22c2f2cd2" title="Sets the value of W0. " alt="" coords="232,1205,411,1241"/>
+<area shape="rect" id="node23" href="$de/d53/a00169.html#a6b2892284335269c13e8c418fdcefc68" title="Sets the value of W1. " alt="" coords="232,1265,411,1301"/>
+<area shape="rect" id="node24" href="$de/d53/a00169.html#a26504a15961b0aaec6e9dabd5e8025fe" title="Sets the value of W2. " alt="" coords="232,1325,411,1361"/>
+<area shape="rect" id="node25" href="$de/d53/a00169.html#a316d3582b458cdbe34897d8500b33a23" title="Sets the value of W3. " alt="" coords="232,1385,411,1421"/>
+</map>

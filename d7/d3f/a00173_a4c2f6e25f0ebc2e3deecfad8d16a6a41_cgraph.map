@@ -1,0 +1,8 @@
+<map id="project.pc.sensor.representation.Quaternion.multiplyByQuat" name="project.pc.sensor.representation.Quaternion.multiplyByQuat">
+<area shape="rect" id="node2" href="$d7/d3f/a00173.html#a1dd9ff495d1cec10e15ccdb912361b35" title="Constructor. " alt="" coords="232,5,411,41"/>
+<area shape="rect" id="node3" href="$d8/d64/a00181.html#aa4cbf79fc5af52ed0ca437bf7f0722d2" title="Copies another Vector4f to this one. " alt="" coords="232,65,411,101"/>
+<area shape="rect" id="node7" href="$d7/d3f/a00173.html#a0ac9dc7f1a928d7b32cbf12e5b4cb5fb" title="Multiplies this Quaternion with another. " alt="" coords="232,125,411,161"/>
+<area shape="rect" id="node4" href="$dd/d4c/a00177.html#a3cad02da7bcd7671731cef01eb04fdaf" title="Returns the X&#45;dimension of this Vector3f. " alt="" coords="459,5,637,41"/>
+<area shape="rect" id="node5" href="$dd/d4c/a00177.html#af1f7d78724c9d942780ff7d2f67a8cd8" title="Returns the Y&#45;dimension of this Vector3f. " alt="" coords="459,65,637,101"/>
+<area shape="rect" id="node6" href="$dd/d4c/a00177.html#a5fe713af4beb1b2632472b75517dcb88" title="Returns the Z&#45;dimension of this Vector3f. " alt="" coords="459,125,637,161"/>
+</map>

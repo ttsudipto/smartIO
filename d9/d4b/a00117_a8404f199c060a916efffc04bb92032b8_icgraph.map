@@ -1,0 +1,5 @@
+<map id="project.pc.net.BroadcastThread.stopBroadcast" name="project.pc.net.BroadcastThread.stopBroadcast">
+<area shape="rect" id="node2" href="$d9/d47/a00129.html#a61581904d96f5be8906b740585486ebc" title="Method to stop server. " alt="" coords="191,36,385,72"/>
+<area shape="rect" id="node3" href="$dd/d42/a00109.html#af518df4286470e49c976c3410c72100b" title="Invoked when an action occurs. " alt="" coords="437,5,617,41"/>
+<area shape="rect" id="node4" href="$dd/d42/a00109.html#a9b7fdbe2729882c790a6366878b5c5c3" title="Gracefully terminates the application. " alt="" coords="433,65,621,101"/>
+</map>

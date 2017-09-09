@@ -1,0 +1,16 @@
+<map id="project.pc.sensor.representation.Quaternion.toString" name="project.pc.sensor.representation.Quaternion.toString">
+<area shape="rect" id="node2" href="$d8/d64/a00181.html#a39d6f5ec8dd92c6e5c45fc3e608e271d" title="Returns the X&#45;dimension of this Vector4f. " alt="" coords="232,5,411,41"/>
+<area shape="rect" id="node3" href="$d8/d64/a00181.html#a2ff229e91866dceffbfe26646e7b5291" title="Returns the Y&#45;dimension of this Vector4f. " alt="" coords="232,65,411,101"/>
+<area shape="rect" id="node4" href="$d8/d64/a00181.html#abecc3cdd45a1c08b935d73403074d80e" title="Returns the Z&#45;dimension of this Vector4f. " alt="" coords="232,125,411,161"/>
+<area shape="rect" id="node5" href="$d8/d64/a00181.html#a48e9fceb563581330e4e3ea84974a430" title="Returns the W&#45;dimension of this Vector4f. " alt="" coords="232,185,411,221"/>
+<area shape="rect" id="node6" href="$de/d53/a00169.html#a6bce1ad7ae5dbf7f40eafdbf5b064a24" title="Returns the matrix. " alt="" coords="232,245,411,281"/>
+<area shape="rect" id="node7" href="$de/d53/a00169.html#a7fbb914d787b3bc98ec2d068882c5eae" title="Returns size of the matrix. " alt="" coords="232,305,411,341"/>
+<area shape="rect" id="node8" href="$d8/d64/a00181.html#aa310e9a8132527db2a7c5aedecb01751" title="Sets the X&#45;dimension of this Vector4f. " alt="" coords="232,365,411,401"/>
+<area shape="rect" id="node9" href="$d8/d64/a00181.html#a8d5fddfc447490659870800d6ba5350b" title="Sets the Y&#45;dimension of this Vector4f. " alt="" coords="232,425,411,461"/>
+<area shape="rect" id="node10" href="$d8/d64/a00181.html#a0a70cdaa3fc44849c5ca56b3a060338a" title="Sets the Z&#45;dimension of this Vector4f. " alt="" coords="232,485,411,521"/>
+<area shape="rect" id="node11" href="$d8/d64/a00181.html#ac347b2a8b40966d32f15d5ba5b361489" title="Sets the W&#45;dimension of this Vector4f. " alt="" coords="232,545,411,581"/>
+<area shape="rect" id="node12" href="$dd/d4c/a00177.html#a3cad02da7bcd7671731cef01eb04fdaf" title="Returns the X&#45;dimension of this Vector3f. " alt="" coords="459,607,637,643"/>
+<area shape="rect" id="node13" href="$dd/d4c/a00177.html#af1f7d78724c9d942780ff7d2f67a8cd8" title="Returns the Y&#45;dimension of this Vector3f. " alt="" coords="459,672,637,708"/>
+<area shape="rect" id="node14" href="$dd/d4c/a00177.html#a5fe713af4beb1b2632472b75517dcb88" title="Returns the Z&#45;dimension of this Vector3f. " alt="" coords="459,743,637,779"/>
+<area shape="rect" id="node15" href="$d8/d64/a00181.html#a656119fae3c21e9123357636d5673d86" title="Copies a Vector3f to this Vector4f using a separate value for W&#45;dimension. " alt="" coords="232,657,411,693"/>
+</map>

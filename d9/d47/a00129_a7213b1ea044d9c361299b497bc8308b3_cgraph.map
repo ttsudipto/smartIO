@@ -1,0 +1,5 @@
+<map id="project.pc.net.NetworkManager.disconnect" name="project.pc.net.NetworkManager.disconnect">
+<area shape="rect" id="node2" href="$d0/de8/a00133.html#a98b2d231bf77423258ab8e2f3f3a5c0f" title="Returns the ServerThread for a client connection. " alt="" coords="280,5,452,41"/>
+<area shape="rect" id="node3" href="$da/d1e/a00149.html#ab57650eb365d7ac7bf6b60acd9e2c254" title="Sets stop flag. " alt="" coords="279,65,453,101"/>
+<area shape="rect" id="node4" href="$da/d1e/a00149.html#a5a16d19b6cd662841c8075f3ea7352f0" title="Returns the timeout of the client Socket. " alt="" coords="279,125,453,161"/>
+</map>

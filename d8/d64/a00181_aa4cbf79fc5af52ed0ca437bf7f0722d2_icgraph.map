@@ -1,0 +1,4 @@
+<map id="project.pc.sensor.representation.Vector4f.copyVec4" name="project.pc.sensor.representation.Vector4f.copyVec4">
+<area shape="rect" id="node2" href="$d7/d3f/a00173.html#a5f8b12122f1991e0d0d7d038c715172f" title="Copies the values from the given Quaternion to this one. " alt="" coords="232,5,411,41"/>
+<area shape="rect" id="node3" href="$d7/d3f/a00173.html#a4c2f6e25f0ebc2e3deecfad8d16a6a41" title="Multiplies this Quaternion by the input one. " alt="" coords="232,65,411,101"/>
+</map>

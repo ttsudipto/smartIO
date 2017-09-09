@@ -1,0 +1,6 @@
+<map id="project.pc.sensor.representation.Vector4f.getZ" name="project.pc.sensor.representation.Vector4f.getZ">
+<area shape="rect" id="node2" href="$d3/d32/a00105.html#a4c67f96bb7c71a251d95d4edc96d1107" title="Displays the 3D cube. " alt="" coords="247,5,396,29"/>
+<area shape="rect" id="node3" href="$d7/d3f/a00173.html#a587ad2d9d4efce7ab90b761815c2350a" title="Multiples this Quaternion with a scalar. " alt="" coords="232,54,411,90"/>
+<area shape="rect" id="node4" href="$d7/d3f/a00173.html#a8080165fcc9bcca528eb672a1e15ec96" title="Returns a String representing this Quaternion. " alt="" coords="232,114,411,150"/>
+<area shape="rect" id="node5" href="$dd/d4c/a00177.html#af856865a4509c64592b3df78f8f14011" title="Constructor. " alt="" coords="232,174,411,210"/>
+</map>
